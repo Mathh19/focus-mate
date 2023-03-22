@@ -7,7 +7,7 @@ export const Header = () => {
       <Logo />
       <div>
         <button className="flex items-center gap-2">
-          <IoSettingsSharp className="z-10 h-6 w-6 transition duration-300 ease-in-out hover:-rotate-90" />
+          <IoSettingsSharp className="h-7 w-7 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
         </button>
       </div>
     </header>
