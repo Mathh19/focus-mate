@@ -1,11 +1,11 @@
 import { Header } from './components/Header';
-import { Timer } from './components/Timer';
+import { Pomodoro } from './components/Pomodoro';
 
 export default function App() {
   return (
-    <div className="App h-full w-full bg-primaryColor text-textColor">
+    <div className="App h-screen w-screen bg-primaryColor text-textColor">
       <Header />
-      <Timer />
+      <Pomodoro />
     </div>
   );
 }
