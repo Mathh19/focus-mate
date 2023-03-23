@@ -3,8 +3,8 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      primaryColor: '#181920',
-      secondaryColor: '#31354c',
+      backgroundColor: '#181920',
+      darkGrayColor: '#31354c',
       textColor: '#e8eaee',
       bluishGray: '#636078',
       bluishPurple: '#7564e2',
