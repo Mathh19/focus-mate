@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useInterval } from '../../hooks/use-interval';
 import { Button } from '../Button';
 import { Timer } from '../Timer';
@@ -7,14 +7,11 @@ import { times } from '../../times';
 export const Pomodoro = () => {
   const [mainTime, setMainTime] = useState(times.pomodoroTime);
   const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
-  const [cyclesQtdManager, setCyclesQtdManager] = useState(
-    new Array(times.cycles - 1).fill(true),
-  );
   const [working, setWorking] = useState(false);
-  const [restTime, setRestTime] = useState(false);
+  const [resting, setResting] = useState(false);
   const [fullWorkingTime, setFullWorkingTime] = useState(0);
-  const [numberOfPomodoros, setNumberOfPomodoros] = useState(0);
   const [completedCycles, setCompletedCycles] = useState(0);
+  const [startCoutingStatus, setStartCoutingStatus] = useState(false);
 
   useInterval(
     () => {
@@ -27,54 +24,47 @@ export const Pomodoro = () => {
   const startTime = () => {
     setTimeCountingSatus(true);
     setWorking(true);
+    setResting(false);
+    setStartCoutingStatus(true);
     setMainTime(times.pomodoroTime);
   };
 
-  const configureRest = (long: boolean) => {
+  const configureToResting = useCallback(() => {
     setTimeCountingSatus(true);
     setWorking(false);
-    setRestTime(true);
+    setResting(true);
+    setCompletedCycles(completedCycles + 1);
+    console.log(completedCycles);
 
-    if (long) {
+    if ((completedCycles + 1) % times.cycles === 0) {
       setMainTime(times.longRestTime);
     } else {
       setMainTime(times.shortsRestTime);
     }
-  };
+  }, [completedCycles]);
 
   useEffect(() => {
     if (mainTime > 0) return;
 
-    if (working && cyclesQtdManager.length > 0) {
-      configureRest(false);
-      cyclesQtdManager.pop();
-    } else if (working && cyclesQtdManager.length <= 0) {
-      configureRest(true);
-      setCyclesQtdManager(new Array(times.cycles - 1).fill(true));
-      setCompletedCycles(completedCycles + 1);
+    if (working) {
+      configureToResting();
     }
 
-    if (working) setNumberOfPomodoros(numberOfPomodoros + 1);
-    if (restTime) startTime();
-  }, [
-    completedCycles,
-    cyclesQtdManager,
-    mainTime,
-    numberOfPomodoros,
-    restTime,
-    setCompletedCycles,
-    working,
-  ]);
-  console.log(cyclesQtdManager);
+    if (resting) startTime();
+  }, [mainTime, working, completedCycles, resting, configureToResting]);
 
   const displayMainTime = () => {
     setMainTime(times.pomodoroTime);
+    setWorking(true);
+    setTimeCountingSatus(false);
   };
   const displayShortBreakTime = () => {
     setMainTime(times.shortsRestTime);
+    setTimeCountingSatus(false);
   };
   const displayLongBreakTime = () => {
     setMainTime(times.longRestTime);
+    setTimeCountingSatus(false);
   };
 
   return (
@@ -85,12 +75,22 @@ export const Pomodoro = () => {
         <Button text="Long Break" onClick={displayLongBreakTime} />
       </div>
       <Timer timer={mainTime} working={working} />
-      <button
-        onClick={startTime}
-        className="my-4 rounded-md border-2 p-1 text-lg font-semibold uppercase transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple"
-      >
-        start
-      </button>
+      <div className="my-4 flex gap-4">
+        <button
+          onClick={startTime}
+          className="rounded-md border-2 p-1 text-lg font-semibold uppercase transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple"
+        >
+          start
+        </button>
+        {startCoutingStatus && (
+          <button
+            onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
+            className="rounded-md border-2 p-1 text-lg font-semibold uppercase transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple"
+          >
+            {timeCoutingStatus ? 'pause' : 'play'}
+          </button>
+        )}
+      </div>
       <div className="font-bold">
         <p>Completed cycles: {completedCycles}</p>
       </div>
