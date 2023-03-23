@@ -8,6 +8,7 @@ module.exports = {
       textColor: '#e8eaee',
       bluishGray: '#636078',
       bluishPurple: '#7564e2',
+      vibrantPurple: '#a855f7',
       purplishGray: '#636069',
     },
     fontFamily: {
