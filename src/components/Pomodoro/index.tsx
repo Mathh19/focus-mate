@@ -34,7 +34,6 @@ export const Pomodoro = () => {
     setWorking(false);
     setResting(true);
     setCompletedCycles(completedCycles + 1);
-    console.log(completedCycles);
 
     if ((completedCycles + 1) % times.cycles === 0) {
       setMainTime(times.longRestTime);
@@ -78,14 +77,14 @@ export const Pomodoro = () => {
       <div className="my-4 flex gap-4">
         <button
           onClick={startTime}
-          className="rounded-md border-2 p-1 text-lg font-semibold uppercase transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple"
+          className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
         >
           start
         </button>
         {startCoutingStatus && (
           <button
             onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
-            className="rounded-md border-2 p-1 text-lg font-semibold uppercase transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple"
+            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
           >
             {timeCoutingStatus ? 'pause' : 'play'}
           </button>
