@@ -1,3 +1,4 @@
+import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { Pomodoro } from './components/Pomodoro';
 
@@ -6,6 +7,7 @@ export default function App() {
     <div className="App h-screen w-screen bg-backgroundColor text-textColor">
       <Header />
       <Pomodoro />
+      <Footer />
     </div>
   );
 }
