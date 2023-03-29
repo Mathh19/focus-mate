@@ -1,4 +1,4 @@
-export type ButtonProps = {
+export type DisplayButtonProps = {
   text: string;
   onClick?: () => void;
 };
