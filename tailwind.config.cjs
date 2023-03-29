@@ -13,11 +13,17 @@ module.exports = {
       purplishGray: '#636069',
       darkBlue: '#31354c',
       pinkColor: '#d34dbb',
+      tealBlue: '#39415b',
     },
     fontFamily: {
       sans: ['Quicksand', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        boxShadowTimer:
+          '6px 6px 6px -1px rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.7)',
+      },
+    },
   },
   plugins: [],
 };
