@@ -1,6 +1,13 @@
+export type TimeProps = {
+  pomodoroTime: number;
+  shortRestTime: number;
+  longRestTime: number;
+  cycles: number;
+};
+
 export const times = {
-  pomodoroTime: 2,
-  shortsRestTime: 3,
+  pomodoroTime: 5,
+  shortRestTime: 2,
   longRestTime: 9,
   cycles: 2,
-};
+} as TimeProps;
