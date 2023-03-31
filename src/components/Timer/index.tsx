@@ -4,13 +4,13 @@ import {
   buildStyles,
 } from 'react-circular-progressbar';
 import { TimerContext } from '../../contexts/TimerContext';
-import { TimeProps } from '../../times';
+import { TimerProps } from '../../times';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
-import { TimerProps } from './Timer.types';
+import { TimerComponentProps } from './Timer.types';
 
-export const Timer = ({ timer, label }: TimerProps) => {
-  const { timer: times } = useContext(TimerContext);
-  const controlerTimer = times[label as keyof TimeProps];
+export const Timer = ({ timer, label }: TimerComponentProps) => {
+  const { timer: timerContext } = useContext(TimerContext);
+  const controlerTimer = timerContext[label as keyof TimerProps];
   const timerPercentage = (timer / controlerTimer) * 100;
 
   return (

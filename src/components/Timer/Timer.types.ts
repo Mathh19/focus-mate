@@ -1,4 +1,4 @@
-export type TimerProps = {
+export type TimerComponentProps = {
   label: string;
   timer: number;
 };

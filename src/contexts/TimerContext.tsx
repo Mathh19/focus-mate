@@ -1,13 +1,13 @@
 import { createContext, useState } from 'react';
-import { TimeProps, times } from '../times';
+import { TimerProps, defaultTimer } from '../times';
 import { TimerContextProps } from './TimerContext.types';
 
 export const TimerContext = createContext({} as TimerContextProps);
 
 const defaultTimesValue = () => {
-  const timerStorage = localStorage.getItem('times');
+  const timerStorage = localStorage.getItem('timer');
   if (timerStorage === null) {
-    return times;
+    return defaultTimer;
   }
   return JSON.parse(timerStorage);
 };
@@ -21,7 +21,7 @@ export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
     cycles: defaultTimer.cycles,
   });
 
-  const handleSetTimer = (newTimer: TimeProps) => {
+  const handleSetTimer = (newTimer: TimerProps) => {
     const inSeconds = {
       pomodoroTime: newTimer.pomodoroTime,
       shortRestTime: newTimer.shortRestTime,
@@ -32,7 +32,7 @@ export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
       ...prevTimer,
       ...inSeconds,
     }));
-    localStorage.setItem('times', JSON.stringify(inSeconds));
+    localStorage.setItem('timer', JSON.stringify(inSeconds));
   };
 
   return (
