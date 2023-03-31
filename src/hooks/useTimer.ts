@@ -49,6 +49,11 @@ export const useTimer = () => {
   }, [completedCycles, timer.cycles, timer.longRestTime, timer.shortRestTime]);
 
   useEffect(() => {
+    setMainTime(timer.pomodoroTime);
+    return;
+  }, [timer.pomodoroTime]);
+
+  useEffect(() => {
     if (mainTime > 0) return;
 
     if (working) {
