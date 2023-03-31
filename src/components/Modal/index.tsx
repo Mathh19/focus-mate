@@ -45,12 +45,15 @@ export const Modal = () => {
 
   const handleCloseModal = () => {
     setOpen(false);
-    return;
   };
 
   return (
     <div>
-      <button onClick={() => setOpen(!open)} className="gap-2 px-2 py-1">
+      <button
+        onClick={() => setOpen(!open)}
+        className="gap-2 px-2 py-1"
+        aria-label="settings"
+      >
         <IoSettingsSharp className="h-7 w-7 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
       </button>
       {open && (

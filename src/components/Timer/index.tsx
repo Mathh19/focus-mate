@@ -21,10 +21,10 @@ export const Timer = ({ timer, label }: TimerProps) => {
         trailColor: '#31354c',
         pathColor: '#7564e2',
       })}
-      className="relative z-10 h-96 w-96"
+      className="max-[370px]:h-72 max-[370px]:w-72 relative z-10 h-96 w-96 max-md:h-80 max-md:w-80"
     >
       <div className="z-10 flex h-full w-full flex-col items-center justify-center rounded-full">
-        <span className="font-sans text-8xl font-semibold">
+        <span className="font-sans text-8xl font-semibold max-md:text-7xl">
           {secondsToMinutes(timer)}
         </span>
         <p className="mt-8 font-semibold">

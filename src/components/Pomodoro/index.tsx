@@ -36,7 +36,7 @@ export const Pomodoro = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="my-6 flex gap-4">
+      <div className="m-6 flex flex-wrap gap-4">
         <DisplayButton text="Pomodoro" onClick={displayPomodoroTime} />
         <DisplayButton text="Short Break" onClick={displayShortBreakTime} />
         <DisplayButton text="Long Break" onClick={displayLongBreakTime} />
