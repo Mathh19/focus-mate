@@ -4,16 +4,12 @@ import { Timer } from '../Timer';
 
 export const Pomodoro = () => {
   const {
-    pomodoroTime,
-    shortRestTime,
-    longRestTime,
+    timer,
     mainTime,
     label,
-    restart,
     startCoutingStatus,
     timeCoutingStatus,
     completedCycles,
-    working,
     setMainTime,
     setLabel,
     setWorking,
@@ -22,18 +18,18 @@ export const Pomodoro = () => {
   } = useTimer();
 
   const displayPomodoroTime = () => {
-    setMainTime(pomodoroTime);
+    setMainTime(timer.pomodoroTime);
     setWorking(true);
     setTimeCountingSatus(false);
     setLabel('pomodoroTime');
   };
   const displayShortBreakTime = () => {
-    setMainTime(shortRestTime);
+    setMainTime(timer.shortRestTime);
     setTimeCountingSatus(false);
     setLabel('shortRestTime');
   };
   const displayLongBreakTime = () => {
-    setMainTime(longRestTime);
+    setMainTime(timer.longRestTime);
     setTimeCountingSatus(false);
     setLabel('longRestTime');
   };
@@ -45,18 +41,20 @@ export const Pomodoro = () => {
         <DisplayButton text="Short Break" onClick={displayShortBreakTime} />
         <DisplayButton text="Long Break" onClick={displayLongBreakTime} />
       </div>
-      <Timer timer={mainTime} label={label} working={working} />
-      <div className="my-4 flex gap-4">
-        <button
-          onClick={startTime}
-          className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
-        >
-          {restart ? 'Restart' : 'Start'}
-        </button>
+      <Timer timer={mainTime} label={label} />
+      <div className="my-4">
+        {!startCoutingStatus && (
+          <button
+            onClick={startTime}
+            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
+          >
+            Start
+          </button>
+        )}
         {startCoutingStatus && (
           <button
             onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
-            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
+            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
           >
             {timeCoutingStatus ? 'pause' : 'play'}
           </button>

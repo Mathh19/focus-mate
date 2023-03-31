@@ -1,7 +1,11 @@
+import { TimeProps } from '../times';
+
 export type TimerContextProps = {
-  pomodoroTime: number;
-  shortRestTime: number;
-  longRestTime: number;
-  cycles: number;
-  setTimes?: () => void;
+  timer: {
+    pomodoroTime: number;
+    shortRestTime: number;
+    longRestTime: number;
+    cycles: number;
+  };
+  setTimer: (newTimer: TimeProps) => void;
 };

@@ -6,18 +6,13 @@ import restBell from '../sounds/rest-bell-ding.mp3';
 
 const play = new Audio(playBell);
 const rest = new Audio(restBell);
-
 export const useTimer = () => {
-  const { pomodoroTime, shortRestTime, longRestTime, cycles } =
-    useContext(TimerContext);
-  const [mainTime, setMainTime] = useState(pomodoroTime);
+  const { timer } = useContext(TimerContext);
+  const [mainTime, setMainTime] = useState(timer.pomodoroTime);
   const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
   const [working, setWorking] = useState(false);
-  const [resting, setResting] = useState(false);
-  const [fullWorkingTime, setFullWorkingTime] = useState(0);
   const [completedCycles, setCompletedCycles] = useState(0);
   const [startCoutingStatus, setStartCoutingStatus] = useState(false);
-  const [restart, setRestart] = useState(false);
   const [label, setLabel] = useState<
     'pomodoroTime' | 'shortRestTime' | 'longRestTime'
   >('pomodoroTime');
@@ -25,7 +20,6 @@ export const useTimer = () => {
   useInterval(
     () => {
       setMainTime(mainTime - 1);
-      if (working) setFullWorkingTime(fullWorkingTime + 1);
     },
     timeCoutingStatus ? 1000 : null,
   );
@@ -34,28 +28,25 @@ export const useTimer = () => {
     play.play();
     setTimeCountingSatus(true);
     setWorking(true);
-    setResting(false);
     setStartCoutingStatus(true);
-    setRestart(true);
-    setMainTime(pomodoroTime);
+    setMainTime(timer.pomodoroTime);
     setLabel('pomodoroTime');
-  }, [pomodoroTime]);
+  }, [timer.pomodoroTime]);
 
   const configureToResting = useCallback(() => {
     rest.play();
     setTimeCountingSatus(true);
     setWorking(false);
-    setResting(true);
     setCompletedCycles(completedCycles + 1);
 
-    if ((completedCycles + 1) % cycles === 0) {
-      setMainTime(longRestTime);
+    if ((completedCycles + 1) % timer.cycles === 0) {
+      setMainTime(timer.longRestTime);
       setLabel('longRestTime');
     } else {
-      setMainTime(shortRestTime);
+      setMainTime(timer.shortRestTime);
       setLabel('shortRestTime');
     }
-  }, [completedCycles, cycles, longRestTime, shortRestTime]);
+  }, [completedCycles, timer.cycles, timer.longRestTime, timer.shortRestTime]);
 
   useEffect(() => {
     if (mainTime > 0) return;
@@ -64,27 +55,16 @@ export const useTimer = () => {
       configureToResting();
     }
 
-    if (resting) startTime();
-  }, [
-    mainTime,
-    working,
-    completedCycles,
-    resting,
-    configureToResting,
-    startTime,
-  ]);
+    if (!working) startTime();
+  }, [mainTime, working, completedCycles, configureToResting, startTime]);
 
   return {
     mainTime,
     startCoutingStatus,
-    restart,
     label,
     timeCoutingStatus,
     completedCycles,
-    pomodoroTime,
-    shortRestTime,
-    longRestTime,
-    cycles,
+    timer,
     working,
     startTime,
     setMainTime,

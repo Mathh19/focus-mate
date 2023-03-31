@@ -1,28 +1,43 @@
 import { createContext, useState } from 'react';
-import { times } from '../times';
+import { TimeProps, times } from '../times';
 import { TimerContextProps } from './TimerContext.types';
 
-export const TimerContext = createContext<TimerContextProps>({
-  pomodoroTime: times.pomodoroTime,
-  shortRestTime: times.shortRestTime,
-  longRestTime: times.longRestTime,
-  cycles: times.cycles,
-});
+export const TimerContext = createContext({} as TimerContextProps);
 
-export const TimerProvider = (children: React.ReactNode) => {
+const defaultTimesValue = () => {
+  const timerStorage = localStorage.getItem('times');
+  if (timerStorage === null) {
+    return times;
+  }
+  return JSON.parse(timerStorage);
+};
+
+export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
+  const defaultTimer = defaultTimesValue();
   const [timer, setTimer] = useState({
-    pomodoroTime: times.pomodoroTime,
-    shortRestTime: times.shortRestTime,
-    longRestTime: times.longRestTime,
-    cycles: times.cycles,
+    pomodoroTime: defaultTimer.pomodoroTime,
+    shortRestTime: defaultTimer.shortRestTime,
+    longRestTime: defaultTimer.longRestTime,
+    cycles: defaultTimer.cycles,
   });
 
-  const value = {
-    timer,
-    setTimer,
+  const handleSetTimer = (newTimer: TimeProps) => {
+    const inSeconds = {
+      pomodoroTime: newTimer.pomodoroTime,
+      shortRestTime: newTimer.shortRestTime,
+      longRestTime: newTimer.longRestTime,
+      cycles: newTimer.cycles,
+    };
+    setTimer((prevTimer) => ({
+      ...prevTimer,
+      ...inSeconds,
+    }));
+    localStorage.setItem('times', JSON.stringify(inSeconds));
   };
 
-  <TimerContext.Provider value={{ ...value.timer }}>
-    {children}
-  </TimerContext.Provider>;
+  return (
+    <TimerContext.Provider value={{ timer, setTimer: handleSetTimer }}>
+      {children}
+    </TimerContext.Provider>
+  );
 };

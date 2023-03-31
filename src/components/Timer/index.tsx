@@ -1,14 +1,17 @@
+import { useContext } from 'react';
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from 'react-circular-progressbar';
-import { times, TimeProps } from '../../times';
-import { secondsToMinutes } from '../../utils/seconds-to-minutes';
+import { TimerContext } from '../../contexts/TimerContext';
+import { TimeProps } from '../../times';
+import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerProps } from './Timer.types';
 
-export const Timer = ({ timer, label, working }: TimerProps) => {
-  const controlerTime = times[label as keyof TimeProps];
-  const timerPercentage = (timer / controlerTime) * 100;
+export const Timer = ({ timer, label }: TimerProps) => {
+  const { timer: times } = useContext(TimerContext);
+  const controlerTimer = times[label as keyof TimeProps];
+  const timerPercentage = (timer / controlerTimer) * 100;
 
   return (
     <CircularProgressbarWithChildren
@@ -18,14 +21,14 @@ export const Timer = ({ timer, label, working }: TimerProps) => {
         trailColor: '#31354c',
         pathColor: '#7564e2',
       })}
-      className="relative z-10 h-80 w-80"
+      className="relative z-10 h-96 w-96"
     >
-      <div className="flex h-full w-full flex-col items-center justify-center rounded-full">
+      <div className="z-10 flex h-full w-full flex-col items-center justify-center rounded-full">
         <span className="font-sans text-8xl font-semibold">
           {secondsToMinutes(timer)}
         </span>
         <p className="mt-8 font-semibold">
-          {working ? 'Time to work' : 'Break to rest'}
+          {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
         </p>
       </div>
     </CircularProgressbarWithChildren>
