@@ -57,7 +57,7 @@ export const Modal = () => {
         <IoSettingsSharp className="h-9 w-9 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
       </button>
       {open && (
-        <div className="fixed inset-0 z-40 flex justify-center">
+        <div className="fixed inset-0 z-40 flex justify-center px-4">
           <form
             onSubmit={handleSubmit}
             className="relative z-50 my-6 w-full max-w-lg rounded-lg bg-darkBlue p-4 text-textColor/70"
@@ -68,7 +68,7 @@ export const Modal = () => {
                 Time in minutes
                 <RiTimerLine />
               </div>
-              <div className="flex flex-wrap gap-7 max-[374px]:justify-around">
+              <div className="flex flex-wrap gap-7 max-[407px]:justify-around">
                 <ModalInput
                   onChange={handleTimerInputChange}
                   labelText="Pomodoro:"
