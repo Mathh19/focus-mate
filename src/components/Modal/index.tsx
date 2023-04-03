@@ -54,13 +54,13 @@ export const Modal = () => {
         className="gap-2 px-2 py-1"
         aria-label="settings"
       >
-        <IoSettingsSharp className="h-7 w-7 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
+        <IoSettingsSharp className="h-9 w-9 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
       </button>
       {open && (
-        <div className="absolute top-0 right-0 left-0 bottom-0 z-40 flex justify-center">
+        <div className="fixed inset-0 z-40 flex justify-center">
           <form
             onSubmit={handleSubmit}
-            className="relative my-6 w-full max-w-lg rounded-lg bg-darkBlue p-4 text-textColor/70"
+            className="relative z-50 my-6 w-full max-w-lg rounded-lg bg-darkBlue p-4 text-textColor/70"
           >
             <h2 className="pb-4 text-lg font-bold uppercase">Settings</h2>
             <div>
@@ -68,7 +68,7 @@ export const Modal = () => {
                 Time in minutes
                 <RiTimerLine />
               </div>
-              <div className="flex gap-7">
+              <div className="flex flex-wrap gap-7 max-[374px]:justify-around">
                 <ModalInput
                   onChange={handleTimerInputChange}
                   labelText="Pomodoro:"

@@ -2,7 +2,7 @@ import { BsGithub } from 'react-icons/bs';
 
 export const Footer = () => {
   return (
-    <footer className="fixed bottom-0">
+    <footer className="fixed bottom-0 flex w-full">
       <div>
         <a
           href="https://github.com/Mathh19/focus-mate"
