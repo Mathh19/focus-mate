@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useTimer } from '../../hooks/useTimer';
 import { DisplayButton } from '../DisplayButton';
 import { Timer } from '../Timer';
@@ -16,6 +17,25 @@ export const Pomodoro = () => {
     startTime,
     setTimeCountingSatus,
   } = useTimer();
+  const [focusPomodoroTime, setFocusPomodoroTime] = useState(true);
+  const [focusShortRestTime, setFocusShortRestTime] = useState(false);
+  const [focusLongRestTime, setFocusLongRestTime] = useState(false);
+
+  useEffect(() => {
+    if (label === 'pomodoroTime') {
+      setFocusPomodoroTime(true);
+      setFocusShortRestTime(false);
+      setFocusLongRestTime(false);
+    } else if (label === 'shortRestTime') {
+      setFocusPomodoroTime(false);
+      setFocusShortRestTime(true);
+      setFocusLongRestTime(false);
+    } else {
+      setFocusPomodoroTime(false);
+      setFocusShortRestTime(false);
+      setFocusLongRestTime(true);
+    }
+  }, [label]);
 
   const displayPomodoroTime = () => {
     setMainTime(timer.pomodoroTime);
@@ -37,9 +57,21 @@ export const Pomodoro = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="m-6 flex flex-wrap gap-4">
-        <DisplayButton text="Pomodoro" onClick={displayPomodoroTime} />
-        <DisplayButton text="Short Break" onClick={displayShortBreakTime} />
-        <DisplayButton text="Long Break" onClick={displayLongBreakTime} />
+        <DisplayButton
+          focused={focusPomodoroTime}
+          text="Pomodoro"
+          onClick={displayPomodoroTime}
+        />
+        <DisplayButton
+          focused={focusShortRestTime}
+          text="Short Break"
+          onClick={displayShortBreakTime}
+        />
+        <DisplayButton
+          focused={focusLongRestTime}
+          text="Long Break"
+          onClick={displayLongBreakTime}
+        />
       </div>
       <Timer timer={mainTime} label={label} />
       <div className="my-4">
