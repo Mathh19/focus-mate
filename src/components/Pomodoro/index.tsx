@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTimer } from '../../hooks/useTimer';
 import { DisplayButton } from '../DisplayButton';
 import { Timer } from '../Timer';
+import { Head } from '../Head';
 
 export const Pomodoro = () => {
   const {
@@ -20,22 +21,34 @@ export const Pomodoro = () => {
   const [focusPomodoroTime, setFocusPomodoroTime] = useState(true);
   const [focusShortRestTime, setFocusShortRestTime] = useState(false);
   const [focusLongRestTime, setFocusLongRestTime] = useState(false);
+  const [title, setTitle] = useState('');
+  const [icon, setIcon] = useState('');
 
   useEffect(() => {
     if (label === 'pomodoroTime') {
       setFocusPomodoroTime(true);
       setFocusShortRestTime(false);
       setFocusLongRestTime(false);
+      startCoutingStatus && setTitle('Pomodoro Time');
     } else if (label === 'shortRestTime') {
       setFocusPomodoroTime(false);
       setFocusShortRestTime(true);
       setFocusLongRestTime(false);
+      startCoutingStatus && setTitle('Short Rest Time');
     } else {
       setFocusPomodoroTime(false);
       setFocusShortRestTime(false);
       setFocusLongRestTime(true);
+      startCoutingStatus && setTitle('Long Rest Time');
     }
-  }, [label]);
+
+    if (timeCoutingStatus) {
+      startCoutingStatus && setIcon('/assets/run-pomodoro.svg');
+    } else {
+      startCoutingStatus && setTitle('Stoped');
+      startCoutingStatus && setIcon('/assets/stop-pomodoro.svg');
+    }
+  }, [label, startCoutingStatus, timeCoutingStatus]);
 
   const displayPomodoroTime = () => {
     setMainTime(timer.pomodoroTime);
@@ -55,7 +68,8 @@ export const Pomodoro = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <main className="flex flex-col items-center">
+      <Head title={title} icon={icon} />
       <div className="m-6 flex flex-wrap gap-4">
         <DisplayButton
           focused={focusPomodoroTime}
@@ -95,6 +109,6 @@ export const Pomodoro = () => {
       <div className="font-bold">
         <p>Completed cycles: {completedCycles}</p>
       </div>
-    </div>
+    </main>
   );
 };
