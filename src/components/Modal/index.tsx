@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { TimerContext } from '../../contexts/TimerContext';
 import { ModalInput } from '../ModalInput';
+import { ModalTitle } from '../ModalTitle';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
 
@@ -60,15 +61,15 @@ export const Modal = () => {
         <div className="fixed inset-0 z-40 flex justify-center px-4">
           <form
             onSubmit={handleSubmit}
-            className="relative z-50 my-6 w-full max-w-lg rounded-lg bg-darkBlue p-4 text-textColor/70"
+            className="relative z-50 my-6 w-full max-w-lg space-y-6 rounded-lg bg-darkBlue p-4 text-textColor/70"
           >
-            <h2 className="pb-4 text-lg font-bold uppercase">Settings</h2>
+            <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
             <div>
-              <div className="mb-1 flex items-center gap-1 text-xl font-semibold">
+              <ModalTitle>
                 Time in minutes
                 <RiTimerLine />
-              </div>
-              <div className="flex flex-wrap gap-7 max-[407px]:justify-around">
+              </ModalTitle>
+              <div className="mt-1 flex flex-wrap gap-8 max-[415px]:justify-between">
                 <ModalInput
                   onChange={handleTimerInputChange}
                   labelText="Pomodoro:"
