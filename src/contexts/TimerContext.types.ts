@@ -1,4 +1,4 @@
-import { TimeProps } from '../times';
+import { TimerProps } from '../times';
 
 export type TimerContextProps = {
   timer: {
@@ -7,5 +7,5 @@ export type TimerContextProps = {
     longRestTime: number;
     cycles: number;
   };
-  setTimer: (newTimer: TimeProps) => void;
+  setTimer: (newTimer: TimerProps) => void;
 };
