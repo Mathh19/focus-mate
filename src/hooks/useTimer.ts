@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { TimerContext } from '../contexts/TimerContext';
+import { PomodoroContext } from '../contexts/PomodoroContext';
 import { useInterval } from './useInterval';
 import playBell from '../sounds/play-bell-ding.mp3';
 import restBell from '../sounds/rest-bell-ding.mp3';
@@ -7,7 +7,7 @@ import restBell from '../sounds/rest-bell-ding.mp3';
 const play = new Audio(playBell);
 const rest = new Audio(restBell);
 export const useTimer = () => {
-  const { timer } = useContext(TimerContext);
+  const { timer } = useContext(PomodoroContext);
   const [mainTime, setMainTime] = useState(timer.pomodoroTime);
   const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
   const [working, setWorking] = useState(false);

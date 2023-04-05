@@ -3,14 +3,14 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from 'react-circular-progressbar';
-import { TimerContext } from '../../contexts/TimerContext';
+import { PomodoroContext } from '../../contexts/PomodoroContext';
 import { TimerProps } from '../../times';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './Timer.types';
 import { Modal } from '../Modal';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
-  const { timer: timerContext } = useContext(TimerContext);
+  const { timer: timerContext } = useContext(PomodoroContext);
   const controlerTimer = timerContext[label as keyof TimerProps];
   const timerPercentage = (timer / controlerTimer) * 100;
 

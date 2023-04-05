@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 import { TimerProps, defaultTimer } from '../times';
-import { TimerContextProps } from './TimerContext.types';
+import { PomodoroContextProps } from './PomodoroContext.types';
 
-export const TimerContext = createContext({} as TimerContextProps);
+export const PomodoroContext = createContext({} as PomodoroContextProps);
 
 const defaultTimesValue = () => {
   const timerStorage = localStorage.getItem('timer');
@@ -12,7 +12,11 @@ const defaultTimesValue = () => {
   return JSON.parse(timerStorage);
 };
 
-export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
+export const PomodoroProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const defaultTimer = defaultTimesValue();
   const [timer, setTimer] = useState({
     pomodoroTime: defaultTimer.pomodoroTime,
@@ -36,8 +40,8 @@ export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <TimerContext.Provider value={{ timer, setTimer: handleSetTimer }}>
+    <PomodoroContext.Provider value={{ timer, setTimer: handleSetTimer }}>
       {children}
-    </TimerContext.Provider>
+    </PomodoroContext.Provider>
   );
 };

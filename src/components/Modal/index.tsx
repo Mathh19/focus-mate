@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
-import { TimerContext } from '../../contexts/TimerContext';
+import { PomodoroContext } from '../../contexts/PomodoroContext';
 import { ModalInput } from '../ModalInput';
 import { ModalTitle } from '../ModalTitle';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
 
 export const Modal = () => {
-  const { timer, setTimer } = useContext(TimerContext);
+  const { timer, setTimer } = useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
   const [newTimer, setNewTimer] = useState({
     ...timer,
