@@ -4,6 +4,8 @@ import { ModalInput } from '../ModalInput';
 import { ModalTitle } from '../ModalTitle';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
+import { BsSoundwave } from 'react-icons/bs';
+import { VolumeSlider } from '../VolumeSlider';
 
 export const Modal = () => {
   const { timer, setTimer } = useContext(PomodoroContext);
@@ -53,7 +55,8 @@ export const Modal = () => {
       <button
         onClick={() => setOpen(!open)}
         className="gap-2 px-2 py-1"
-        aria-label="settings"
+        aria-label="Settings"
+        title="Settings"
       >
         <IoSettingsSharp className="h-9 w-9 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
       </button>
@@ -98,6 +101,16 @@ export const Modal = () => {
                   type="number"
                   defaultValue={timer.cycles}
                 />
+              </div>
+            </div>
+            <div>
+              <ModalTitle>
+                Sound
+                <BsSoundwave className="h-7 w-7" />
+              </ModalTitle>
+              <div className="flex flex-col justify-start">
+                <span className="mt-2 font-semibold">Volume:</span>
+                <VolumeSlider />
               </div>
             </div>
             <div className="absolute bottom-0 left-0 flex w-full justify-between p-4 text-xl font-semibold">
