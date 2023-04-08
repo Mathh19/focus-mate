@@ -8,11 +8,15 @@ import { BsSoundwave } from 'react-icons/bs';
 import { VolumeSlider } from '../VolumeSlider';
 
 export const Modal = () => {
-  const { timer, setTimer } = useContext(PomodoroContext);
+  const { timer, setTimer, configPomodoro, setConfig } =
+    useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
   const [newTimer, setNewTimer] = useState({
     ...timer,
   });
+  const [volume, setVolume] = useState<number[]>([
+    configPomodoro.sound.volume[0],
+  ]);
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -28,6 +32,7 @@ export const Modal = () => {
     e.preventDefault();
     setTimer(newTimer);
     setOpen(false);
+    setConfig({ configPomodoro: { sound: { volume: volume } } });
   };
 
   const handleTimerInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +43,7 @@ export const Modal = () => {
     }));
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCyclesInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewTimer((prevTimer) => ({
       ...prevTimer,
@@ -95,7 +100,7 @@ export const Modal = () => {
                   defaultValue={displayInMinutes(timer.longRestTime)}
                 />
                 <ModalInput
-                  onChange={handleInputChange}
+                  onChange={handleCyclesInputChange}
                   labelText="Cycles:"
                   name="cycles"
                   type="number"
@@ -110,7 +115,7 @@ export const Modal = () => {
               </ModalTitle>
               <div className="flex flex-col justify-start">
                 <span className="mt-2 font-semibold">Volume:</span>
-                <VolumeSlider />
+                <VolumeSlider volume={volume} setVolume={setVolume} />
               </div>
             </div>
             <div className="absolute bottom-0 left-0 flex w-full justify-between p-4 text-xl font-semibold">

@@ -1,5 +1,13 @@
 import { TimerProps } from '../times';
 
+export type ConfigPomodoroProps = {
+  configPomodoro: {
+    sound: {
+      volume: number[];
+    };
+  };
+};
+
 export type PomodoroContextProps = {
   timer: {
     pomodoroTime: number;
@@ -7,11 +15,11 @@ export type PomodoroContextProps = {
     longRestTime: number;
     cycles: number;
   };
-  setTimer: (newTimer: TimerProps) => void;
-  configPomodoro?: {
+  configPomodoro: {
     sound: {
-      mute: boolean;
-      volume: number;
+      volume: number[];
     };
   };
+  setTimer: (newTimer: TimerProps) => void;
+  setConfig: (newConfig: ConfigPomodoroProps) => void;
 };

@@ -7,7 +7,8 @@ import restBell from '../sounds/rest-bell-ding.mp3';
 const play = new Audio(playBell);
 const rest = new Audio(restBell);
 export const useTimer = () => {
-  const { timer } = useContext(PomodoroContext);
+  const { timer, configPomodoro } = useContext(PomodoroContext);
+  const volume = configPomodoro.sound.volume[0] / 100;
   const [mainTime, setMainTime] = useState(timer.pomodoroTime);
   const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
   const [working, setWorking] = useState(false);
@@ -25,15 +26,17 @@ export const useTimer = () => {
   );
 
   const startTime = useCallback(() => {
+    play.volume = volume;
     play.play();
     setTimeCountingSatus(true);
     setWorking(true);
     setStartCoutingStatus(true);
     setMainTime(timer.pomodoroTime);
     setLabel('pomodoroTime');
-  }, [timer.pomodoroTime]);
+  }, [timer.pomodoroTime, volume]);
 
   const configureToResting = useCallback(() => {
+    rest.volume = volume;
     rest.play();
     setTimeCountingSatus(true);
     setWorking(false);
@@ -46,7 +49,13 @@ export const useTimer = () => {
       setMainTime(timer.shortRestTime);
       setLabel('shortRestTime');
     }
-  }, [completedCycles, timer.cycles, timer.longRestTime, timer.shortRestTime]);
+  }, [
+    completedCycles,
+    timer.cycles,
+    timer.longRestTime,
+    timer.shortRestTime,
+    volume,
+  ]);
 
   useEffect(() => {
     setMainTime(timer.pomodoroTime);
