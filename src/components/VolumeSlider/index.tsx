@@ -6,7 +6,9 @@ import { VolumeSliderProps } from './VolumeSlider.types';
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   return (
     <div className="flex items-center">
-      <BsFillVolumeMuteFill className="h-7 w-7" />
+      <BsFillVolumeMuteFill
+        className={`h-7 w-7 ${volume[0] === 0 && 'text-bluishPurple'}`}
+      />
       <Slider.Root
         className="relative mx-2 flex h-5 w-[200px] touch-none select-none items-center"
         defaultValue={volume}
@@ -19,7 +21,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
         </Slider.Track>
         <Slider.Thumb
           data-tooltip-id="my-tooltip"
-          data-tooltip-content={`${volume}%`}
+          data-tooltip-content={`${volume[0] === 0 ? 'mute' : `${volume}%`}`}
           className="block h-5 w-5 cursor-pointer rounded-[10px] bg-bluishPurple transition-all hover:shadow-[0_2px_10px] hover:shadow-bluishPurple"
         />
         <Tooltip
