@@ -14,9 +14,7 @@ export const Modal = () => {
   const [newTimer, setNewTimer] = useState({
     ...timer,
   });
-  const [volume, setVolume] = useState<number[]>([
-    configPomodoro.sound.volume[0],
-  ]);
+  const [volume, setVolume] = useState<number[]>([configPomodoro.volume[0]]);
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -32,7 +30,7 @@ export const Modal = () => {
     e.preventDefault();
     setTimer(newTimer);
     setOpen(false);
-    setConfig({ configPomodoro: { sound: { volume: volume } } });
+    setConfig({ configPomodoro: { volume: volume } });
   };
 
   const handleTimerInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

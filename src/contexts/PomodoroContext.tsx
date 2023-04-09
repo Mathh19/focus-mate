@@ -16,9 +16,14 @@ const defaultTimesValue = () => {
 };
 
 const defaultConfigValue = () => {
+  const defaultConfig = {
+    configPomodoro: {
+      volume: [100],
+    },
+  };
   const configStorage = localStorage.getItem('configPomodoro');
   if (configStorage === null) {
-    return defaultTimer;
+    return defaultConfig;
   }
   return JSON.parse(configStorage);
 };

@@ -8,7 +8,7 @@ const play = new Audio(playBell);
 const rest = new Audio(restBell);
 export const useTimer = () => {
   const { timer, configPomodoro } = useContext(PomodoroContext);
-  const volume = configPomodoro.sound.volume[0] / 100;
+  const volume = configPomodoro.volume[0] / 100;
   const [mainTime, setMainTime] = useState(timer.pomodoroTime);
   const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
   const [working, setWorking] = useState(false);
