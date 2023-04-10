@@ -6,7 +6,7 @@ import {
 import { PomodoroContext } from '../../contexts/PomodoroContext';
 import { TimerProps } from '../../times';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
-import { TimerComponentProps } from './Timer.types';
+import { TimerComponentProps } from './types';
 import { Modal } from '../Modal';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {

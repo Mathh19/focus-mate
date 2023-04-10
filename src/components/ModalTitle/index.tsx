@@ -1,4 +1,4 @@
-import { ModalTitleProps } from './ModalTitle.types';
+import { ModalTitleProps } from './types';
 
 export const ModalTitle = ({ children }: ModalTitleProps) => {
   return (

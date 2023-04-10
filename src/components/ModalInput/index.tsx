@@ -1,4 +1,4 @@
-import { InputProps } from './Input.Types';
+import { InputProps } from './types';
 
 export const ModalInput = ({
   labelText,

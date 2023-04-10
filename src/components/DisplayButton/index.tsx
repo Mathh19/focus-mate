@@ -1,4 +1,4 @@
-import { DisplayButtonProps } from './DisplayButton.types';
+import { DisplayButtonProps } from './types';
 
 export const DisplayButton = ({
   text,

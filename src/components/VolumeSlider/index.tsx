@@ -1,7 +1,7 @@
 import { Tooltip } from 'react-tooltip';
 import * as Slider from '@radix-ui/react-slider';
 import { BsFillVolumeMuteFill, BsFillVolumeUpFill } from 'react-icons/bs';
-import { VolumeSliderProps } from './VolumeSlider.types';
+import { VolumeSliderProps } from './types';
 
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   return (

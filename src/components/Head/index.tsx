@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { HeadProps } from './Head.types';
+import { HeadProps } from './types';
 
 export const Head = ({ title, icon }: HeadProps) => {
   const titleConfig = title ? `${title} - Focus mate` : 'Focus mate';
