@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
-import { PomodoroContext } from '../../contexts/PomodoroContext';
+import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { ModalInput } from '../ModalInput';
 import { ModalTitle } from '../ModalTitle';
+import { VolumeSlider } from '../VolumeSlider';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave } from 'react-icons/bs';
-import { VolumeSlider } from '../VolumeSlider';
 
 export const Modal = () => {
   const { timer, setTimer, configPomodoro, setConfig } =

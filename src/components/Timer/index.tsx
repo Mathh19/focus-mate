@@ -3,7 +3,7 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from 'react-circular-progressbar';
-import { PomodoroContext } from '../../contexts/PomodoroContext';
+import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { TimerProps } from '../../times';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './types';

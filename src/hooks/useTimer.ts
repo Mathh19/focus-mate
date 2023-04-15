@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { PomodoroContext } from '../contexts/PomodoroContext';
+import { PomodoroContext } from '../contexts/PomodoroContext/PomodoroContext';
 import { useInterval } from './useInterval';
 import playBell from '../sounds/play-bell-ding.mp3';
 import restBell from '../sounds/rest-bell-ding.mp3';

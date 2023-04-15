@@ -1,4 +1,4 @@
-import { TimerProps } from '../times';
+import { TimerProps } from '../../times';
 
 export type ConfigPomodoroProps = {
   configPomodoro: {
