@@ -67,7 +67,7 @@ export const Modal = () => {
         <div className="fixed inset-0 z-40 flex justify-center px-4">
           <form
             onSubmit={handleSubmit}
-            className="relative z-50 my-6 w-full max-w-lg space-y-6 rounded-lg bg-darkBlue p-4 text-textColor/70"
+            className="relative z-50 my-6 w-full max-w-lg space-y-6 rounded-lg bg-darkBlue p-4 text-textColor"
           >
             <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
             <div>
