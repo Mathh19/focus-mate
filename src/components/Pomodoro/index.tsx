@@ -68,7 +68,7 @@ export const Pomodoro = () => {
   };
 
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <Head title={title} icon={icon} />
       <div className="m-6 flex flex-wrap gap-4">
         <DisplayButton
@@ -88,7 +88,7 @@ export const Pomodoro = () => {
         />
       </div>
       <Timer timer={mainTime} label={label} />
-      <div className="my-4">
+      <div className="mt-4 flex flex-col items-center gap-4">
         {!startCoutingStatus && (
           <button
             onClick={startTime}
@@ -105,9 +105,7 @@ export const Pomodoro = () => {
             {timeCoutingStatus ? 'pause' : 'play'}
           </button>
         )}
-      </div>
-      <div className="font-bold">
-        <p>Completed cycles: {completedCycles}</p>
+        <p className="font-bold">Completed cycles: {completedCycles}</p>
       </div>
     </main>
   );
