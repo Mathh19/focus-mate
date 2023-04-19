@@ -7,7 +7,7 @@ import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave } from 'react-icons/bs';
 
-export const Modal = () => {
+export const SettingsTimer = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
     useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
@@ -61,7 +61,7 @@ export const Modal = () => {
         aria-label="Settings"
         title="Settings"
       >
-        <IoSettingsSharp className="h-9 w-9 fill-purplishGray transition duration-300 ease-in-out hover:-rotate-90" />
+        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90" />
       </button>
       {open && (
         <div className="fixed inset-0 z-40 flex justify-center px-4">

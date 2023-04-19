@@ -7,7 +7,7 @@ import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext'
 import { TimerProps } from '../../times';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './types';
-import { Modal } from '../Modal';
+import { SettingsTimer } from '../SettingsTimer';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
   const { timer: timerContext } = useContext(PomodoroContext);
@@ -24,16 +24,16 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
         backgroundColor: '#212034',
         pathColor: '#7564e2',
       })}
-      className="h-96 w-96 drop-shadow-lg max-md:h-80 max-md:w-80 max-[370px]:h-72 max-[370px]:w-72"
+      className="w-h-96 h-96 drop-shadow-lg max-[540px]:h-80 max-[540px]:w-80"
     >
       <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-full">
-        <span className="font-sans text-8xl font-semibold max-md:text-7xl max-[370px]:text-6xl">
+        <span className="font-sans text-8xl font-semibold max-[540px]:text-7xl">
           {secondsToMinutes(timer)}
         </span>
-        <p className="mb-6 font-semibold">
+        <p className="font-semibold">
           {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
         </p>
-        <Modal />
+        <SettingsTimer />
       </div>
     </CircularProgressbarWithChildren>
   );
