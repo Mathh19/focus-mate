@@ -41,7 +41,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[420px] cursor-default rounded-md bg-darkGrayColor p-4"
+            className="w-full max-w-[420px] cursor-default rounded-md bg-darkGray p-4"
           >
             <div className="space-y-10">
               <div className="flex justify-between border-b border-bluishGray pb-3">
@@ -63,7 +63,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
               <div className="flex w-full flex-wrap justify-between gap-2">
                 <button
                   onClick={handleDeleteTask}
-                  className="rounded-md bg-warningColor px-3 py-1"
+                  className="rounded-md bg-dangerColor px-3 py-1"
                 >
                   Delete
                 </button>

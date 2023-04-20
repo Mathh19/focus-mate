@@ -37,21 +37,21 @@ export const DropdownMenuTasks = () => {
           <div className="flex flex-col">
             <button
               onClick={() => handleClick(() => setFinished(true))}
-              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-textColor"
+              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white"
             >
               Check all tasks
               <HiCheck />
             </button>
             <button
               onClick={() => handleClick(() => deleteTask(undefined, true))}
-              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-textColor"
+              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white"
             >
               Delete finished tasks
               <VscClearAll />
             </button>
             <button
               onClick={handleClickDeleteAllTask}
-              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-warningColor hover:text-textColor"
+              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-dangerColor hover:text-white"
             >
               Delete all tasks
               <MdDelete />

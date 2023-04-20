@@ -51,7 +51,7 @@ export const Tasks = () => {
           </li>
         ))}
         <li>
-          <label className="t flex w-full items-center justify-between gap-1 rounded-md border-4 border-dashed border-bluishPurple/60 bg-none p-2 text-textColor/50 transition duration-200 ease-in-out focus-within:border-bluishPurple focus-within:text-textColor hover:border-bluishPurple  hover:text-textColor">
+          <label className="flex w-full items-center justify-between gap-1 rounded-md border-4 border-dashed border-bluishPurple/60 bg-none p-2 text-white/50 transition duration-200 ease-in-out focus-within:border-bluishPurple focus-within:text-white hover:border-bluishPurple  hover:text-white">
             <input
               type="text"
               value={newTask.name}

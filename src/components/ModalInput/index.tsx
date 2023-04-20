@@ -17,7 +17,7 @@ export const ModalInput = ({
         defaultValue={defaultValue}
         onChange={onChange}
         step="1"
-        className="w-24 appearance-none rounded-md bg-bluishGray p-2 text-lg font-semibold text-textColor/70 outline-none"
+        className="w-24 appearance-none rounded-md bg-bluishGray p-2 text-lg font-semibold text-white outline-none"
       />
     </label>
   );

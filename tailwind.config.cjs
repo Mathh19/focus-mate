@@ -5,8 +5,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       backgroundColor: '#181920',
-      darkGrayColor: '#31354c',
-      textColor: '#e8eaee',
+      darkGray: '#31354c',
+      white: '#e8eaee',
       bluishGray: '#636078',
       bluishPurple: {
         DEFAULT: '#7564e2',
@@ -15,9 +15,9 @@ module.exports = {
       vibrantPurple: '#a855f7',
       purplishGray: '#636069',
       darkBlue: '#31354c',
-      pinkColor: '#d34dbb',
+      pink: '#d34dbb',
       tealBlue: '#39415b',
-      warningColor: '#cd2f2c',
+      dangerColor: '#cd2f2c',
       successColor: '#48d877',
     },
     fontFamily: {
