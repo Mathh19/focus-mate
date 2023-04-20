@@ -56,7 +56,7 @@ export const Tasks = () => {
               type="text"
               value={newTask.name}
               placeholder="Add a task..."
-              className="w-full bg-[transparent] outline-none"
+              className="w-full bg-transparent outline-none"
               onChange={handleChange}
             />
             <MdOutlinePostAdd

@@ -3,18 +3,21 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
+      transparent: 'transparent',
       backgroundColor: '#181920',
       darkGrayColor: '#31354c',
       textColor: '#e8eaee',
       bluishGray: '#636078',
-      lighGray: '#31354c',
-      bluishPurple: '#7564e2',
+      bluishPurple: {
+        DEFAULT: '#7564e2',
+        dark: '#695acb',
+      },
       vibrantPurple: '#a855f7',
       purplishGray: '#636069',
       darkBlue: '#31354c',
       pinkColor: '#d34dbb',
       tealBlue: '#39415b',
-      warningColor: '#df0b37',
+      warningColor: '#cd2f2c',
       successColor: '#48d877',
     },
     fontFamily: {
