@@ -44,10 +44,10 @@ export const Pomodoro = () => {
     }
 
     if (timeCoutingStatus) {
-      startCoutingStatus && setIcon('/assets/run-pomodoro.svg');
+      startCoutingStatus && setIcon('/run-pomodoro.svg');
     } else {
       startCoutingStatus && setTitle('Stoped');
-      startCoutingStatus && setIcon('/assets/stop-pomodoro.svg');
+      startCoutingStatus && setIcon('/stop-pomodoro.svg');
     }
   }, [label, startCoutingStatus, timeCoutingStatus]);
 

@@ -5,7 +5,7 @@ export const Head = ({ title, icon }: HeadProps) => {
   const titleConfig = title ? `${title} - Focus mate` : 'Focus mate';
   const defaultConfig = {
     title: titleConfig,
-    icon: '/assets/favico.svg',
+    icon: '/favico.svg',
   };
   return (
     <Helmet>
