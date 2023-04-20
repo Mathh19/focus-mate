@@ -3,6 +3,7 @@ import { useTimer } from '../../hooks/useTimer';
 import { DisplayButton } from '../DisplayButton';
 import { Timer } from '../Timer';
 import { Head } from '../Head';
+import { Tasks } from '../Tasks';
 
 export const Pomodoro = () => {
   const {
@@ -68,7 +69,7 @@ export const Pomodoro = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
+    <main className="flex flex-col items-center justify-center">
       <Head title={title} icon={icon} />
       <div className="m-6 flex flex-wrap gap-4">
         <DisplayButton
@@ -107,6 +108,7 @@ export const Pomodoro = () => {
         )}
         <p className="font-bold">Completed cycles: {completedCycles}</p>
       </div>
+      <Tasks />
     </main>
   );
 };

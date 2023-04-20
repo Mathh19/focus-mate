@@ -8,9 +8,11 @@ import { TimerProps } from '../../times';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './types';
 import { SettingsTimer } from '../SettingsTimer';
+import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
   const { timer: timerContext } = useContext(PomodoroContext);
+  const { tasks } = useContext(TasksContext);
   const controlerTimer = timerContext[label as keyof TimerProps];
   const timerPercentage = (timer / controlerTimer) * 100;
 
@@ -34,6 +36,19 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
           {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
         </p>
         <SettingsTimer />
+        {tasks.map(
+          (task, index) =>
+            task.working && (
+              <p
+                key={index}
+                className="max-w-[240px] truncate font-semibold
+                max-[540px]:max-w-[160px]"
+              >
+                <span className="font-bold">Focused:</span> #{index + 1}{' '}
+                {task.name}
+              </p>
+            ),
+        )}
       </div>
     </CircularProgressbarWithChildren>
   );
