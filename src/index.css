@@ -6,6 +6,6 @@
 
 @layer components {
   .check {
-    @apply absolute border rounded-full text-successColor;
+    @apply absolute border bg-successColor rounded-full text-successColor;
   }
 }
