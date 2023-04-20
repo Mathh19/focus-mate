@@ -1,6 +1,18 @@
-export type TasksProps = {
-  tasks: string[];
-  setTasks: (newTasks: string) => void;
-  updateTask: (updateTask: string, newTask: string) => void;
-  deleteTask: (deleteTask: string) => void;
+export type TaskProps = {
+  name: string;
+  finished: boolean;
+  working?: boolean;
+};
+
+export type TasksContextProps = {
+  tasks: TaskProps[];
+  addNewTask: (newTasks: TaskProps) => void;
+  updateTask: (updateTask: TaskProps, newTask: TaskProps) => void;
+  deleteTask: (deleteTask?: TaskProps, deleteFinishedTasks?: boolean) => void;
+  setFinished: (
+    check: boolean,
+    task?: TaskProps,
+    setAllTasksFinished?: boolean,
+  ) => void;
+  setWorkingTask: (task: TaskProps, working: boolean) => void;
 };

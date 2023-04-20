@@ -1,7 +1,7 @@
-import { createContext, useEffect, useState } from 'react';
-import { TasksProps } from './types';
+import { createContext, useState, useEffect } from 'react';
+import { TaskProps, TasksContextProps } from './types';
 
-export const TasksContext = createContext({} as TasksProps);
+export const TasksContext = createContext({} as TasksContextProps);
 
 const initialValues = () => {
   const tasksStorage = localStorage.getItem('tasks');
@@ -12,16 +12,17 @@ const initialValues = () => {
 };
 
 export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
-  const [tasks, setTasks] = useState<string[]>(initialValues);
+  const initialValuesTasks = initialValues();
+  const [tasks, setTasks] = useState<TaskProps[]>(initialValuesTasks);
 
-  const addNewTasks = (newTask: string) => {
-    setTasks([...tasks, newTask]);
+  const addNewTask = (newTask: TaskProps) => {
+    setTasks([...tasks, { ...newTask }]);
   };
 
-  const updateTask = (updateTask: string, newTask: string) => {
+  const updateTask = (updateTask: TaskProps, newTask: TaskProps) => {
     const updatedTasks = tasks.map((task) => {
       if (task === updateTask) {
-        return (task = newTask);
+        return { ...task, ...newTask };
       } else {
         return task;
       }
@@ -29,8 +30,57 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     setTasks(updatedTasks);
   };
 
-  const deleteTask = (deleteTask: string) => {
-    setTasks(tasks.filter((task) => task !== deleteTask));
+  const deleteTask = (
+    deleteTask?: TaskProps,
+    deleteFinishedTasks?: boolean,
+  ) => {
+    if (deleteTask) {
+      return setTasks(tasks.filter((task) => task !== deleteTask));
+    } else if (deleteFinishedTasks) {
+      return setTasks(tasks.filter((task) => task.finished !== true));
+    }
+    setTasks([]);
+  };
+
+  const setFinished = (
+    check: boolean,
+    taskCheck?: TaskProps,
+    setAllTasksFinished?: boolean,
+  ) => {
+    if (taskCheck) {
+      const checkTask = tasks.map((task) => {
+        if (task === taskCheck) {
+          return { ...task, finished: check };
+        } else {
+          return task;
+        }
+      });
+      return setTasks(checkTask);
+    } else if (setAllTasksFinished) {
+      const allFinishedTasks = tasks.map((task) => {
+        if (task.finished === false) {
+          return { ...task, finished: check };
+        } else {
+          return task;
+        }
+      });
+      return setTasks(allFinishedTasks);
+    }
+    const checkAllTasks = tasks.map((task) => {
+      return { ...task, finished: check };
+    });
+    setTasks(checkAllTasks);
+  };
+
+  const setWorkingTask = (taskCheck: TaskProps, working: boolean) => {
+    const checkTask = tasks.map((task) => {
+      if (task === taskCheck) {
+        return { ...task, working: working };
+      } else {
+        return { ...task, working: false };
+      }
+    });
+    setTasks(checkTask);
   };
 
   useEffect(() => {
@@ -39,7 +89,14 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <TasksContext.Provider
-      value={{ tasks, setTasks: addNewTasks, updateTask, deleteTask }}
+      value={{
+        tasks,
+        addNewTask,
+        updateTask,
+        deleteTask,
+        setFinished,
+        setWorkingTask,
+      }}
     >
       {children}
     </TasksContext.Provider>
