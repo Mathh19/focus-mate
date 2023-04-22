@@ -19,6 +19,12 @@ export const Tasks = () => {
     setNewTask({ name: '', finished: false });
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   const handleWorking = (task: TaskProps) => {
     setWorkingTask(task, true);
   };
@@ -58,6 +64,7 @@ export const Tasks = () => {
               placeholder="Add a task..."
               className="w-full bg-transparent outline-none"
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
             <MdOutlinePostAdd
               className="cursor-pointer text-4xl"
