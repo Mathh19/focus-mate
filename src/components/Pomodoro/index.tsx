@@ -69,9 +69,9 @@ export const Pomodoro = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center">
+    <main className="my-5 flex min-h-screen flex-col items-center justify-center gap-6">
       <Head title={title} icon={icon} />
-      <div className="m-6 flex flex-wrap gap-4">
+      <div className="flex gap-4">
         <DisplayButton
           focused={focusPomodoroTime}
           text="Pomodoro"
@@ -89,7 +89,7 @@ export const Pomodoro = () => {
         />
       </div>
       <Timer timer={mainTime} label={label} />
-      <div className="mt-4 flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4">
         {!startCoutingStatus && (
           <button
             onClick={startTime}

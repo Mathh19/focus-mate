@@ -35,7 +35,7 @@ export const Tasks = () => {
   };
 
   return (
-    <div className="mt-9 w-full max-w-md space-y-2 px-3">
+    <div className="w-full max-w-md space-y-2 px-3">
       <h2 className="flex items-center justify-between border-b-2 pb-2 text-6xl font-bold text-bluishPurple max-[540px]:text-5xl">
         Tasks
         <DropdownMenuTasks />
