@@ -35,12 +35,12 @@ export const Tasks = () => {
   };
 
   return (
-    <div className="w-full max-w-md space-y-2 px-3">
+    <div className="w-full max-w-md space-y-2">
       <h2 className="flex items-center justify-between border-b-2 pb-2 text-6xl font-bold text-bluishPurple max-[540px]:text-5xl">
         Tasks
         <DropdownMenuTasks />
       </h2>
-      <ul className="flex flex-col gap-2 overflow-auto p-2 text-2xl font-semibold">
+      <ul className="flex flex-col gap-2 p-2 text-2xl font-semibold">
         {tasks.map((task, index) => (
           <li
             key={index}

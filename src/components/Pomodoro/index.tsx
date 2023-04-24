@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTimer } from '../../hooks/useTimer';
-import { DisplayButton } from '../DisplayButton';
+import { DisplayTimeButton } from '../DisplayTimeButton';
 import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
@@ -69,20 +69,20 @@ export const Pomodoro = () => {
   };
 
   return (
-    <main className="my-5 flex min-h-screen flex-col items-center justify-center gap-6">
+    <main className="my-5 mx-2 flex min-h-screen flex-col items-center justify-center gap-6">
       <Head title={title} icon={icon} />
       <div className="flex gap-4">
-        <DisplayButton
+        <DisplayTimeButton
           focused={focusPomodoroTime}
           text="Pomodoro"
           onClick={displayPomodoroTime}
         />
-        <DisplayButton
+        <DisplayTimeButton
           focused={focusShortRestTime}
           text="Short Break"
           onClick={displayShortBreakTime}
         />
-        <DisplayButton
+        <DisplayTimeButton
           focused={focusLongRestTime}
           text="Long Break"
           onClick={displayLongBreakTime}
