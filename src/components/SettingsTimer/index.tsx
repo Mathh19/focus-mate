@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { isMobile } from 'react-device-detect';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { ModalInput } from '../ModalInput';
 import { ModalTitle } from '../ModalTitle';
@@ -6,6 +7,7 @@ import { VolumeSlider } from '../VolumeSlider';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave } from 'react-icons/bs';
+import { RxOpenInNewWindow } from 'react-icons/rx';
 
 export const SettingsTimer = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
@@ -53,6 +55,21 @@ export const SettingsTimer = () => {
     setOpen(false);
   };
 
+  const openPomodoroWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const localUrl = window.location.href;
+    const width = 400;
+    const height = 700;
+    const left = window.screenLeft - window.innerWidth - width - 10;
+    const top = window.screenTop + window.innerHeight - height - 10;
+    window.open(
+      localUrl,
+      'Pomodoro',
+      `width=${width}, height=${height},left=${left} top=${top}`,
+    );
+    setOpen(false);
+  };
+
   return (
     <div>
       <button
@@ -61,7 +78,7 @@ export const SettingsTimer = () => {
         aria-label="Settings"
         title="Settings"
       >
-        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90" />
+        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 max-[320px]:text-2xl" />
       </button>
       {open && (
         <div className="fixed inset-0 z-40 flex justify-center px-4">
@@ -116,11 +133,23 @@ export const SettingsTimer = () => {
                 <VolumeSlider volume={volume} setVolume={setVolume} />
               </div>
             </div>
+            {!isMobile && (
+              <div>
+                <ModalTitle>Screen</ModalTitle>
+                <button
+                  onClick={(e) => openPomodoroWindow(e)}
+                  className="flex items-center gap-2 font-semibold"
+                >
+                  Open in floating window
+                  <RxOpenInNewWindow />
+                </button>
+              </div>
+            )}
             <div className="absolute bottom-0 left-0 flex w-full justify-between p-4 text-xl font-semibold">
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="rounded-lg bg-tealBlue p-2 text-bluishPurple/70 transition ease-in-out"
+                className="rounded-md bg-tealBlue p-2 text-bluishPurple"
               >
                 cancel
               </button>
