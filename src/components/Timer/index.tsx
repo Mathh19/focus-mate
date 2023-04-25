@@ -17,39 +17,41 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
   const timerPercentage = (timer / controlerTimer) * 100;
 
   return (
-    <CircularProgressbarWithChildren
-      strokeWidth={3}
-      background
-      backgroundPadding={3}
-      value={timerPercentage}
-      styles={buildStyles({
-        backgroundColor: '#212034',
-        pathColor: '#7564e2',
-      })}
-      className="w-h-96 h-96 drop-shadow-lg max-[540px]:h-80 max-[540px]:w-80"
-    >
-      <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-full">
-        <span className="font-sans text-8xl font-semibold max-[540px]:text-7xl">
-          {secondsToMinutes(timer)}
-        </span>
-        <p className="font-semibold">
-          {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
-        </p>
-        <SettingsTimer />
-        {tasks.map(
-          (task, index) =>
-            task.working && (
-              <p
-                key={index}
-                className="max-w-[240px] truncate font-semibold
+    <div className="w-full max-w-[384px]">
+      <CircularProgressbarWithChildren
+        strokeWidth={3}
+        background
+        backgroundPadding={3}
+        value={timerPercentage}
+        styles={buildStyles({
+          backgroundColor: '#212034',
+          pathColor: '#7564e2',
+        })}
+        className="h-full w-full drop-shadow-lg"
+      >
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-full">
+          <span className="font-sans text-8xl font-semibold max-[380px]:text-7xl">
+            {secondsToMinutes(timer)}
+          </span>
+          <p className="font-semibold">
+            {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
+          </p>
+          <SettingsTimer />
+          {tasks.map(
+            (task, index) =>
+              task.working && (
+                <p
+                  key={index}
+                  className="max-w-[240px] truncate font-semibold
                 max-[540px]:max-w-[160px]"
-              >
-                <span className="font-bold">Focused:</span> #{index + 1}{' '}
-                {task.name}
-              </p>
-            ),
-        )}
-      </div>
-    </CircularProgressbarWithChildren>
+                >
+                  <span className="font-bold">Focused:</span> #{index + 1}{' '}
+                  {task.name}
+                </p>
+              ),
+          )}
+        </div>
+      </CircularProgressbarWithChildren>
+    </div>
   );
 };
