@@ -9,7 +9,7 @@ export const Logo = () => {
         src="/logo-site.svg"
         alt="The logo site"
       />
-      <p className="font-sans text-2xl font-bold">Focus mate</p>
+      <p className="font-sans text-2xl font-bold">Focus Mate</p>
     </div>
   );
 };
