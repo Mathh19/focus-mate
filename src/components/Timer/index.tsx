@@ -4,7 +4,7 @@ import {
   buildStyles,
 } from 'react-circular-progressbar';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-import { TimerProps } from '../../times';
+import { TimerProps } from '../../timer';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './types';
 import { SettingsTimer } from '../SettingsTimer';

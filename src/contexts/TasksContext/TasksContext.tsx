@@ -1,19 +1,12 @@
 import { createContext, useState, useEffect } from 'react';
 import { TaskProps, TasksContextProps } from './types';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export const TasksContext = createContext({} as TasksContextProps);
 
-const initialValues = () => {
-  const tasksStorage = localStorage.getItem('tasks');
-  if (tasksStorage === null) {
-    return [];
-  }
-  return JSON.parse(tasksStorage);
-};
-
 export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
-  const initialValuesTasks = initialValues();
-  const [tasks, setTasks] = useState<TaskProps[]>(initialValuesTasks);
+  const { storedValue, setValue } = useLocalStorage<TaskProps[]>('tasks', []);
+  const [tasks, setTasks] = useState<TaskProps[]>(storedValue);
 
   const addNewTask = (newTask: TaskProps) => {
     setTasks([...tasks, { ...newTask }]);
@@ -84,8 +77,8 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    setValue(tasks);
+  }, [setValue, tasks]);
 
   return (
     <TasksContext.Provider

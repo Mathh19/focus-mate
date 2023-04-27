@@ -1,60 +1,33 @@
 import { createContext, useState } from 'react';
-import { TimerProps, defaultTimer } from '../../times';
+import { TimerProps, defaultTimer } from '../../timer';
 import { ConfigPomodoroProps, PomodoroContextProps } from './types';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export const PomodoroContext = createContext({} as PomodoroContextProps);
-
-const defaultTimesValue = () => {
-  const timerStorage = localStorage.getItem('timer');
-  if (timerStorage === null) {
-    return defaultTimer;
-  }
-  return JSON.parse(timerStorage);
-};
-
-const defaultConfigValue = () => {
-  const defaultConfig = {
-    configPomodoro: {
-      volume: [100],
-    },
-  };
-  const configStorage = localStorage.getItem('configPomodoro');
-  if (configStorage === null) {
-    return defaultConfig;
-  }
-  return JSON.parse(configStorage);
-};
 
 export const PomodoroProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const defaultTimer = defaultTimesValue();
-  const defaultConfig: ConfigPomodoroProps = defaultConfigValue();
+  const { storedValue: storedTimerValue, setValue: setTimerValue } =
+    useLocalStorage('timer', defaultTimer);
+  const { storedValue: storedConfigValue, setValue: setConfigValue } =
+    useLocalStorage('defaultConfig', {
+      configPomodoro: { volume: [100] },
+    } as ConfigPomodoroProps);
+  const initialTimer = storedTimerValue;
+  const initialConfig = storedConfigValue;
 
-  const [timer, setTimer] = useState({
-    pomodoroTime: defaultTimer.pomodoroTime,
-    shortRestTime: defaultTimer.shortRestTime,
-    longRestTime: defaultTimer.longRestTime,
-    cycles: defaultTimer.cycles,
-  });
-  const [config, setConfig] = useState<ConfigPomodoroProps>({
-    configPomodoro: defaultConfig.configPomodoro,
-  });
+  const [timer, setTimer] = useState<TimerProps>(initialTimer);
+  const [config, setConfig] = useState<ConfigPomodoroProps>(initialConfig);
 
   const handleSetTimer = (newTimer: TimerProps) => {
-    const inSeconds = {
-      pomodoroTime: newTimer.pomodoroTime,
-      shortRestTime: newTimer.shortRestTime,
-      longRestTime: newTimer.longRestTime,
-      cycles: newTimer.cycles,
-    };
     setTimer((prevTimer) => ({
       ...prevTimer,
-      ...inSeconds,
+      ...newTimer,
     }));
-    localStorage.setItem('timer', JSON.stringify(inSeconds));
+    setTimerValue(newTimer);
   };
 
   const handleSetConfig = (config: ConfigPomodoroProps) => {
@@ -62,7 +35,7 @@ export const PomodoroProvider = ({
       ...prevState,
       ...config,
     }));
-    localStorage.setItem('configPomodoro', JSON.stringify(config));
+    setConfigValue(config);
   };
 
   return (
