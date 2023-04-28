@@ -1,4 +1,4 @@
-export type InputProps = {
+export type SettingsPomodoroInputProps = {
   labelText: string;
   name: string;
   type: React.HTMLInputTypeAttribute;

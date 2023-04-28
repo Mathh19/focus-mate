@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-import { ModalInput } from '../ModalInput';
-import { ModalTitle } from '../ModalTitle';
+import { SettingsPomodoroInput } from '../SettingsPomodoroInput';
+import { SettingsPomodoroBox } from '../SettingsPomodoroBox';
 import { VolumeSlider } from '../VolumeSlider';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave } from 'react-icons/bs';
 import { RxOpenInNewWindow } from 'react-icons/rx';
 
-export const SettingsTimer = () => {
+export const SettingsPomodoro = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
     useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
@@ -73,7 +73,7 @@ export const SettingsTimer = () => {
   return (
     <div>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen(true)}
         className="gap-2 px-2 py-1"
         aria-label="Settings"
         title="Settings"
@@ -81,40 +81,40 @@ export const SettingsTimer = () => {
         <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 max-[320px]:text-2xl" />
       </button>
       {open && (
-        <div className="fixed inset-0 z-40 flex justify-center px-4">
+        <div
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-50 flex min-h-screen justify-center bg-backgroundColor/60 px-4"
+        >
           <form
+            onClick={(e) => e.stopPropagation()}
             onSubmit={handleSubmit}
-            className="relative z-50 my-6 w-full max-w-lg space-y-6 rounded-lg bg-darkBlue p-4 text-white"
+            className="relative my-6 max-w-lg space-y-5 rounded-lg bg-darkBlue p-4"
           >
             <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
-            <div>
-              <ModalTitle>
-                Time in minutes
-                <RiTimerLine />
-              </ModalTitle>
+            <SettingsPomodoroBox title="Time in minutes" icon={<RiTimerLine />}>
               <div className="mt-1 flex flex-wrap gap-8 max-[415px]:justify-between">
-                <ModalInput
+                <SettingsPomodoroInput
                   onChange={handleTimerInputChange}
                   labelText="Pomodoro:"
                   name="pomodoroTime"
                   type="number"
                   defaultValue={displayInMinutes(timer.pomodoroTime)}
                 />
-                <ModalInput
+                <SettingsPomodoroInput
                   onChange={handleTimerInputChange}
                   labelText="Short Break:"
                   name="shortRestTime"
                   type="number"
                   defaultValue={displayInMinutes(timer.shortRestTime)}
                 />
-                <ModalInput
+                <SettingsPomodoroInput
                   onChange={handleTimerInputChange}
                   labelText="Long Break:"
                   name="longRestTime"
                   type="number"
                   defaultValue={displayInMinutes(timer.longRestTime)}
                 />
-                <ModalInput
+                <SettingsPomodoroInput
                   onChange={handleCyclesInputChange}
                   labelText="Cycles:"
                   name="cycles"
@@ -122,20 +122,16 @@ export const SettingsTimer = () => {
                   defaultValue={timer.cycles}
                 />
               </div>
-            </div>
-            <div>
-              <ModalTitle>
-                Sound
-                <BsSoundwave className="h-7 w-7" />
-              </ModalTitle>
-              <div className="flex flex-col justify-start">
-                <span className="mt-2 font-semibold">Volume:</span>
-                <VolumeSlider volume={volume} setVolume={setVolume} />
-              </div>
-            </div>
+            </SettingsPomodoroBox>
+            <SettingsPomodoroBox
+              title="Sound"
+              icon={<BsSoundwave className="h-7 w-7" />}
+            >
+              <span className="mt-2 font-semibold">Volume:</span>
+              <VolumeSlider volume={volume} setVolume={setVolume} />
+            </SettingsPomodoroBox>
             {!isMobile && (
-              <div>
-                <ModalTitle>Screen</ModalTitle>
+              <SettingsPomodoroBox title="Screen">
                 <button
                   onClick={(e) => openPomodoroWindow(e)}
                   className="flex items-center gap-2 font-semibold"
@@ -143,7 +139,7 @@ export const SettingsTimer = () => {
                   Open in floating window
                   <RxOpenInNewWindow />
                 </button>
-              </div>
+              </SettingsPomodoroBox>
             )}
             <div className="absolute bottom-0 left-0 flex w-full justify-between p-4 text-xl font-semibold">
               <button

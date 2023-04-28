@@ -7,7 +7,7 @@ import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext'
 import { TimerProps } from '../../timer';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './types';
-import { SettingsTimer } from '../SettingsTimer';
+import { SettingsPomodoro } from '../SettingsPomodoro';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
@@ -36,7 +36,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
           <p className="font-semibold">
             {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
           </p>
-          <SettingsTimer />
+          <SettingsPomodoro />
           {tasks.map(
             (task, index) =>
               task.working && (

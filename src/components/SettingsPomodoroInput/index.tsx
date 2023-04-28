@@ -1,12 +1,12 @@
-import { InputProps } from './types';
+import { SettingsPomodoroInputProps } from './types';
 
-export const ModalInput = ({
+export const SettingsPomodoroInput = ({
   labelText,
   name,
   defaultValue,
   type,
   onChange,
-}: InputProps) => {
+}: SettingsPomodoroInputProps) => {
   return (
     <label htmlFor={name} className="flex flex-col gap-2 font-semibold">
       {labelText}
