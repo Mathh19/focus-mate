@@ -10,7 +10,7 @@ export const Pomodoro = () => {
     timer,
     mainTime,
     label,
-    startCoutingStatus,
+    pause,
     timeCoutingStatus,
     completedCycles,
     setMainTime,
@@ -30,26 +30,26 @@ export const Pomodoro = () => {
       setFocusPomodoroTime(true);
       setFocusShortRestTime(false);
       setFocusLongRestTime(false);
-      startCoutingStatus && setTitle('Pomodoro Time');
+      pause && setTitle('Pomodoro Time');
     } else if (label === 'shortRestTime') {
       setFocusPomodoroTime(false);
       setFocusShortRestTime(true);
       setFocusLongRestTime(false);
-      startCoutingStatus && setTitle('Short Rest Time');
+      pause && setTitle('Short Rest Time');
     } else {
       setFocusPomodoroTime(false);
       setFocusShortRestTime(false);
       setFocusLongRestTime(true);
-      startCoutingStatus && setTitle('Long Rest Time');
+      pause && setTitle('Long Rest Time');
     }
 
     if (timeCoutingStatus) {
-      startCoutingStatus && setIcon('/run-pomodoro.svg');
+      pause && setIcon('/run-pomodoro.svg');
     } else {
-      startCoutingStatus && setTitle('Stoped');
-      startCoutingStatus && setIcon('/stop-pomodoro.svg');
+      pause && setTitle('Stoped');
+      pause && setIcon('/stop-pomodoro.svg');
     }
-  }, [label, startCoutingStatus, timeCoutingStatus]);
+  }, [label, pause, timeCoutingStatus]);
 
   const displayPomodoroTime = () => {
     setMainTime(timer.pomodoroTime);
@@ -69,7 +69,7 @@ export const Pomodoro = () => {
   };
 
   return (
-    <main className="my-5 mx-2 flex min-h-screen flex-col items-center justify-center gap-6">
+    <main className="mx-2 my-5 flex min-h-screen flex-col items-center justify-center gap-6">
       <Head title={title} icon={icon} />
       <div className="flex gap-4">
         <DisplayTimeButton
@@ -90,7 +90,7 @@ export const Pomodoro = () => {
       </div>
       <Timer timer={mainTime} label={label} />
       <div className="flex flex-col items-center gap-4">
-        {!startCoutingStatus && (
+        {!pause && (
           <button
             onClick={startTime}
             className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
@@ -98,7 +98,7 @@ export const Pomodoro = () => {
             Start
           </button>
         )}
-        {startCoutingStatus && (
+        {pause && (
           <button
             onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
             className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"

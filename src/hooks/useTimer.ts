@@ -13,7 +13,7 @@ export const useTimer = () => {
   const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
   const [working, setWorking] = useState(false);
   const [completedCycles, setCompletedCycles] = useState(0);
-  const [startCoutingStatus, setStartCoutingStatus] = useState(false);
+  const [pause, setPause] = useState(false);
   const [label, setLabel] = useState<
     'pomodoroTime' | 'shortRestTime' | 'longRestTime'
   >('pomodoroTime');
@@ -30,7 +30,7 @@ export const useTimer = () => {
     play.play();
     setTimeCountingSatus(true);
     setWorking(true);
-    setStartCoutingStatus(true);
+    setPause(true);
     setMainTime(timer.pomodoroTime);
     setLabel('pomodoroTime');
   }, [timer.pomodoroTime, volume]);
@@ -74,7 +74,7 @@ export const useTimer = () => {
 
   return {
     mainTime,
-    startCoutingStatus,
+    pause,
     label,
     timeCoutingStatus,
     completedCycles,
