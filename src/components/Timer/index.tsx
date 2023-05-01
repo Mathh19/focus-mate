@@ -19,18 +19,19 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
   return (
     <div className="w-full max-w-[384px]">
       <CircularProgressbarWithChildren
-        strokeWidth={3}
+        strokeWidth={4}
         background
         backgroundPadding={3}
         value={timerPercentage}
         styles={buildStyles({
           backgroundColor: '#212034',
           pathColor: '#7564e2',
+          strokeLinecap: 'round',
         })}
         className="h-full w-full drop-shadow-lg"
       >
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-full">
-          <span className="font-sans text-8xl font-semibold max-[380px]:text-7xl">
+        <div className="flex h-[90%] w-[90%] flex-col items-center justify-center gap-2 rounded-full border-[2px] border-bluishPurple shadow-shadowAllSides shadow-bluishPurple">
+          <span className="font-sans text-8xl font-semibold max-[400px]:text-7xl">
             {secondsToMinutes(timer)}
           </span>
           <p className="font-semibold">
