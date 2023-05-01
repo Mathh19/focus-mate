@@ -23,6 +23,9 @@ export const About = () => {
             <div className="rounded-lg bg-darkGray p-4 font-semibold">
               <div className="flex max-h-[500px] max-w-[450px] flex-col items-center gap-3 overflow-y-auto rounded-lg text-center text-lg font-semibold">
                 <BsQuestionCircle className="text-7xl text-bluishPurple max-[432px]:min-h-[72px] max-[432px]:min-w-[72px]" />
+                <h2 className="text-3xl font-bold text-bluishPurple">
+                  What is the Pomodoro ?
+                </h2>
                 <p>{about}</p>
               </div>
             </div>
