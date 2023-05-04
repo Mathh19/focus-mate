@@ -1,20 +1,41 @@
+import { useMemo } from 'react';
+import { VolumeSliderProps } from './types';
 import { Tooltip } from 'react-tooltip';
 import * as Slider from '@radix-ui/react-slider';
-import { BsFillVolumeMuteFill, BsFillVolumeUpFill } from 'react-icons/bs';
-import { VolumeSliderProps } from './types';
+import {
+  BsFillVolumeMuteFill,
+  BsFillVolumeDownFill,
+  BsFillVolumeUpFill,
+} from 'react-icons/bs';
 
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
+  const volumeInMemo = useMemo(() => {
+    if (volume[0] === 0) {
+      return 'mute';
+    }
+    return `${volume[0]}%`;
+  }, [volume]);
+
   return (
     <div className="flex items-center">
-      <BsFillVolumeMuteFill
-        className={`h-7 w-7 ${volume[0] === 0 && 'text-bluishPurple'}`}
-      />
+      {volume[0] === 0 ? (
+        <BsFillVolumeMuteFill
+          className="h-7 w-7 text-bluishPurple"
+          aria-label="Volume mute"
+        />
+      ) : (
+        <BsFillVolumeDownFill className="h-7 w-7" aria-label="Volume down" />
+      )}
       <Slider.Root
         className="relative mx-2 flex h-5 w-[200px] touch-none select-none items-center"
         defaultValue={volume}
         max={100}
         step={1}
         onValueChange={setVolume}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={volume[0]}
+        aria-valuetext={volumeInMemo}
       >
         <Slider.Track className="relative h-[3px] grow cursor-pointer rounded-full bg-bluishPurple/25">
           <Slider.Range className="absolute h-full rounded-full bg-bluishPurple" />
@@ -26,10 +47,12 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
         />
         <Tooltip
           id="my-tooltip"
+          data-tooltip-content={volumeInMemo}
+          aria-label="Volume"
           className="absolute top-0 rounded-sm bg-bluishGray px-1 font-semibold"
         />
       </Slider.Root>
-      <BsFillVolumeUpFill className="h-7 w-7" />
+      <BsFillVolumeUpFill className="h-7 w-7" aria-label="Volume up" />
     </div>
   );
 };
