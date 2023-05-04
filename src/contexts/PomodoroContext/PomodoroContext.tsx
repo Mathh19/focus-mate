@@ -14,7 +14,7 @@ export const PomodoroProvider = ({
     useLocalStorage('timer', defaultTimer);
   const { storedValue: storedConfigValue, setValue: setConfigValue } =
     useLocalStorage('defaultConfig', {
-      configPomodoro: { volume: [100] },
+      configPomodoro: { auto: true, volume: [100] },
     } as ConfigPomodoroProps);
   const initialTimer = storedTimerValue;
   const initialConfig = storedConfigValue;

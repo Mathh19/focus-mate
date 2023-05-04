@@ -2,6 +2,7 @@ import { TimerProps } from '../../timer';
 
 export type ConfigPomodoroProps = {
   configPomodoro: {
+    auto: boolean;
     volume: number[];
   };
 };
@@ -14,6 +15,7 @@ export type PomodoroContextProps = {
     cycles: number;
   };
   configPomodoro: {
+    auto: boolean;
     volume: number[];
   };
   setTimer: (newTimer: TimerProps) => void;
