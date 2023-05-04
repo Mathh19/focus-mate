@@ -4,6 +4,7 @@ import { DisplayTimeButton } from '../DisplayTimeButton';
 import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
+import { FiSkipForward } from 'react-icons/fi';
 
 export const Pomodoro = () => {
   const {
@@ -18,6 +19,7 @@ export const Pomodoro = () => {
     setWorking,
     startTime,
     setTimeCountingSatus,
+    nextTime,
   } = useTimer();
   const [focusPomodoroTime, setFocusPomodoroTime] = useState(true);
   const [focusShortRestTime, setFocusShortRestTime] = useState(false);
@@ -99,12 +101,17 @@ export const Pomodoro = () => {
           </button>
         )}
         {pause && (
-          <button
-            onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
-            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
-          >
-            {timeCoutingStatus ? 'pause' : 'play'}
-          </button>
+          <div className="relative flex w-full items-center justify-center">
+            <button
+              onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
+              className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
+            >
+              {timeCoutingStatus ? 'pause' : 'play'}
+            </button>
+            <button onClick={nextTime} className="absolute right-2">
+              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:translate-y-1 hover:text-bluishPurple" />
+            </button>
+          </div>
         )}
         <p className="font-bold">Completed cycles: {completedCycles}</p>
       </div>

@@ -33,7 +33,12 @@ export const useTimer = () => {
     setPause(true);
     setMainTime(timer.pomodoroTime);
     setLabel('pomodoroTime');
-  }, [timer.pomodoroTime, volume]);
+    if (!configPomodoro.auto) {
+      if (completedCycles > 0) {
+        setTimeCountingSatus(false);
+      }
+    }
+  }, [completedCycles, configPomodoro.auto, timer.pomodoroTime, volume]);
 
   const configureToResting = useCallback(() => {
     rest.volume = volume;
@@ -45,17 +50,31 @@ export const useTimer = () => {
     if ((completedCycles + 1) % timer.cycles === 0) {
       setMainTime(timer.longRestTime);
       setLabel('longRestTime');
+      if (!configPomodoro.auto) {
+        setTimeCountingSatus(false);
+      }
     } else {
       setMainTime(timer.shortRestTime);
       setLabel('shortRestTime');
+      if (!configPomodoro.auto) {
+        setTimeCountingSatus(false);
+      }
     }
   }, [
     completedCycles,
+    configPomodoro.auto,
     timer.cycles,
     timer.longRestTime,
     timer.shortRestTime,
     volume,
   ]);
+
+  const nextTime = () => {
+    if (working) {
+      return configureToResting();
+    }
+    return startTime();
+  };
 
   useEffect(() => {
     setMainTime(timer.pomodoroTime);
@@ -85,5 +104,6 @@ export const useTimer = () => {
     setLabel,
     setWorking,
     setTimeCountingSatus,
+    nextTime,
   };
 };
