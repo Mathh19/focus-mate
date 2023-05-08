@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { minutesToSeconds } from '../../utils/minutesToSeconds';
 import { isMobile } from 'react-device-detect';
-import { SettingsPomodoroInput } from '../SettingsPomodoroInput';
-import { SettingsPomodoroBox } from '../SettingsPomodoroBox';
+import { SettingsInput } from '../SettingsInput';
+import { SettingsBox } from '../SettingsBox';
 import { VolumeSlider } from '../VolumeSlider';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { RiTimerLine } from 'react-icons/ri';
@@ -12,7 +12,7 @@ import { RxOpenInNewWindow } from 'react-icons/rx';
 import { ToggleButton } from '../ToggleButton';
 import { openWindow } from '../../utils/openWindow';
 
-export const SettingsPomodoro = () => {
+export const Settings = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
     useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
@@ -77,32 +77,32 @@ export const SettingsPomodoro = () => {
             className="relative my-6 max-w-lg space-y-5 rounded-lg bg-darkBlue p-4"
           >
             <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
-            <SettingsPomodoroBox title="Timer" icon={<RiTimerLine />}>
+            <SettingsBox title="Timer" icon={<RiTimerLine />}>
               <div>
                 <span className="font-semibold">time in minutes</span>
                 <div className="my-1 flex flex-wrap gap-8 max-[415px]:justify-between">
-                  <SettingsPomodoroInput
+                  <SettingsInput
                     onChange={handleTimerInputChange}
                     labelText="Pomodoro:"
                     name="pomodoroTime"
                     type="number"
                     defaultValue={displayInMinutes(timer.pomodoroTime)}
                   />
-                  <SettingsPomodoroInput
+                  <SettingsInput
                     onChange={handleTimerInputChange}
                     labelText="Short Break:"
                     name="shortRestTime"
                     type="number"
                     defaultValue={displayInMinutes(timer.shortRestTime)}
                   />
-                  <SettingsPomodoroInput
+                  <SettingsInput
                     onChange={handleTimerInputChange}
                     labelText="Long Break:"
                     name="longRestTime"
                     type="number"
                     defaultValue={displayInMinutes(timer.longRestTime)}
                   />
-                  <SettingsPomodoroInput
+                  <SettingsInput
                     onChange={handleCyclesInputChange}
                     labelText="Cycles:"
                     name="cycles"
@@ -118,16 +118,16 @@ export const SettingsPomodoro = () => {
                   />
                 </div>
               </div>
-            </SettingsPomodoroBox>
-            <SettingsPomodoroBox
+            </SettingsBox>
+            <SettingsBox
               title="Sound"
               icon={<BsSoundwave className="h-7 w-7" />}
             >
               <span className="mt-2 font-semibold">Volume:</span>
               <VolumeSlider volume={volume} setVolume={setVolume} />
-            </SettingsPomodoroBox>
+            </SettingsBox>
             {!isMobile && (
-              <SettingsPomodoroBox title="Screen">
+              <SettingsBox title="Screen">
                 <button
                   onClick={(e) => openPomodoroWindow(e)}
                   className="flex items-center gap-2 font-semibold"
@@ -135,7 +135,7 @@ export const SettingsPomodoro = () => {
                   Open in floating window
                   <RxOpenInNewWindow />
                 </button>
-              </SettingsPomodoroBox>
+              </SettingsBox>
             )}
             <div className="absolute bottom-0 left-0 flex w-full justify-between p-4 text-xl font-semibold">
               <button
