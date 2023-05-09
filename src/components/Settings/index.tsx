@@ -52,7 +52,7 @@ export const Settings = () => {
 
   const openPomodoroWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    openWindow(400, 700, 'Pomodoro');
+    openWindow(400, 800, 'Pomodoro');
     setOpen(false);
   };
 
@@ -69,83 +69,87 @@ export const Settings = () => {
       {open && (
         <div
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-50 flex min-h-screen justify-center bg-backgroundColor/60 px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-backgroundColor/60 px-4"
         >
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={handleSubmit}
-            className="relative my-6 max-w-lg space-y-5 rounded-lg bg-darkBlue p-4"
+            className="my-6 max-h-[95%] space-y-5 overflow-auto rounded-lg bg-darkBlue p-4"
           >
-            <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
-            <SettingsBox title="Timer" icon={<RiTimerLine />}>
-              <div>
-                <span className="font-semibold">time in minutes</span>
-                <div className="my-1 flex flex-wrap gap-8 max-[415px]:justify-between">
-                  <SettingsInput
-                    onChange={handleTimerInputChange}
-                    labelText="Pomodoro:"
-                    name="pomodoroTime"
-                    type="number"
-                    defaultValue={displayInMinutes(timer.pomodoroTime)}
-                  />
-                  <SettingsInput
-                    onChange={handleTimerInputChange}
-                    labelText="Short Break:"
-                    name="shortRestTime"
-                    type="number"
-                    defaultValue={displayInMinutes(timer.shortRestTime)}
-                  />
-                  <SettingsInput
-                    onChange={handleTimerInputChange}
-                    labelText="Long Break:"
-                    name="longRestTime"
-                    type="number"
-                    defaultValue={displayInMinutes(timer.longRestTime)}
-                  />
-                  <SettingsInput
-                    onChange={handleCyclesInputChange}
-                    labelText="Cycles:"
-                    name="cycles"
-                    type="number"
-                    defaultValue={timer.cycles}
-                  />
-                </div>
-                <div className="mt-3">
-                  <ToggleButton
-                    label="Auto Pomodoro"
-                    toggled={autoPomodoro}
-                    setToggle={setAutoPomodoro}
-                  />
-                </div>
-              </div>
-            </SettingsBox>
-            <SettingsBox
-              title="Sound"
-              icon={<BsSoundwave className="h-7 w-7" />}
-            >
-              <span className="mt-2 font-semibold">Volume:</span>
-              <VolumeSlider volume={volume} setVolume={setVolume} />
-            </SettingsBox>
-            {!isMobile && (
-              <SettingsBox title="Screen">
-                <button
-                  onClick={(e) => openPomodoroWindow(e)}
-                  className="flex items-center gap-2 font-semibold"
+            <div className="relative">
+              <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
+              <div className="divide-y divide-bluishGray pb-16">
+                <SettingsBox title="Timer" icon={<RiTimerLine />}>
+                  <div>
+                    <span className="font-semibold">time in minutes</span>
+                    <div className="my-1 flex flex-wrap gap-8 max-[415px]:justify-between">
+                      <SettingsInput
+                        onChange={handleTimerInputChange}
+                        labelText="Pomodoro:"
+                        name="pomodoroTime"
+                        type="number"
+                        defaultValue={displayInMinutes(timer.pomodoroTime)}
+                      />
+                      <SettingsInput
+                        onChange={handleTimerInputChange}
+                        labelText="Short Break:"
+                        name="shortRestTime"
+                        type="number"
+                        defaultValue={displayInMinutes(timer.shortRestTime)}
+                      />
+                      <SettingsInput
+                        onChange={handleTimerInputChange}
+                        labelText="Long Break:"
+                        name="longRestTime"
+                        type="number"
+                        defaultValue={displayInMinutes(timer.longRestTime)}
+                      />
+                      <SettingsInput
+                        onChange={handleCyclesInputChange}
+                        labelText="Cycles:"
+                        name="cycles"
+                        type="number"
+                        defaultValue={timer.cycles}
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <ToggleButton
+                        label="Auto Pomodoro"
+                        toggled={autoPomodoro}
+                        setToggle={setAutoPomodoro}
+                      />
+                    </div>
+                  </div>
+                </SettingsBox>
+                <SettingsBox
+                  title="Sound"
+                  icon={<BsSoundwave className="h-7 w-7" />}
                 >
-                  Open in floating window
-                  <RxOpenInNewWindow />
+                  <span className="mt-2 font-semibold">Volume:</span>
+                  <VolumeSlider volume={volume} setVolume={setVolume} />
+                </SettingsBox>
+                {!isMobile && (
+                  <SettingsBox title="Screen">
+                    <button
+                      onClick={(e) => openPomodoroWindow(e)}
+                      className="flex items-center gap-2 font-semibold"
+                    >
+                      Open in floating window
+                      <RxOpenInNewWindow />
+                    </button>
+                  </SettingsBox>
+                )}
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xl font-semibold">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md bg-tealBlue p-2 text-bluishPurple"
+                >
+                  cancel
                 </button>
-              </SettingsBox>
-            )}
-            <div className="absolute bottom-0 left-0 flex w-full justify-between p-4 text-xl font-semibold">
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="rounded-md bg-tealBlue p-2 text-bluishPurple"
-              >
-                cancel
-              </button>
-              <button type="submit">apply</button>
+                <button type="submit">apply</button>
+              </div>
             </div>
           </form>
         </div>
