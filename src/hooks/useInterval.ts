@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { setInterval, clearInterval } from 'worker-timers';
 
 export function useInterval<C extends CallableFunction>(
   callback: C,
