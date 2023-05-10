@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="700" alt="Banner do app focus mate" src="public/banner.png" />
+  <img width="600" alt="Banner do app focus mate" src="public/banner.png" />
 </div>
 
 <h3 align="center">
