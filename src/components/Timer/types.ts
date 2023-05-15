@@ -1,4 +1,4 @@
 export type TimerComponentProps = {
-  label: string;
+  label: 'pomodoroTime' | 'shortRestTime' | 'longRestTime';
   timer: number;
 };

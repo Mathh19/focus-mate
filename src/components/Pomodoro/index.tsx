@@ -16,32 +16,19 @@ export const Pomodoro = () => {
     completedCycles,
     setMainTime,
     setLabel,
-    setWorking,
     startTime,
     setTimeCountingSatus,
     nextTime,
   } = useTimer();
-  const [focusPomodoroTime, setFocusPomodoroTime] = useState(true);
-  const [focusShortRestTime, setFocusShortRestTime] = useState(false);
-  const [focusLongRestTime, setFocusLongRestTime] = useState(false);
   const [title, setTitle] = useState('');
   const [icon, setIcon] = useState('');
 
   useEffect(() => {
     if (label === 'pomodoroTime') {
-      setFocusPomodoroTime(true);
-      setFocusShortRestTime(false);
-      setFocusLongRestTime(false);
       pause && setTitle('Pomodoro Time');
     } else if (label === 'shortRestTime') {
-      setFocusPomodoroTime(false);
-      setFocusShortRestTime(true);
-      setFocusLongRestTime(false);
       pause && setTitle('Short Rest Time');
     } else {
-      setFocusPomodoroTime(false);
-      setFocusShortRestTime(false);
-      setFocusLongRestTime(true);
       pause && setTitle('Long Rest Time');
     }
 
@@ -53,21 +40,13 @@ export const Pomodoro = () => {
     }
   }, [label, pause, timeCoutingStatus]);
 
-  const displayPomodoroTime = () => {
-    setMainTime(timer.pomodoroTime);
-    setWorking(true);
+  const displayTime = (
+    time: number,
+    labelTime: 'pomodoroTime' | 'shortRestTime' | 'longRestTime',
+  ) => {
+    setMainTime(time);
     setTimeCountingSatus(false);
-    setLabel('pomodoroTime');
-  };
-  const displayShortBreakTime = () => {
-    setMainTime(timer.shortRestTime);
-    setTimeCountingSatus(false);
-    setLabel('shortRestTime');
-  };
-  const displayLongBreakTime = () => {
-    setMainTime(timer.longRestTime);
-    setTimeCountingSatus(false);
-    setLabel('longRestTime');
+    setLabel(labelTime);
   };
 
   return (
@@ -75,19 +54,19 @@ export const Pomodoro = () => {
       <Head title={title} icon={icon} />
       <div className="flex gap-4">
         <DisplayTimeButton
-          focused={focusPomodoroTime}
+          focused={label === 'pomodoroTime' && true}
           text="Pomodoro"
-          onClick={displayPomodoroTime}
+          onClick={() => displayTime(timer.pomodoroTime, 'pomodoroTime')}
         />
         <DisplayTimeButton
-          focused={focusShortRestTime}
+          focused={label === 'shortRestTime' && true}
           text="Short Break"
-          onClick={displayShortBreakTime}
+          onClick={() => displayTime(timer.shortRestTime, 'shortRestTime')}
         />
         <DisplayTimeButton
-          focused={focusLongRestTime}
+          focused={label === 'longRestTime' && true}
           text="Long Break"
-          onClick={displayLongBreakTime}
+          onClick={() => displayTime(timer.longRestTime, 'longRestTime')}
         />
       </div>
       <Timer timer={mainTime} label={label} />

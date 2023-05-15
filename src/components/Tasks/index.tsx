@@ -45,7 +45,7 @@ export const Tasks = () => {
           <li
             key={index}
             onClick={() => handleWorking(task)}
-            className="flex cursor-pointer items-center justify-between gap-1 rounded-md bg-bluishPurple py-2 px-3 hover:bg-bluishPurple-dark"
+            className="flex cursor-pointer items-center justify-between gap-1 rounded-md bg-bluishPurple px-3 py-2 hover:bg-bluishPurple-dark"
           >
             <p className={`truncate ${task.finished && 'line-through'}`}>
               {task.name}
