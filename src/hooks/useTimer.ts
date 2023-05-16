@@ -12,7 +12,7 @@ export const useTimer = () => {
   const volume = configPomodoro.volume[0] / 100;
 
   const [mainTime, setMainTime] = useState(timer.pomodoroTime);
-  const [timeCoutingStatus, setTimeCountingSatus] = useState(false);
+  const [timeCoutingStatus, setTimeCountingStatus] = useState(false);
   const [working, setWorking] = useState(false);
   const [completedCycles, setCompletedCycles] = useState(0);
   const [pause, setPause] = useState(false);
@@ -27,17 +27,17 @@ export const useTimer = () => {
     timeCoutingStatus ? 1000 : null,
   );
 
-  const startTime = useCallback(() => {
+  const startTimer = useCallback(() => {
     play.volume = volume;
     play.play();
-    setTimeCountingSatus(true);
+    setTimeCountingStatus(true);
     setWorking(true);
     setPause(true);
     setMainTime(timer.pomodoroTime);
     setLabel('pomodoroTime');
     if (!configPomodoro.auto) {
       if (completedCycles > 0) {
-        setTimeCountingSatus(false);
+        setTimeCountingStatus(false);
       }
     }
   }, [completedCycles, configPomodoro.auto, timer.pomodoroTime, volume]);
@@ -45,21 +45,21 @@ export const useTimer = () => {
   const configureToResting = useCallback(() => {
     rest.volume = volume;
     rest.play();
-    setTimeCountingSatus(true);
+    setTimeCountingStatus(true);
     setWorking(false);
-    setCompletedCycles(completedCycles + 1);
+    setCompletedCycles((prevCompletedCycles) => prevCompletedCycles + 1);
 
     if ((completedCycles + 1) % timer.cycles === 0) {
       setMainTime(timer.longRestTime);
       setLabel('longRestTime');
       if (!configPomodoro.auto) {
-        setTimeCountingSatus(false);
+        setTimeCountingStatus(false);
       }
     } else {
       setMainTime(timer.shortRestTime);
       setLabel('shortRestTime');
       if (!configPomodoro.auto) {
-        setTimeCountingSatus(false);
+        setTimeCountingStatus(false);
       }
     }
   }, [
@@ -75,21 +75,28 @@ export const useTimer = () => {
     if (working) {
       return configureToResting();
     }
-    return startTime();
+    return startTimer();
   };
 
   useEffect(() => {
-    setMainTime(timer.pomodoroTime);
-    return;
-  }, [timer.pomodoroTime]);
+    if (label === 'pomodoroTime') {
+      setMainTime(timer.pomodoroTime);
+    } else if (label === 'shortRestTime') {
+      setMainTime(timer.shortRestTime);
+    } else {
+      setMainTime(timer.longRestTime);
+    }
+  }, [label, timer]);
 
   useEffect(() => {
-    if (mainTime > 0) return;
-
-    if (working) configureToResting();
-
-    if (!working) startTime();
-  }, [mainTime, working, completedCycles, configureToResting, startTime]);
+    if (mainTime <= 0) {
+      if (working) {
+        configureToResting();
+      } else {
+        startTimer();
+      }
+    }
+  }, [mainTime, working, completedCycles, configureToResting, startTimer]);
 
   return {
     mainTime,
@@ -98,10 +105,10 @@ export const useTimer = () => {
     timeCoutingStatus,
     completedCycles,
     timer,
-    startTime,
+    startTimer,
     setMainTime,
     setLabel,
-    setTimeCountingSatus,
+    setTimeCountingStatus,
     nextTime,
   };
 };

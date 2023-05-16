@@ -16,8 +16,8 @@ export const Pomodoro = () => {
     completedCycles,
     setMainTime,
     setLabel,
-    startTime,
-    setTimeCountingSatus,
+    startTimer,
+    setTimeCountingStatus,
     nextTime,
   } = useTimer();
   const [title, setTitle] = useState('');
@@ -45,7 +45,7 @@ export const Pomodoro = () => {
     labelTime: 'pomodoroTime' | 'shortRestTime' | 'longRestTime',
   ) => {
     setMainTime(time);
-    setTimeCountingSatus(false);
+    setTimeCountingStatus(false);
     setLabel(labelTime);
   };
 
@@ -73,7 +73,7 @@ export const Pomodoro = () => {
       <div className="flex flex-col items-center gap-4">
         {!pause && (
           <button
-            onClick={startTime}
+            onClick={startTimer}
             className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
           >
             Start
@@ -82,7 +82,7 @@ export const Pomodoro = () => {
         {pause && (
           <div className="relative flex w-full items-center justify-center">
             <button
-              onClick={() => setTimeCountingSatus(!timeCoutingStatus)}
+              onClick={() => setTimeCountingStatus(!timeCoutingStatus)}
               className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
             >
               {timeCoutingStatus ? 'pause' : 'play'}
