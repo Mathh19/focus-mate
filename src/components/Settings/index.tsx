@@ -1,22 +1,23 @@
 import { useState, useContext } from 'react';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-import { minutesToSeconds } from '../../utils/minutesToSeconds';
 import { isMobile } from 'react-device-detect';
-import { SettingsInput } from '../SettingsInput';
+import { SettingsInputTimer } from '../SettingsInputTimer';
 import { SettingsBox } from '../SettingsBox';
 import { VolumeSlider } from '../VolumeSlider';
-import { IoSettingsSharp } from 'react-icons/io5';
+import { ToggleButton } from '../ToggleButton';
+import { openWindow } from '../../utils/openWindow';
+import { TimerProps } from '../../timer';
+import { minutesToSeconds } from '../../utils/minutesToSeconds';
 import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave } from 'react-icons/bs';
 import { RxOpenInNewWindow } from 'react-icons/rx';
-import { ToggleButton } from '../ToggleButton';
-import { openWindow } from '../../utils/openWindow';
+import { IoSettingsSharp } from 'react-icons/io5';
 
 export const Settings = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
     useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
-  const [newTimer, setNewTimer] = useState({
+  const [newTimer, setNewTimer] = useState<TimerProps>({
     ...timer,
   });
   const [volume, setVolume] = useState<number[]>([configPomodoro.volume[0]]);
@@ -34,26 +35,18 @@ export const Settings = () => {
     setConfig({ configPomodoro: { auto: autoPomodoro, volume: volume } });
   };
 
-  const handleTimerInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputTimerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewTimer((prevTimer) => ({
       ...prevTimer,
-      [name]: minutesToSeconds(parseInt(value)),
-    }));
-  };
-
-  const handleCyclesInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setNewTimer((prevTimer) => ({
-      ...prevTimer,
-      [name]: parseInt(value),
+      [name]:
+        name === 'cycles' ? parseInt(value) : minutesToSeconds(parseInt(value)),
     }));
   };
 
   const openPomodoroWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    openWindow(400, 800, 'Pomodoro');
-    setOpen(false);
+    openWindow(400, 800);
   };
 
   return (
@@ -83,29 +76,29 @@ export const Settings = () => {
                   <div>
                     <span className="font-semibold">time in minutes</span>
                     <div className="my-1 flex flex-wrap gap-8 max-[415px]:justify-between">
-                      <SettingsInput
-                        onChange={handleTimerInputChange}
+                      <SettingsInputTimer
+                        onChange={handleInputTimerChange}
                         labelText="Pomodoro:"
                         name="pomodoroTime"
                         type="number"
                         defaultValue={displayInMinutes(timer.pomodoroTime)}
                       />
-                      <SettingsInput
-                        onChange={handleTimerInputChange}
+                      <SettingsInputTimer
+                        onChange={handleInputTimerChange}
                         labelText="Short Break:"
                         name="shortRestTime"
                         type="number"
                         defaultValue={displayInMinutes(timer.shortRestTime)}
                       />
-                      <SettingsInput
-                        onChange={handleTimerInputChange}
+                      <SettingsInputTimer
+                        onChange={handleInputTimerChange}
                         labelText="Long Break:"
                         name="longRestTime"
                         type="number"
                         defaultValue={displayInMinutes(timer.longRestTime)}
                       />
-                      <SettingsInput
-                        onChange={handleCyclesInputChange}
+                      <SettingsInputTimer
+                        onChange={handleInputTimerChange}
                         labelText="Cycles:"
                         name="cycles"
                         type="number"

@@ -1,6 +1,6 @@
 import { SettingsInputProps } from './types';
 
-export const SettingsInput = ({
+export const SettingsInputTimer = ({
   labelText,
   name,
   defaultValue,
