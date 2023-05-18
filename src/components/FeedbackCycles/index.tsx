@@ -32,6 +32,7 @@ export const FeedbackCycles = ({
         aria-label={`Completed cycles: ${completedCycles}`}
         className="absolute flex gap-4"
       >
+        <span className="sr-only">Completed cycles:</span>
         {completedCyclesElement}
       </div>
     </div>

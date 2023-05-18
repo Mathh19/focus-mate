@@ -93,7 +93,7 @@ export const Pomodoro = () => {
             </button>
           </div>
         )}
-        <p className="text-xl font-bold">Cycles</p>
+        <h2 className="text-xl font-bold">Cycles</h2>
         <FeedbackCycles
           cycles={timer.cycles}
           completedCycles={completedCycles}
