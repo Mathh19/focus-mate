@@ -27,7 +27,7 @@ module.exports = {
       boxShadow: {
         boxShadowTimer:
           '6px 6px 6px -1px rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.7)',
-        shadowAllSides: '0 0 15px',
+        shadowAllSides: '0 0 10px',
       },
       keyframes: {
         'short-line': {

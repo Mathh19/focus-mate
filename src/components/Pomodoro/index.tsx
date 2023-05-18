@@ -5,6 +5,7 @@ import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
 import { FiSkipForward } from 'react-icons/fi';
+import { FeedbackCycles } from '../FeedbackCycles';
 
 export const Pomodoro = () => {
   const {
@@ -74,25 +75,29 @@ export const Pomodoro = () => {
         {!pause && (
           <button
             onClick={startTimer}
-            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
+            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-shadowAllSides hover:shadow-bluishPurple"
           >
             Start
           </button>
         )}
         {pause && (
-          <div className="relative flex w-full items-center justify-center">
+          <div className="relative flex w-36 items-center justify-center">
             <button
               onClick={() => setTimeCountingStatus(!timeCoutingStatus)}
-              className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:translate-y-1 hover:border-bluishPurple hover:text-bluishPurple hover:shadow-bluishPurple/30"
+              className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-shadowAllSides hover:shadow-bluishPurple"
             >
               {timeCoutingStatus ? 'pause' : 'play'}
             </button>
             <button onClick={nextTime} className="absolute right-2">
-              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:translate-y-1 hover:text-bluishPurple" />
+              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-bluishPurple" />
             </button>
           </div>
         )}
-        <p className="font-bold">Completed cycles: {completedCycles}</p>
+        <p className="text-xl font-bold">Cycles</p>
+        <FeedbackCycles
+          cycles={timer.cycles}
+          completedCycles={completedCycles}
+        />
       </div>
       <Tasks />
     </main>
