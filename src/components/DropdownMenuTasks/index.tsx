@@ -4,23 +4,31 @@ import { HiMenu, HiCheck } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { VscClearAll } from 'react-icons/vsc';
+import { alertWindow } from '../../utils/alertWindow';
 
 export const DropdownMenuTasks = () => {
   const [open, setOpen] = useState(false);
   const { tasks, deleteTask, setFinished } = useContext(TasksContext);
 
-  const handleClick = (fn: () => void) => {
-    fn();
+  const handleClickCheckAllTasks = () => {
+    setFinished(true);
     setOpen(false);
   };
 
   const handleClickDeleteAllTask = () => {
     if (tasks.length > 0) {
-      const alert = window.confirm(
-        'Do you really want to delete all your tasks?',
-      );
+      const alert = alertWindow('Do you really want to delete all your tasks?');
       alert && deleteTask();
-      setOpen(false);
+    }
+    setOpen(false);
+  };
+
+  const deleteAllFinishedTasks = () => {
+    if (tasks.length > 0) {
+      const alert = alertWindow(
+        'Do you really want to delete all your completed tasks?',
+      );
+      alert && deleteTask(undefined, true);
     }
     setOpen(false);
   };
@@ -36,14 +44,14 @@ export const DropdownMenuTasks = () => {
         <div className="absolute right-0 z-50 w-80 rounded-md bg-darkBlue p-2 text-2xl text-bluishPurple-dark">
           <div className="flex flex-col">
             <button
-              onClick={() => handleClick(() => setFinished(true))}
+              onClick={handleClickCheckAllTasks}
               className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white"
             >
               Check all tasks
               <HiCheck />
             </button>
             <button
-              onClick={() => handleClick(() => deleteTask(undefined, true))}
+              onClick={deleteAllFinishedTasks}
               className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white"
             >
               Delete finished tasks

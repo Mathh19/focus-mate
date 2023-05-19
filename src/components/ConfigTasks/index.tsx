@@ -3,6 +3,7 @@ import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { ConfigTasksProps } from './types';
 import { RiCloseLine } from 'react-icons/ri';
 import { IoIosOptions } from 'react-icons/io';
+import { alertWindow } from '../../utils/alertWindow';
 
 export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const { tasks, updateTask, deleteTask } = useContext(TasksContext);
@@ -21,7 +22,10 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   };
 
   const handleDeleteTask = () => {
-    deleteTask(task);
+    const alert = alertWindow(
+      `Do you really want to delete the "${task.name}" task?`,
+    );
+    alert && deleteTask(task);
     setOpen(false);
   };
 
