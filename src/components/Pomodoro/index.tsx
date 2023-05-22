@@ -25,16 +25,9 @@ export const Pomodoro = () => {
   const [icon, setIcon] = useState('');
 
   useEffect(() => {
-    if (label === 'pomodoroTime') {
-      pause && setTitle('Pomodoro Time');
-    } else if (label === 'shortRestTime') {
-      pause && setTitle('Short Rest Time');
-    } else {
-      pause && setTitle('Long Rest Time');
-    }
-
     if (timeCoutingStatus) {
       pause && setIcon('/run-pomodoro.svg');
+      setTitle('');
     } else {
       pause && setTitle('Stoped');
       pause && setIcon('/stop-pomodoro.svg');
@@ -93,7 +86,9 @@ export const Pomodoro = () => {
             </button>
           </div>
         )}
-        <h2 className="text-xl font-bold">Cycles</h2>
+        <h2 className="text-xl font-bold">
+          Cycles {completedCycles}/{timer.cycles}
+        </h2>
         <FeedbackCycles
           cycles={timer.cycles}
           completedCycles={completedCycles}
