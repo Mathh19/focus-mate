@@ -19,7 +19,7 @@ export const FeedbackCycles = ({
         <span
           key={i}
           aria-label={`Cycle ${i + 1} of ${cycles}`}
-          className="inline-block h-3 w-3 rounded-full bg-bluishPurple-dark"
+          className="inline-block h-3 w-3 rounded-full bg-bluishPurple-dark blueTheme:bg-blueTheme-dark dark:bg-white"
         ></span>
       );
     }

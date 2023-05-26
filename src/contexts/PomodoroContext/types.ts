@@ -1,10 +1,11 @@
 import { TimerProps } from '../../timer';
 
+export type ThemeProps = 'defaultTheme' | 'blueTheme' | 'darkTheme';
+
 export type ConfigPomodoroProps = {
-  configPomodoro: {
-    auto: boolean;
-    volume: number[];
-  };
+  auto: boolean;
+  volume: number[];
+  theme: ThemeProps;
 };
 
 export type PomodoroContextProps = {
@@ -17,6 +18,7 @@ export type PomodoroContextProps = {
   configPomodoro: {
     auto: boolean;
     volume: number[];
+    theme: ThemeProps;
   };
   setTimer: (newTimer: TimerProps) => void;
   setConfig: (newConfig: ConfigPomodoroProps) => void;

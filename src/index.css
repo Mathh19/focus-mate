@@ -8,4 +8,8 @@
   .check {
     @apply absolute border bg-successColor rounded-full text-successColor;
   }
+
+  .btn-control {
+    @apply rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-shadowAllSides hover:shadow-bluishPurple blueTheme:hover:border-blueTheme blueTheme:hover:text-blueTheme blueTheme:hover:shadow-blueTheme dark:hover:border-white dark:hover:text-white dark:hover:shadow-white
+  }
 }

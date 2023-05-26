@@ -36,7 +36,7 @@ export const Tasks = () => {
 
   return (
     <div className="w-full max-w-md space-y-2">
-      <h2 className="flex items-center justify-between border-b-2 pb-2 text-6xl font-bold text-bluishPurple max-[540px]:text-5xl">
+      <h2 className="flex items-center justify-between border-b-2 pb-2 text-6xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[540px]:text-5xl">
         Tasks
         <DropdownMenuTasks />
       </h2>
@@ -45,7 +45,7 @@ export const Tasks = () => {
           <li
             key={index}
             onClick={() => handleWorking(task)}
-            className="flex cursor-pointer items-center justify-between gap-1 rounded-md bg-bluishPurple px-3 py-2 hover:bg-bluishPurple-dark"
+            className="flex cursor-pointer items-center justify-between gap-1 rounded-md bg-bluishPurple px-3 py-2 hover:bg-bluishPurple-dark blueTheme:bg-blueTheme blueTheme:hover:bg-blueTheme-dark dark:bg-darkTheme dark:hover:bg-darkTheme-dark"
           >
             <p className={`truncate ${task.finished && 'line-through'}`}>
               {task.name}
@@ -57,7 +57,7 @@ export const Tasks = () => {
           </li>
         ))}
         <li>
-          <label className="flex w-full items-center justify-between gap-1 rounded-md border-4 border-dashed border-bluishPurple/60 bg-none p-2 text-white/50 transition duration-200 ease-in-out focus-within:border-bluishPurple focus-within:text-white hover:border-bluishPurple  hover:text-white">
+          <label className="flex w-full items-center justify-between gap-1 rounded-md border-4 border-dashed border-bluishPurple/60 bg-none p-2 text-white/50 transition duration-200 ease-in-out focus-within:border-bluishPurple focus-within:text-white hover:border-bluishPurple hover:text-white blueTheme:border-blueTheme/60 blueTheme:focus-within:border-blueTheme blueTheme:hover:border-blueTheme dark:border-darkTheme/60 dark:focus-within:border-white dark:hover:border-white">
             <input
               type="text"
               value={newTask.name}

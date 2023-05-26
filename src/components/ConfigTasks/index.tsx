@@ -52,7 +52,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
                 <h2>Config task</h2>
                 <RiCloseLine
                   onClick={() => setOpen(false)}
-                  className="cursor-pointer rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple"
+                  className="cursor-pointer rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme"
                 />
               </div>
               <label className="my-2 flex gap-2">
@@ -61,7 +61,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
                   type="text"
                   value={newTask.name}
                   onChange={handleChange}
-                  className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple"
+                  className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme"
                 />
               </label>
               <div className="flex w-full flex-wrap justify-between gap-2">

@@ -12,6 +12,9 @@ import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave } from 'react-icons/bs';
 import { RxOpenInNewWindow } from 'react-icons/rx';
 import { IoSettingsSharp } from 'react-icons/io5';
+import { GiPaintRoller } from 'react-icons/gi';
+import { SelectTheme } from '../SelectTheme';
+import { ThemeProps } from '../../contexts/PomodoroContext/types';
 
 export const Settings = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
@@ -22,6 +25,7 @@ export const Settings = () => {
   });
   const [volume, setVolume] = useState<number[]>([configPomodoro.volume[0]]);
   const [autoPomodoro, setAutoPomodoro] = useState(configPomodoro.auto);
+  const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -32,7 +36,11 @@ export const Settings = () => {
     e.preventDefault();
     setTimer(newTimer);
     setOpen(false);
-    setConfig({ configPomodoro: { auto: autoPomodoro, volume: volume } });
+    setConfig({
+      auto: autoPomodoro,
+      volume: volume,
+      theme: theme,
+    });
   };
 
   const handleInputTimerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +75,7 @@ export const Settings = () => {
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={handleSubmit}
-            className="my-6 max-h-[95%] space-y-5 overflow-auto rounded-lg bg-darkBlue p-4"
+            className="my-6 max-h-[95%] space-y-5 overflow-auto rounded-lg bg-darkBlue p-4 dark:bg-darkTheme-950"
           >
             <div className="relative">
               <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
@@ -132,12 +140,20 @@ export const Settings = () => {
                     </button>
                   </SettingsBox>
                 )}
+                <SettingsBox
+                  title="Theme"
+                  icon={<GiPaintRoller className="h-6 w-6 rotate-45" />}
+                >
+                  <div>
+                    <SelectTheme themeSelected={theme} setTheme={setTheme} />
+                  </div>
+                </SettingsBox>
               </div>
               <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xl font-semibold">
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="rounded-md bg-tealBlue p-2 text-bluishPurple"
+                  className="rounded-md bg-tealBlue p-2 text-bluishPurple blueTheme:text-blueTheme dark:bg-darkTheme-600 dark:text-white"
                 >
                   cancel
                 </button>

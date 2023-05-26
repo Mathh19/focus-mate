@@ -1,16 +1,32 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     colors: {
       transparent: 'transparent',
       backgroundColor: '#181920',
+      darkBackgroundColor: '#15161A',
       darkGray: '#31354c',
       white: '#e8eaee',
       bluishGray: '#636078',
       bluishPurple: {
         DEFAULT: '#7564e2',
         dark: '#695acb',
+      },
+      darkTheme: {
+        DEFAULT: '#636069',
+        dark: '#4e4c52',
+        600: '#8F8DA3',
+        950: '#303036',
+      },
+      blueTheme: {
+        DEFAULT: '#4f53ff',
+        dark: '#4136f5',
+        800: '#2d25ae',
       },
       vibrantPurple: '#a855f7',
       purplishGray: '#636069',
@@ -43,5 +59,13 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant, e }) {
+      addVariant('blueTheme', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.blueTheme .${e(`blueTheme${separator}${className}`)}`;
+        });
+      });
+    }),
+  ],
 };

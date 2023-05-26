@@ -66,10 +66,7 @@ export const Pomodoro = () => {
       <Timer timer={mainTime} label={label} />
       <div className="flex flex-col items-center gap-4">
         {!pause && (
-          <button
-            onClick={startTimer}
-            className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-shadowAllSides hover:shadow-bluishPurple"
-          >
+          <button onClick={startTimer} className="btn-control">
             Start
           </button>
         )}
@@ -77,12 +74,12 @@ export const Pomodoro = () => {
           <div className="relative flex w-36 items-center justify-center">
             <button
               onClick={() => setTimeCountingStatus(!timeCoutingStatus)}
-              className="rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-shadowAllSides hover:shadow-bluishPurple"
+              className="btn-control"
             >
               {timeCoutingStatus ? 'pause' : 'play'}
             </button>
             <button onClick={nextTime} className="absolute right-2">
-              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-bluishPurple" />
+              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:text-white" />
             </button>
           </div>
         )}
