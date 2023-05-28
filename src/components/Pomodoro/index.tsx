@@ -29,7 +29,7 @@ export const Pomodoro = () => {
       pause && setIcon('/run-pomodoro.svg');
       setTitle('');
     } else {
-      pause && setTitle('Stoped');
+      pause && setTitle('Stopped');
       pause && setIcon('/stop-pomodoro.svg');
     }
   }, [label, pause, timeCoutingStatus]);
