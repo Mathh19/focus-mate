@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { about } from '../../content/about.json';
 import { BsQuestionCircle } from 'react-icons/bs';
+import { about } from '../../content/about.json';
 
 export const About = () => {
   const [open, setOpen] = useState(false);

@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { HiMenu, HiCheck } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { VscClearAll } from 'react-icons/vsc';
+import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { alertWindow } from '../../utils/alertWindow';
 
 export const DropdownMenuTasks = () => {

@@ -27,7 +27,9 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "import",
+    "import-order"
   ],
   "settings": {
     "react": {
@@ -35,6 +37,13 @@
     }
   },
   "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
+        "newlines-between": "never"
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error"
   }

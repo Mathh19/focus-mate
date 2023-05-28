@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { ConfigTasksProps } from './types';
 import { RiCloseLine } from 'react-icons/ri';
 import { IoIosOptions } from 'react-icons/io';
+import { TasksContext } from '../../contexts/TasksContext/TasksContext';
+import { ConfigTasksProps } from './types';
 import { alertWindow } from '../../utils/alertWindow';
 
 export const ConfigTasks = ({ task }: ConfigTasksProps) => {

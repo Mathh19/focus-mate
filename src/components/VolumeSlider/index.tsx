@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { VolumeSliderProps } from './types';
 import { Tooltip } from 'react-tooltip';
 import * as Slider from '@radix-ui/react-slider';
 import {
@@ -7,6 +6,7 @@ import {
   BsFillVolumeDownFill,
   BsFillVolumeUpFill,
 } from 'react-icons/bs';
+import { VolumeSliderProps } from './types';
 
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   const volumeInMemo = useMemo(() => {

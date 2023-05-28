@@ -1,6 +1,11 @@
 import { useState, useContext } from 'react';
-import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { isMobile } from 'react-device-detect';
+import { RiTimerLine } from 'react-icons/ri';
+import { BsSoundwave } from 'react-icons/bs';
+import { RxOpenInNewWindow } from 'react-icons/rx';
+import { IoSettingsSharp } from 'react-icons/io5';
+import { GiPaintRoller } from 'react-icons/gi';
+import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { SettingsInputTimer } from '../SettingsInputTimer';
 import { SettingsBox } from '../SettingsBox';
 import { VolumeSlider } from '../VolumeSlider';
@@ -8,11 +13,6 @@ import { ToggleButton } from '../ToggleButton';
 import { openWindow } from '../../utils/openWindow';
 import { TimerProps } from '../../timer';
 import { minutesToSeconds } from '../../utils/minutesToSeconds';
-import { RiTimerLine } from 'react-icons/ri';
-import { BsSoundwave } from 'react-icons/bs';
-import { RxOpenInNewWindow } from 'react-icons/rx';
-import { IoSettingsSharp } from 'react-icons/io5';
-import { GiPaintRoller } from 'react-icons/gi';
 import { SelectTheme } from '../SelectTheme';
 import { ThemeProps } from '../../contexts/PomodoroContext/types';
 

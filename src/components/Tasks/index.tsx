@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
+import { MdOutlinePostAdd } from 'react-icons/md';
 import { AnimatedCheck } from '../AnimatedCheck';
 import { DropdownMenuTasks } from '../DropdownMenuTasks';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { ConfigTasks } from '../ConfigTasks';
 import { TaskProps } from '../../contexts/TasksContext/types';
-import { MdOutlinePostAdd } from 'react-icons/md';
 
 export const Tasks = () => {
   const { tasks, addNewTask, setWorkingTask } = useContext(TasksContext);

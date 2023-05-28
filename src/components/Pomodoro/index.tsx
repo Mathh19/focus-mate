@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import { FiSkipForward } from 'react-icons/fi';
 import { useTimer } from '../../hooks/useTimer';
 import { DisplayTimeButton } from '../DisplayTimeButton';
 import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
-import { FiSkipForward } from 'react-icons/fi';
 import { FeedbackCycles } from '../FeedbackCycles';
 
 export const Pomodoro = () => {
