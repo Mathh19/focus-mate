@@ -26,11 +26,11 @@ export const Pomodoro = () => {
 
   useEffect(() => {
     if (timeCoutingStatus) {
-      pause && setIcon('/run-pomodoro.svg');
+      pause && setIcon('/run-pomodoro.ico');
       setTitle('');
     } else {
       pause && setTitle('Stopped');
-      pause && setIcon('/stop-pomodoro.svg');
+      pause && setIcon('/stop-pomodoro.ico');
     }
   }, [label, pause, timeCoutingStatus]);
 

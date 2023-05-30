@@ -5,14 +5,14 @@ export const Head = ({ title, icon }: HeadProps) => {
   const titleConfig = title ? `${title} - Focus Mate` : 'Focus Mate';
   const defaultConfig = {
     title: titleConfig,
-    icon: '/favico.svg',
+    icon: '/favicon.ico',
   };
   return (
     <Helmet>
       <title>{defaultConfig.title}</title>
       <link
         rel="icon"
-        type="image/svg+xml"
+        type="image/x-icon"
         href={`${!icon ? defaultConfig.icon : icon}`}
       />
     </Helmet>
