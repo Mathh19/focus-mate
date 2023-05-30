@@ -7,16 +7,6 @@ module.exports = {
   darkMode: 'class',
   theme: {
     colors: {
-      transparent: 'transparent',
-      backgroundColor: '#181920',
-      darkBackgroundColor: '#15161A',
-      darkGray: '#31354c',
-      white: '#e8eaee',
-      bluishGray: '#636078',
-      bluishPurple: {
-        DEFAULT: '#7564e2',
-        dark: '#695acb',
-      },
       darkTheme: {
         DEFAULT: '#636069',
         dark: '#4e4c52',
@@ -28,13 +18,23 @@ module.exports = {
         dark: '#4136f5',
         800: '#2d25ae',
       },
+      bluishPurple: {
+        DEFAULT: '#7564e2',
+        dark: '#695acb',
+      },
+      white: '#e8eaee',
+      backgroundColor: '#181920',
+      darkBackgroundColor: '#15161A',
+      dangerColor: '#cd2f2c',
+      successColor: '#48d877',
+      darkGray: '#31354c',
+      bluishGray: '#636078',
       vibrantPurple: '#a855f7',
       purplishGray: '#636069',
       darkBlue: '#31354c',
       pink: '#d34dbb',
       tealBlue: '#39415b',
-      dangerColor: '#cd2f2c',
-      successColor: '#48d877',
+      transparent: 'transparent',
     },
     fontFamily: {
       sans: ['Quicksand', 'sans-serif'],
