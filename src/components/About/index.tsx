@@ -18,7 +18,7 @@ export const About = () => {
         {open && (
           <div
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-backgroundColor/60 px-4"
+            className="fixed inset-0 z-50 flex min-h-screen animate-fade-in-slowly items-center justify-center bg-backgroundColor/60 px-4"
           >
             <div className="rounded-lg bg-darkGray p-4 font-semibold dark:bg-darkTheme-950">
               <div className="flex max-h-[500px] max-w-[450px] flex-col items-center gap-3 overflow-y-auto rounded-lg text-center text-lg font-semibold">

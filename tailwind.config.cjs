@@ -52,10 +52,15 @@ module.exports = {
         'long-line': {
           '0%': { width: '0px', left: '8px', bottom: '3px' },
         },
+        'slowly-element': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '100%' },
+        },
       },
       animation: {
         'check-short-line': 'short-line 0.2s ease-in-out',
         'check-long-line': 'long-line 0.4s ease-in-out',
+        'fade-in-slowly': 'slowly-element 0.3s ease-in-out',
       },
     },
   },
