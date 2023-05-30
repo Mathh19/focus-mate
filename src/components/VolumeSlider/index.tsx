@@ -43,7 +43,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
         <Slider.Thumb
           data-tooltip-id="my-tooltip"
           data-tooltip-content={`${volume[0] === 0 ? 'mute' : `${volume}%`}`}
-          className="block h-5 w-5 cursor-pointer rounded-[10px] bg-bluishPurple transition-all hover:shadow-[0_2px_10px] hover:shadow-bluishPurple blueTheme:bg-blueTheme blueTheme:hover:shadow-blueTheme dark:bg-white dark:hover:shadow-white"
+          className="block h-5 w-5 cursor-pointer rounded-[10px] bg-bluishPurple transition-all hover:shadow-shadowAllSides hover:shadow-bluishPurple blueTheme:bg-blueTheme blueTheme:hover:shadow-blueTheme dark:bg-white dark:hover:shadow-white"
         />
         <Tooltip
           id="my-tooltip"
