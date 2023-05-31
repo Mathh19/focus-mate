@@ -11,10 +11,9 @@ import { SettingsBox } from '../SettingsBox';
 import { VolumeSlider } from '../VolumeSlider';
 import { ToggleButton } from '../ToggleButton';
 import { openWindow } from '../../utils/openWindow';
-import { TimerProps } from '../../timer';
 import { minutesToSeconds } from '../../utils/minutesToSeconds';
 import { SelectTheme } from '../SelectTheme';
-import { ThemeProps } from '../../contexts/PomodoroContext/types';
+import { ThemeProps, TimerProps } from '../../shared-types/pomodoro';
 
 export const Settings = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
@@ -113,12 +112,14 @@ export const Settings = () => {
                         defaultValue={timer.cycles}
                       />
                     </div>
-                    <div className="mt-3">
-                      <ToggleButton
-                        label="Auto Pomodoro"
-                        toggled={autoPomodoro}
-                        setToggle={setAutoPomodoro}
-                      />
+                    <div className="mt-3 space-y-3">
+                      <div>
+                        <ToggleButton
+                          label="Auto Pomodoro"
+                          toggled={autoPomodoro}
+                          setToggle={setAutoPomodoro}
+                        />
+                      </div>
                     </div>
                   </div>
                 </SettingsBox>

@@ -1,8 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
-import { TimerProps, defaultPomodoro } from '../../timer';
-import { ConfigPomodoroProps, PomodoroContextProps } from './types';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { setClassTheme } from '../../utils/setClassTheme';
+import { ConfigPomodoroProps, TimerProps } from '../../shared-types/pomodoro';
+import { PomodoroContextProps } from './types';
+import { defaultPomodoro } from '../../timer';
 
 export const PomodoroContext = createContext({} as PomodoroContextProps);
 
