@@ -9,11 +9,11 @@ export const ToggleButton = ({
     <div className="flex justify-between text-lg font-semibold">
       <span>{label}</span>
       <label
-        htmlFor="toggle"
+        htmlFor={label}
         className="relative inline-block h-7 w-14 cursor-pointer"
       >
         <input
-          id="toggle"
+          id={label}
           type="checkbox"
           onChange={() => setToggle(!toggled)}
           checked={toggled}
