@@ -1,6 +1,6 @@
 import { HiCheck } from 'react-icons/hi';
 import { SelectThemesProps } from './types';
-import { ThemeProps } from '../../contexts/PomodoroContext/types';
+import { ThemeProps } from '../../shared-types/pomodoro';
 
 export const SelectTheme = ({ themeSelected, setTheme }: SelectThemesProps) => {
   const themes = ['defaultTheme', 'blueTheme', 'darkTheme'] as ThemeProps[];
