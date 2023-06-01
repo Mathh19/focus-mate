@@ -4,11 +4,11 @@ import {
   buildStyles,
 } from 'react-circular-progressbar';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-import { TimerProps } from '../../timer';
 import { secondsToMinutes } from '../../utils/secondsToMinutes';
 import { TimerComponentProps } from './types';
 import { Settings } from '../Settings';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
+import { TimerProps } from '../../shared-types/pomodoro';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
   const { timer: timerContext, configPomodoro } = useContext(PomodoroContext);
