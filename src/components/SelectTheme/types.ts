@@ -1,4 +1,4 @@
-import { ThemeProps } from '../../contexts/PomodoroContext/types';
+import { ThemeProps } from '../../shared-types/pomodoro';
 
 export type SelectThemesProps = {
   themeSelected: ThemeProps;
