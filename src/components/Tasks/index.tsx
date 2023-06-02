@@ -4,6 +4,7 @@ import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { TaskProps } from '../../contexts/TasksContext/types';
 import { TaskItem } from '../TaskItem';
 import { TaskInput } from '../TaskInput';
+import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 
 export const Tasks = () => {
   const { tasks, addNewTask, setWorkingTask } = useContext(TasksContext);
@@ -14,7 +15,8 @@ export const Tasks = () => {
 
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
-    addNewTask(newTask);
+    const cleanTaskInput = cleanInputSpaces(newTask.name);
+    addNewTask({ ...newTask, name: cleanTaskInput });
     setNewTask({ name: '', finished: false });
   };
 

@@ -4,11 +4,13 @@ import { IoIosOptions } from 'react-icons/io';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { ConfigTasksProps } from './types';
 import { alertWindow } from '../../utils/alertWindow';
+import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 
 export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const { tasks, updateTask, deleteTask } = useContext(TasksContext);
   const [open, setOpen] = useState(false);
   const [newTask, setNewTask] = useState(task);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const getTask = () => {
     setOpen(true);
@@ -17,7 +19,15 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   };
 
   const handleEditTask = () => {
-    updateTask(task, newTask);
+    if (newTask.name.trim() === '') {
+      setIsEmpty(true);
+      return;
+    }
+    setIsEmpty(false);
+
+    const cleanTaskInput = cleanInputSpaces(newTask.name);
+
+    updateTask(task, { ...newTask, name: cleanTaskInput });
     setOpen(false);
   };
 
@@ -31,8 +41,14 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    if (value.trim() !== '') setIsEmpty(false);
 
     setNewTask((task) => ({ ...task, name: value }));
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setIsEmpty(false);
   };
 
   return (
@@ -40,7 +56,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
       <IoIosOptions className="cursor-pointer" onClick={getTask} />
       {open && (
         <div
-          onClick={() => setOpen(false)}
+          onClick={handleClose}
           className="fixed inset-0 z-50 flex min-h-screen cursor-pointer items-center justify-center bg-backgroundColor/50 p-4"
         >
           <div
@@ -51,19 +67,26 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
               <div className="flex justify-between border-b border-bluishGray pb-3">
                 <h2>Config task</h2>
                 <RiCloseLine
-                  onClick={() => setOpen(false)}
+                  onClick={handleClose}
                   className="cursor-pointer rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme"
                 />
               </div>
-              <label className="my-2 flex gap-2">
-                Edit:
-                <input
-                  type="text"
-                  value={newTask.name}
-                  onChange={handleChange}
-                  className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme"
-                />
-              </label>
+              <div className="flex flex-col">
+                <label className="my-2 flex gap-2">
+                  Edit:
+                  <input
+                    type="text"
+                    value={newTask.name}
+                    onChange={handleChange}
+                    className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme"
+                  />
+                </label>
+                {isEmpty && (
+                  <span className="animate-earthquake text-dangerColor">
+                    Task field is empty!
+                  </span>
+                )}
+              </div>
               <div className="flex w-full flex-wrap justify-between gap-2">
                 <button
                   onClick={handleDeleteTask}

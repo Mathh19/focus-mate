@@ -56,11 +56,17 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '100%' },
         },
+        earthquake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-1px)' },
+          '20%, 40%, 60%, 80%': { transform: 'translateX(1px)' },
+        },
       },
       animation: {
         'check-short-line': 'short-line 0.2s ease-in-out',
         'check-long-line': 'long-line 0.4s ease-in-out',
         'fade-in-slowly': 'slowly-element 0.3s ease-in-out',
+        earthquake: 'earthquake 0.4s',
       },
     },
   },
