@@ -25,6 +25,7 @@ export const Settings = () => {
   const [volume, setVolume] = useState<number[]>([configPomodoro.volume[0]]);
   const [autoPomodoro, setAutoPomodoro] = useState(configPomodoro.auto);
   const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
+  const [notification, setNotification] = useState(configPomodoro.notification);
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -33,12 +34,14 @@ export const Settings = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setTimer(newTimer);
     setOpen(false);
     setConfig({
       auto: autoPomodoro,
       volume: volume,
       theme: theme,
+      notification: notification,
     });
   };
 
@@ -49,6 +52,19 @@ export const Settings = () => {
       [name]:
         name === 'cycles' ? parseInt(value) : minutesToSeconds(parseInt(value)),
     }));
+  };
+
+  const handleToggleNotification = () => {
+    Notification.requestPermission()
+      .then((permission) =>
+        permission !== 'granted'
+          ? setNotification(false)
+          : setNotification(true),
+      )
+      .catch((err) =>
+        console.log(`Failed to request notification permission: ${err}`),
+      )
+      .finally(() => setNotification(!notification));
   };
 
   const openPomodoroWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -120,6 +136,15 @@ export const Settings = () => {
                           setToggle={setAutoPomodoro}
                         />
                       </div>
+                      {!isMobile && (
+                        <div>
+                          <ToggleButton
+                            label="Notification"
+                            toggled={notification}
+                            setToggle={handleToggleNotification}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </SettingsBox>

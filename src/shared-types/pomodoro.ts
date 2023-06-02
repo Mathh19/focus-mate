@@ -11,4 +11,5 @@ export type ConfigPomodoroProps = {
   auto: boolean;
   volume: number[];
   theme: ThemeProps;
+  notification: boolean;
 };

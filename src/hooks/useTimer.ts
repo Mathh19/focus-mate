@@ -1,8 +1,19 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { PomodoroContext } from '../contexts/PomodoroContext/PomodoroContext';
 import { useInterval } from './useInterval';
 import playBell from '../sounds/play-bell-ding.mp3';
 import restBell from '../sounds/rest-bell-ding.mp3';
+import { sendNotification } from '../utils/sendNotification';
+import {
+  randomLongBreakMessage,
+  randomShortBreakMessage,
+  workMessage,
+} from '../content/notification-messages';
+import shortRestImage from '../imgs/Icon-Notifcation-Short-Break.png';
+import longRestImage from '../imgs/Icon-Notifcation-Long-Break.png';
+import workImage from '../imgs/Icon-Notifcation-Work.png';
+import iconNotification from '../imgs/Icon-Notification.png';
 
 const play = new Audio(playBell);
 const rest = new Audio(restBell);
@@ -35,12 +46,25 @@ export const useTimer = () => {
     setPause(true);
     setMainTime(timer.pomodoroTime);
     setLabel('pomodoroTime');
+    if (configPomodoro.notification && !isMobile) {
+      sendNotification("It's time for a work!", {
+        body: workMessage,
+        image: workImage,
+        icon: iconNotification,
+      });
+    }
     if (!configPomodoro.auto) {
       if (completedCycles > 0) {
         setTimeCountingStatus(false);
       }
     }
-  }, [completedCycles, configPomodoro.auto, timer.pomodoroTime, volume]);
+  }, [
+    completedCycles,
+    configPomodoro.auto,
+    configPomodoro.notification,
+    timer.pomodoroTime,
+    volume,
+  ]);
 
   const configureToResting = useCallback(() => {
     rest.volume = volume;
@@ -50,12 +74,26 @@ export const useTimer = () => {
     setCompletedCycles((prevCompletedCycles) => prevCompletedCycles + 1);
 
     if ((completedCycles + 1) % timer.cycles === 0) {
+      if (configPomodoro.notification && !isMobile) {
+        sendNotification("It's time for a long break!", {
+          body: randomLongBreakMessage,
+          image: longRestImage,
+          icon: iconNotification,
+        });
+      }
       setMainTime(timer.longRestTime);
       setLabel('longRestTime');
       if (!configPomodoro.auto) {
         setTimeCountingStatus(false);
       }
     } else {
+      if (configPomodoro.notification && !isMobile) {
+        sendNotification("It's time for a break!", {
+          body: randomShortBreakMessage,
+          image: shortRestImage,
+          icon: iconNotification,
+        });
+      }
       setMainTime(timer.shortRestTime);
       setLabel('shortRestTime');
       if (!configPomodoro.auto) {
@@ -65,6 +103,7 @@ export const useTimer = () => {
   }, [
     completedCycles,
     configPomodoro.auto,
+    configPomodoro.notification,
     timer.cycles,
     timer.longRestTime,
     timer.shortRestTime,
@@ -96,7 +135,14 @@ export const useTimer = () => {
         startTimer();
       }
     }
-  }, [mainTime, working, completedCycles, configureToResting, startTimer]);
+  }, [
+    mainTime,
+    working,
+    completedCycles,
+    configureToResting,
+    startTimer,
+    configPomodoro.notification,
+  ]);
 
   return {
     mainTime,
