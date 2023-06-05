@@ -19,7 +19,7 @@ export const TaskInput = ({
         name="addTask"
         value={newTask.name}
         placeholder="Add a task..."
-        className="w-full bg-transparent outline-none"
+        className="w-full bg-transparent text-2xl font-semibold outline-none"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
