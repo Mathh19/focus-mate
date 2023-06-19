@@ -1,12 +1,10 @@
-export type TaskProps = {
-  name: string;
-  finished: boolean;
-  working?: boolean;
-};
+import { TaskProps, WeeklyTasksProps } from '../../shared-types/tasks';
 
 export type TasksContextProps = {
   tasks: TaskProps[];
+  weeklyTasks: WeeklyTasksProps[];
   addNewTask: (newTasks: TaskProps) => void;
+  addWeeklyTasks: (newWeeklyTasks: WeeklyTasksProps[]) => void;
   updateTask: (updateTask: TaskProps, newTask: TaskProps) => void;
   deleteTask: (deleteTask?: TaskProps, deleteFinishedTasks?: boolean) => void;
   setFinished: (
@@ -14,5 +12,5 @@ export type TasksContextProps = {
     task?: TaskProps,
     setAllTasksFinished?: boolean,
   ) => void;
-  setWorkingTask: (task: TaskProps, working: boolean) => void;
+  setFocusTask: (task: TaskProps) => void;
 };

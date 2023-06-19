@@ -1,4 +1,4 @@
-import { TaskProps } from '../../contexts/TasksContext/types';
+import { TaskProps } from '../../shared-types/tasks';
 
 export type ConfigTasksProps = {
   task: TaskProps;

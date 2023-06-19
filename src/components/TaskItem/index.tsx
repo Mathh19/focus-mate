@@ -1,8 +1,17 @@
+import { useContext } from 'react';
+import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { AnimatedCheck } from '../AnimatedCheck';
 import { ConfigTasks } from '../ConfigTasks';
 import { TaskItemProps } from './types';
+import { TaskProps } from '../../shared-types/tasks';
 
-export const TaskItem = ({ task, handleWorking }: TaskItemProps) => {
+export const TaskItem = ({ task }: TaskItemProps) => {
+  const { setFocusTask } = useContext(TasksContext);
+
+  const handleWorking = (task: TaskProps) => {
+    setFocusTask(task);
+  };
+
   return (
     <li
       onClick={() => handleWorking(task)}

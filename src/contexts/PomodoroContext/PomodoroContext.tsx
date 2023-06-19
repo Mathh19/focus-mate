@@ -3,7 +3,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { setClassTheme } from '../../utils/setClassTheme';
 import { ConfigPomodoroProps, TimerProps } from '../../shared-types/pomodoro';
 import { PomodoroContextProps } from './types';
-import { defaultPomodoro } from '../../timer';
+import { defaultPomodoro } from '../../defaultConfig/pomodoro';
 
 export const PomodoroContext = createContext({} as PomodoroContextProps);
 

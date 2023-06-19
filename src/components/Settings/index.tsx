@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 import { RiTimerLine } from 'react-icons/ri';
-import { BsSoundwave } from 'react-icons/bs';
+import { BsSoundwave, BsListCheck } from 'react-icons/bs';
 import { RxOpenInNewWindow } from 'react-icons/rx';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { GiPaintRoller } from 'react-icons/gi';
@@ -26,6 +26,9 @@ export const Settings = () => {
   const [autoPomodoro, setAutoPomodoro] = useState(configPomodoro.auto);
   const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
   const [notification, setNotification] = useState(configPomodoro.notification);
+  const [routineMode, setRoutineMode] = useState(
+    configPomodoro.weeklyTasksMode,
+  );
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -42,6 +45,7 @@ export const Settings = () => {
       volume: volume,
       theme: theme,
       notification: notification,
+      weeklyTasksMode: routineMode,
     });
   };
 
@@ -147,6 +151,13 @@ export const Settings = () => {
                       )}
                     </div>
                   </div>
+                </SettingsBox>
+                <SettingsBox title="Tasks" icon={<BsListCheck />}>
+                  <ToggleButton
+                    label="routine mode"
+                    toggled={routineMode}
+                    setToggle={setRoutineMode}
+                  />
                 </SettingsBox>
                 <SettingsBox
                   title="Sound"

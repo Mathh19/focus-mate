@@ -12,4 +12,5 @@ export type ConfigPomodoroProps = {
   volume: number[];
   theme: ThemeProps;
   notification: boolean;
+  weeklyTasksMode: boolean;
 };

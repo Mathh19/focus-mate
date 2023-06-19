@@ -44,7 +44,7 @@ export const Pomodoro = () => {
   };
 
   return (
-    <main className="mx-2 my-5 flex min-h-screen flex-col items-center justify-center gap-6">
+    <main className="mx-2 my-5 flex min-h-screen flex-col items-center justify-center gap-6 px-2">
       <Head title={title} icon={icon} />
       <div className="flex gap-4">
         <DisplayTimeButton

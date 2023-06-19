@@ -1,6 +1,5 @@
-import { TaskProps } from '../../contexts/TasksContext/types';
+import { TaskProps } from '../../shared-types/tasks';
 
 export type TaskItemProps = {
   task: TaskProps;
-  handleWorking: (task: TaskProps) => void;
 };
