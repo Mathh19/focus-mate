@@ -6,7 +6,7 @@ import { TaskInput } from '../TaskInput';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
-import { TaskProps } from '../../shared-types/tasks';
+import { DayProps, TaskProps } from '../../shared-types/tasks';
 
 export const Tasks = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
@@ -21,7 +21,11 @@ export const Tasks = () => {
     if (newTask.name.trim() === '') return;
     const cleanTaskInput = cleanInputSpaces(newTask.name);
     configPomodoro.routineMode
-      ? addNewTask({ ...newTask, name: cleanTaskInput, day: currentDay })
+      ? addNewTask({
+          ...newTask,
+          name: cleanTaskInput,
+          day: currentDay as DayProps,
+        })
       : addNewTask({ ...newTask, name: cleanTaskInput });
     setNewTask({ ...newTask, name: '', finished: false });
   };
