@@ -33,7 +33,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
 
   const handleDeleteTask = () => {
     const alert = alertWindow(
-      `Do you really want to delete the "${task.name}" task?`,
+      `Do you really want to delete the "${task.name}" task ?`,
     );
     alert && deleteTask(task);
     setOpen(false);
