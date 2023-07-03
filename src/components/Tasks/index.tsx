@@ -9,7 +9,7 @@ import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
 import { TaskProps } from '../../shared-types/tasks';
 
 export const Tasks = () => {
-  const { tasks, weeklyTasks, addNewTask } = useContext(TasksContext);
+  const { tasks, addNewTask } = useContext(TasksContext);
   const { configPomodoro } = useContext(PomodoroContext);
   const [newTask, setNewTask] = useState<TaskProps>({
     name: '',
@@ -20,31 +20,36 @@ export const Tasks = () => {
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
     const cleanTaskInput = cleanInputSpaces(newTask.name);
-    addNewTask({ ...newTask, name: cleanTaskInput });
-    setNewTask({ name: '', finished: false });
+    configPomodoro.routineMode
+      ? addNewTask({ ...newTask, name: cleanTaskInput, day: currentDay })
+      : addNewTask({ ...newTask, name: cleanTaskInput });
+    setNewTask({ ...newTask, name: '', finished: false });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setNewTask({ name: value, finished: false });
+    setNewTask({ ...newTask, name: value, finished: false });
   };
 
-  const targetCurrentTask = weeklyTasks.find(
-    (currentTask) => currentTask.day === currentDay,
-  );
+  const displayTasks = () => {
+    if (configPomodoro.routineMode) {
+      return tasks.filter((currentTask) => currentTask.day === currentDay);
+    }
+    return tasks.filter((tasks) => tasks.day === undefined);
+  };
+
+  const targetCurrentTask = displayTasks();
 
   return (
     <div className="w-full max-w-md space-y-2">
       <h2 className="flex items-center justify-between border-b-2 pb-2 text-5xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[540px]:text-5xl">
-        {!configPomodoro.weeklyTasksMode ? 'Tasks' : `${currentDay}`}
+        {!configPomodoro.routineMode ? 'Tasks' : `${currentDay}`}
         <DropdownMenuTasks />
       </h2>
       <ul className="flex flex-col gap-2 p-2">
-        {configPomodoro.weeklyTasksMode
-          ? targetCurrentTask?.tasks.map((task, index) => (
-              <TaskItem key={index} task={task} />
-            ))
-          : tasks.map((task, index) => <TaskItem key={index} task={task} />)}
+        {targetCurrentTask.map((task, index) => (
+          <TaskItem key={index} task={task} />
+        ))}
         <li>
           <TaskInput
             handleChange={handleChange}

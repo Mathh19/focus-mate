@@ -1,16 +1,18 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import { VscExpandAll } from 'react-icons/vsc';
+import { IoMdClose } from 'react-icons/io';
 import { TaskInput } from '../TaskInput';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 import { TaskItem } from '../TaskItem';
 import { TaskWeekOrganizerProps } from './types';
+import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
+import { DayProps } from '../../shared-types/tasks';
 
 export const TaskWeekOrganizer = ({
   isDropdownOpen,
 }: TaskWeekOrganizerProps) => {
-  const { weeklyTasks, addWeeklyTasks } = useContext(TasksContext);
+  const { tasks, addNewTask } = useContext(TasksContext);
   const [open, setOpen] = useState(false);
   const [newTask, setNewTask] = useState({
     name: '',
@@ -28,7 +30,9 @@ export const TaskWeekOrganizer = ({
     'Saturday',
     'Sunday',
   ];
-  const [countDay, setCountDay] = useState(0);
+  const today = getCurrentDayOfWeek();
+  const findIndexDay = days.findIndex((element) => element === today);
+  const [countDay, setCountDay] = useState(findIndexDay);
 
   const handleScroll = () => {
     const ulElement = ulRef.current;
@@ -40,13 +44,17 @@ export const TaskWeekOrganizer = ({
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
     const cleanTaskInput = cleanInputSpaces(newTask.name);
-    setNewTask({ name: '', finished: false });
-    weeklyTasks[countDay].tasks.push({ ...newTask, name: cleanTaskInput });
+    setNewTask({ ...newTask, name: '', finished: false });
+    addNewTask({
+      ...newTask,
+      name: cleanTaskInput,
+      day: days[countDay] as DayProps,
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setNewTask({ name: value, finished: false });
+    setNewTask({ ...newTask, name: value, finished: false });
   };
 
   const handlePrevOrNext = (
@@ -55,22 +63,17 @@ export const TaskWeekOrganizer = ({
   ) => {
     e.preventDefault();
     if (state === 'prev') {
-      if (countDay === 0) return;
-      setCountDay((prevState) => prevState - 1);
+      countDay === 0
+        ? setCountDay(6)
+        : setCountDay((prevState) => prevState - 1);
     } else {
-      if (countDay === 6) return;
-      setCountDay((prevState) => prevState + 1);
+      countDay === 6
+        ? setCountDay(0)
+        : setCountDay((prevState) => prevState + 1);
     }
   };
 
-  const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    addWeeklyTasks(weeklyTasks);
-    setOpen(false);
-    isDropdownOpen(false);
-  };
-
-  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClose = (e: React.MouseEvent<SVGElement>) => {
     e.preventDefault();
     setOpen(false);
     isDropdownOpen(false);
@@ -83,7 +86,11 @@ export const TaskWeekOrganizer = ({
       ulElement.clientHeight < 289 ? setHasScroll(false) : setHasScroll(true);
       return () => ulElement.removeEventListener('scroll', handleScroll);
     }
-  }, [ulRef.current?.clientHeight]);
+  }, [ulRef.current?.clientHeight, countDay]);
+
+  const targetCurrentTask = tasks.filter(
+    (currentTask) => currentTask.day === days[countDay],
+  );
 
   return (
     <div>
@@ -100,24 +107,30 @@ export const TaskWeekOrganizer = ({
             onClick={(e) => e.stopPropagation()}
             className="mx-4 flex w-full max-w-[826px] flex-col items-center space-y-6 rounded-3xl border border-white bg-darkGray py-6 text-white dark:bg-darkTheme-950"
           >
-            <div className="flex w-full justify-between border-b-2 border-bluishGray px-4 pb-4">
-              <h2 className="text-4xl font-semibold">
+            <div className="flex w-full items-center justify-between border-b-2 border-bluishGray px-4 pb-4 text-4xl font-semibold">
+              <h2>
                 Add your tasks for{' '}
                 <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-darkTheme">
                   {days[countDay]}
                 </span>
               </h2>
+              <span>
+                <IoMdClose
+                  onClick={handleClose}
+                  className="cursor-pointer hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:hover:text-darkTheme"
+                />
+              </span>
             </div>
             <div className="w-full max-w-lg px-4">
               <ul
                 ref={ulRef}
-                className={`relative mb-4 max-h-[289px] space-y-3 overflow-auto ${
+                className={`relative mb-4 max-h-[289px] min-h-[288px] space-y-3 overflow-auto ${
                   hasScroll &&
                   isScrolledToTop &&
                   "after:pointer-events-none after:absolute after:bottom-0 after:h-4 after:w-full after:animate-fade-in-slowly after:bg-gradient-to-t after:from-darkGray after:to-transparent after:content-[''] after:dark:from-darkTheme-950"
                 }`}
               >
-                {weeklyTasks[countDay].tasks.map((task, index) => (
+                {targetCurrentTask.map((task, index) => (
                   <TaskItem key={index} task={task} />
                 ))}
               </ul>
@@ -127,32 +140,18 @@ export const TaskWeekOrganizer = ({
                 newTask={newTask}
               />
             </div>
-            <div className="flex w-full items-center justify-between gap-2 px-4 text-xl font-semibold text-bluishPurple blueTheme:text-blueTheme dark:text-white">
+            <div className="flex w-full max-w-lg justify-between px-4 text-xl font-semibold text-bluishPurple blueTheme:text-blueTheme dark:text-white">
               <button
-                onClick={handleCancel}
-                className="w-full max-w-[122px] rounded-md bg-tealBlue px-1 py-2 dark:bg-darkTheme-600"
+                onClick={(e) => handlePrevOrNext(e, 'prev')}
+                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-600"
               >
-                Cancel
+                Prev
               </button>
-              <div className="flex gap-2">
-                <button
-                  onClick={(e) => handlePrevOrNext(e, 'prev')}
-                  className="rounded-md bg-tealBlue px-3 py-2 dark:bg-darkTheme-600"
-                >
-                  <SlArrowLeft />
-                </button>
-                <button
-                  onClick={(e) => handlePrevOrNext(e, 'next')}
-                  className="rounded-md bg-tealBlue px-3 py-2 dark:bg-darkTheme-600"
-                >
-                  <SlArrowRight />
-                </button>
-              </div>
               <button
-                onClick={handleConfirm}
-                className="w-full max-w-[122px] rounded-md bg-tealBlue px-1 py-2 dark:bg-darkTheme-600"
+                onClick={(e) => handlePrevOrNext(e, 'next')}
+                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-600"
               >
-                Confirm
+                Next
               </button>
             </div>
           </div>

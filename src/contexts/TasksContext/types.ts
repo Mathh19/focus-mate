@@ -1,10 +1,8 @@
-import { TaskProps, WeeklyTasksProps } from '../../shared-types/tasks';
+import { TaskProps } from '../../shared-types/tasks';
 
 export type TasksContextProps = {
   tasks: TaskProps[];
-  weeklyTasks: WeeklyTasksProps[];
-  addNewTask: (newTasks: TaskProps) => void;
-  addWeeklyTasks: (newWeeklyTasks: WeeklyTasksProps[]) => void;
+  addNewTask: (newTask: TaskProps) => void;
   updateTask: (updateTask: TaskProps, newTask: TaskProps) => void;
   deleteTask: (deleteTask?: TaskProps, deleteFinishedTasks?: boolean) => void;
   setFinished: (

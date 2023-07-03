@@ -26,9 +26,7 @@ export const Settings = () => {
   const [autoPomodoro, setAutoPomodoro] = useState(configPomodoro.auto);
   const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
   const [notification, setNotification] = useState(configPomodoro.notification);
-  const [routineMode, setRoutineMode] = useState(
-    configPomodoro.weeklyTasksMode,
-  );
+  const [routineMode, setRoutineMode] = useState(configPomodoro.routineMode);
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -45,7 +43,7 @@ export const Settings = () => {
       volume: volume,
       theme: theme,
       notification: notification,
-      weeklyTasksMode: routineMode,
+      routineMode: routineMode,
     });
   };
 

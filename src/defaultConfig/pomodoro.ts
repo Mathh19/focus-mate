@@ -12,6 +12,6 @@ export const defaultPomodoro = {
     volume: [100],
     theme: 'defaultTheme',
     notification: false,
-    weeklyTasksMode: false,
+    routineMode: false,
   } as ConfigPomodoroProps,
 };

@@ -9,11 +9,7 @@ export type DayProps =
 
 export type TaskProps = {
   name: string;
+  day?: DayProps;
   finished: boolean;
   inFocus?: boolean;
-};
-
-export type WeeklyTasksProps = {
-  day: DayProps;
-  tasks: TaskProps[];
 };

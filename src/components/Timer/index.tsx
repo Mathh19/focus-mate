@@ -10,16 +10,14 @@ import { Settings } from '../Settings';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { TimerProps } from '../../shared-types/pomodoro';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
-import { getDayIndex } from '../../utils/getDayIndex';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
   const { timer: timerContext, configPomodoro } = useContext(PomodoroContext);
-  const { tasks, weeklyTasks } = useContext(TasksContext);
+  const { tasks } = useContext(TasksContext);
   const controlerTimer = timerContext[label as keyof TimerProps];
   const timerPercentage = (timer / controlerTimer) * 100;
 
   const currentDay = getCurrentDayOfWeek();
-  const targetDayIndex = getDayIndex(currentDay, weeklyTasks);
 
   const pathColor = () => {
     if (configPomodoro.theme === 'defaultTheme' || !configPomodoro.theme)
@@ -27,6 +25,10 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
     if (configPomodoro.theme === 'blueTheme') return '#4f53ff';
     if (configPomodoro.theme === 'darkTheme') return '#636069';
   };
+
+  const targetCurrentTask = tasks.filter(
+    (currentTask) => currentTask.day === currentDay,
+  );
 
   return (
     <div className="mx-2 w-full max-w-[384px]">
@@ -51,8 +53,8 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
             {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
           </p>
           <Settings />
-          {configPomodoro.weeklyTasksMode
-            ? weeklyTasks[targetDayIndex].tasks.map(
+          {configPomodoro.routineMode
+            ? targetCurrentTask.map(
                 (task, index) =>
                   task.inFocus && (
                     <p
