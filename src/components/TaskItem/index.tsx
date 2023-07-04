@@ -17,6 +17,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
       onClick={() => handleWorking(task)}
       className="flex cursor-pointer items-center justify-between gap-1 rounded-md bg-bluishPurple px-3 py-2 text-2xl font-semibold transition-colors hover:bg-bluishPurple-dark blueTheme:bg-blueTheme blueTheme:hover:bg-blueTheme-dark dark:bg-darkTheme dark:hover:bg-darkTheme-dark"
       aria-label={task.name}
+      title={task.name}
     >
       <p className={`truncate ${task.finished && 'line-through'}`}>
         {task.name}
