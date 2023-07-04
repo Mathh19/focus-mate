@@ -15,7 +15,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const getTask = () => {
     setOpen(true);
     const taskFound = tasks.find((element) => element === task);
-    setNewTask(taskFound === undefined ? task : taskFound);
+    setNewTask(taskFound ?? task);
   };
 
   const handleEditTask = () => {
@@ -39,7 +39,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
     setOpen(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     if (value.trim() !== '') setIsEmpty(false);
 
@@ -53,7 +53,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
-      <IoIosOptions className="cursor-pointer" onClick={getTask} />
+      <IoIosOptions className="cursor-pointer" onMouseDown={getTask} />
       {open && (
         <div
           onClick={handleClose}
@@ -72,15 +72,15 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="my-2 flex gap-2">
+                <div className="flex items-center gap-4">
                   Edit:
-                  <input
-                    type="text"
+                  <textarea
+                    placeholder="Edit your task..."
                     value={newTask.name}
                     onChange={handleChange}
                     className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme dark:focus:border-white"
                   />
-                </label>
+                </div>
                 {isEmpty && (
                   <span className="animate-earthquake text-dangerColor">
                     Task field is empty!
