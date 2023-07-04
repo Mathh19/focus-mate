@@ -1,13 +1,23 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { VscExpandAll } from 'react-icons/vsc';
 import { IoMdClose } from 'react-icons/io';
 import { TaskInput } from '../TaskInput';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
-import { TaskItem } from '../TaskItem';
 import { TaskWeekOrganizerProps } from './types';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
 import { DayProps } from '../../shared-types/tasks';
+import { ContainerTaskItem } from '../ContainerTaskItem';
+
+const days = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
 
 export const TaskWeekOrganizer = ({
   isDropdownOpen,
@@ -18,28 +28,9 @@ export const TaskWeekOrganizer = ({
     name: '',
     finished: false,
   });
-  const ulRef = useRef<HTMLUListElement>(null);
-  const [isScrolledToTop, setIsScrolledToTop] = useState(true);
-  const [hasScroll, setHasScroll] = useState(false);
-  const days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
   const today = getCurrentDayOfWeek();
   const findIndexDay = days.findIndex((element) => element === today);
   const [countDay, setCountDay] = useState(findIndexDay);
-
-  const handleScroll = () => {
-    const ulElement = ulRef.current;
-    if (ulElement) {
-      setIsScrolledToTop(ulElement.scrollTop === 0);
-    }
-  };
 
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
@@ -63,13 +54,9 @@ export const TaskWeekOrganizer = ({
   ) => {
     e.preventDefault();
     if (state === 'prev') {
-      countDay === 0
-        ? setCountDay(6)
-        : setCountDay((prevState) => prevState - 1);
+      setCountDay((prevState) => (prevState === 0 ? 6 : prevState - 1));
     } else {
-      countDay === 6
-        ? setCountDay(0)
-        : setCountDay((prevState) => prevState + 1);
+      setCountDay((prevState) => (prevState === 6 ? 0 : prevState + 1));
     }
   };
 
@@ -79,22 +66,17 @@ export const TaskWeekOrganizer = ({
     isDropdownOpen(false);
   };
 
-  useEffect(() => {
-    const ulElement = ulRef.current;
-    if (ulElement) {
-      ulElement.addEventListener('scroll', handleScroll);
-      ulElement.clientHeight < 289 ? setHasScroll(false) : setHasScroll(true);
-      return () => ulElement.removeEventListener('scroll', handleScroll);
-    }
-  }, [ulRef.current?.clientHeight, countDay]);
-
   const targetCurrentTask = tasks.filter(
     (currentTask) => currentTask.day === days[countDay],
   );
 
   return (
     <div>
-      <button className="btn-dropdown w-full" onClick={() => setOpen(true)}>
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="Add weekly tasks"
+        className="btn-dropdown w-full"
+      >
         Add weekly tasks
         <VscExpandAll />
       </button>
@@ -122,18 +104,11 @@ export const TaskWeekOrganizer = ({
               </span>
             </div>
             <div className="w-full max-w-lg px-4">
-              <ul
-                ref={ulRef}
-                className={`relative mb-4 max-h-[289px] min-h-[288px] space-y-3 overflow-auto ${
-                  hasScroll &&
-                  isScrolledToTop &&
-                  "after:pointer-events-none after:absolute after:bottom-0 after:h-4 after:w-full after:animate-fade-in-slowly after:bg-gradient-to-t after:from-darkGray after:to-transparent after:content-[''] after:dark:from-darkTheme-950"
-                }`}
-              >
-                {targetCurrentTask.map((task, index) => (
-                  <TaskItem key={index} task={task} />
-                ))}
-              </ul>
+              <ContainerTaskItem
+                tasks={targetCurrentTask}
+                shadowEffectColor="darkGray"
+                dynamicHeight={false}
+              />
               <TaskInput
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}

@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { DropdownMenuTasks } from '../DropdownMenuTasks';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { TaskItem } from '../TaskItem';
 import { TaskInput } from '../TaskInput';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
 import { DayProps, TaskProps } from '../../shared-types/tasks';
+import { ContainerTaskItem } from '../ContainerTaskItem';
 
 export const Tasks = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
@@ -45,23 +45,25 @@ export const Tasks = () => {
   const targetCurrentTask = displayTasks();
 
   return (
-    <div className="w-full max-w-md space-y-2">
+    <div className="w-full max-w-md space-y-4">
       <h2 className="flex items-center justify-between border-b-2 pb-2 text-5xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[540px]:text-5xl">
         {!configPomodoro.routineMode ? 'Tasks' : `${currentDay}`}
         <DropdownMenuTasks />
       </h2>
-      <ul className="flex flex-col gap-2 p-2">
-        {targetCurrentTask.map((task, index) => (
-          <TaskItem key={index} task={task} />
-        ))}
-        <li>
+      <div>
+        <ContainerTaskItem
+          tasks={targetCurrentTask}
+          shadowEffectColor="backgroundColor"
+          dynamicHeight={true}
+        />
+        <div className="px-2">
           <TaskInput
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             newTask={newTask}
           />
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 };
