@@ -38,7 +38,17 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
     if (deleteFinishedTasks) {
-      setTasks((prevTasks) => prevTasks.filter((task) => !task.finished));
+      setTasks((prevTasks) => {
+        const tasksFilter = configPomodoro.routineMode
+          ? prevTasks.filter(
+              (task) => task.day !== currentDay || !task.finished,
+            )
+          : prevTasks.filter(
+              (task) => task.day !== undefined || !task.finished,
+            );
+        console.log(tasksFilter);
+        return tasksFilter;
+      });
       return;
     }
     setTasks((prevTasks) => {
