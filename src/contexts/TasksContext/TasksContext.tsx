@@ -36,37 +36,26 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
     if (deleteTask) {
       setTasks((prevTasks) => prevTasks.filter((task) => task !== deleteTask));
       return;
-    } else if (deleteFinishedTasks) {
+    }
+    if (deleteFinishedTasks) {
       setTasks((prevTasks) => prevTasks.filter((task) => !task.finished));
       return;
     }
-    configPomodoro.routineMode
-      ? setTasks((prevTasks) => {
-          const tasksFilter = prevTasks.filter(
-            (task) => task.day !== currentDay,
-          );
-          return tasksFilter;
-        })
-      : setTasks((prevTasks) => {
-          const tasksFilter = prevTasks.filter(
-            (task) => task.day !== undefined,
-          );
-          return tasksFilter;
-        });
+    setTasks((prevTasks) => {
+      const tasksFilter = configPomodoro.routineMode
+        ? prevTasks.filter((task) => task.day !== currentDay)
+        : prevTasks.filter((task) => task.day !== undefined);
+      return tasksFilter;
+    });
   };
 
   const setFinished = (check: boolean, taskCheck?: TaskProps) => {
-    if (taskCheck) {
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task === taskCheck ? { ...task, finished: check } : task,
-        ),
-      );
-      return;
-    }
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.day !== undefined && task.day === currentDay
+        task === taskCheck ||
+        (taskCheck === undefined &&
+          ((configPomodoro.routineMode && task.day === currentDay) ||
+            (!configPomodoro.routineMode && task.day === undefined)))
           ? { ...task, finished: check }
           : task,
       ),
