@@ -50,7 +50,7 @@ export const Tasks = () => {
         {!configPomodoro.routineMode ? 'Tasks' : `${currentDay}`}
         <DropdownMenuTasks />
       </h2>
-      <div>
+      <div className="space-y-4">
         <ContainerTaskItem
           tasks={targetCurrentTask}
           shadowEffectColor="backgroundColor"
