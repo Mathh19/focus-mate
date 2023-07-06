@@ -3,11 +3,11 @@ import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { AnimatedCheckProps } from './types';
 
 export const AnimatedCheck = ({ task }: AnimatedCheckProps) => {
-  const { setFinished } = useContext(TasksContext);
+  const { doneTask } = useContext(TasksContext);
 
   const handleCheck = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setFinished(!task.finished, task);
+    doneTask(!task.finished, task);
   };
 
   return (

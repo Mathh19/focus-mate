@@ -11,28 +11,29 @@ import { TaskWeekOrganizer } from '../TaskWeekOrganizer';
 export const DropdownMenuTasks = () => {
   const [open, setOpen] = useState(false);
   const { configPomodoro } = useContext(PomodoroContext);
-  const { tasks, deleteTask, setFinished } = useContext(TasksContext);
+  const { tasks, deleteAllTasks, deleteAllFinishedTasks, doneAllTasks } =
+    useContext(TasksContext);
 
-  const handleClickCheckAllTasks = () => {
-    setFinished(true);
+  const handleCheckAllTasks = () => {
+    doneAllTasks();
     setOpen(false);
   };
 
-  const handleClickDeleteAllTask = () => {
+  const handleDeleteAllTask = () => {
     if (tasks.length > 0) {
       const alert = alertWindow('Do you really want to delete all your tasks?');
-      alert && deleteTask();
+      alert && deleteAllTasks();
     }
     setOpen(false);
   };
 
-  const deleteAllFinishedTasks = () => {
+  const handleDeleteAllFinishedTasks = () => {
     const tasksFinished = tasks.filter((task) => task.finished === true);
     if (tasksFinished.length > 0) {
       const alert = alertWindow(
         'Do you really want to delete all your completed tasks?',
       );
-      alert && deleteTask(undefined, true);
+      alert && deleteAllFinishedTasks();
     }
     setOpen(false);
   };
@@ -50,16 +51,19 @@ export const DropdownMenuTasks = () => {
             {configPomodoro.routineMode && (
               <TaskWeekOrganizer isDropdownOpen={setOpen} />
             )}
-            <button onClick={handleClickCheckAllTasks} className="btn-dropdown">
+            <button onClick={handleCheckAllTasks} className="btn-dropdown">
               Check all tasks
               <HiCheck />
             </button>
-            <button onClick={deleteAllFinishedTasks} className="btn-dropdown">
+            <button
+              onClick={handleDeleteAllFinishedTasks}
+              className="btn-dropdown"
+            >
               Delete finished tasks
               <VscClearAll />
             </button>
             <button
-              onClick={handleClickDeleteAllTask}
+              onClick={handleDeleteAllTask}
               className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-dangerColor hover:text-white"
             >
               Delete all tasks
