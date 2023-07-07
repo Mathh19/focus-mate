@@ -13,7 +13,7 @@ export const Pomodoro = () => {
     mainTime,
     label,
     pause,
-    timeCoutingStatus,
+    timeCountingStatus,
     completedCycles,
     setMainTime,
     setLabel,
@@ -25,14 +25,14 @@ export const Pomodoro = () => {
   const [icon, setIcon] = useState('');
 
   useEffect(() => {
-    if (timeCoutingStatus) {
+    if (timeCountingStatus) {
       pause && setIcon('/run-pomodoro.ico');
       setTitle('');
     } else {
       pause && setTitle('Stopped');
       pause && setIcon('/stop-pomodoro.ico');
     }
-  }, [label, pause, timeCoutingStatus]);
+  }, [label, pause, timeCountingStatus]);
 
   const displayTime = (
     time: number,
@@ -73,10 +73,10 @@ export const Pomodoro = () => {
         {pause && (
           <div className="relative flex w-36 items-center justify-center">
             <button
-              onClick={() => setTimeCountingStatus(!timeCoutingStatus)}
+              onClick={() => setTimeCountingStatus(!timeCountingStatus)}
               className="btn-control"
             >
-              {timeCoutingStatus ? 'pause' : 'play'}
+              {timeCountingStatus ? 'pause' : 'play'}
             </button>
             <button onClick={nextTime} className="absolute right-2">
               <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:text-white" />

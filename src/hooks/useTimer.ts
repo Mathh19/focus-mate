@@ -2,8 +2,6 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { PomodoroContext } from '../contexts/PomodoroContext/PomodoroContext';
 import { useInterval } from './useInterval';
-import playBell from '../sounds/play-bell-ding.mp3';
-import restBell from '../sounds/rest-bell-ding.mp3';
 import { sendNotification } from '../utils/sendNotification';
 import {
   randomLongBreakMessage,
@@ -14,16 +12,18 @@ import shortRestImage from '../imgs/Icon-Notifcation-Short-Break.png';
 import longRestImage from '../imgs/Icon-Notifcation-Long-Break.png';
 import workImage from '../imgs/Icon-Notifcation-Work.png';
 import iconNotification from '../imgs/Icon-Notification.png';
+import playBellSound from '../sounds/play-bell-ding.mp3';
+import restBellSound from '../sounds/rest-bell-ding.mp3';
 
-const play = new Audio(playBell);
-const rest = new Audio(restBell);
+const playBell = new Audio(playBellSound);
+const restBell = new Audio(restBellSound);
 
 export const useTimer = () => {
   const { timer, configPomodoro } = useContext(PomodoroContext);
   const volume = configPomodoro.volume[0] / 100;
 
   const [mainTime, setMainTime] = useState(timer.pomodoroTime);
-  const [timeCoutingStatus, setTimeCountingStatus] = useState(false);
+  const [timeCountingStatus, setTimeCountingStatus] = useState(false);
   const [working, setWorking] = useState(false);
   const [completedCycles, setCompletedCycles] = useState(0);
   const [pause, setPause] = useState(false);
@@ -35,12 +35,12 @@ export const useTimer = () => {
     () => {
       setMainTime(mainTime - 1);
     },
-    timeCoutingStatus ? 1000 : null,
+    timeCountingStatus ? 1000 : null,
   );
 
   const startTimer = useCallback(() => {
-    play.volume = volume;
-    play.play();
+    playBell.volume = volume;
+    playBell.play();
     setTimeCountingStatus(true);
     setWorking(true);
     setPause(true);
@@ -67,8 +67,8 @@ export const useTimer = () => {
   ]);
 
   const configureToResting = useCallback(() => {
-    rest.volume = volume;
-    rest.play();
+    restBell.volume = volume;
+    restBell.play();
     setTimeCountingStatus(true);
     setWorking(false);
     setCompletedCycles((prevCompletedCycles) => prevCompletedCycles + 1);
@@ -148,7 +148,7 @@ export const useTimer = () => {
     mainTime,
     pause,
     label,
-    timeCoutingStatus,
+    timeCountingStatus,
     completedCycles,
     timer,
     startTimer,
