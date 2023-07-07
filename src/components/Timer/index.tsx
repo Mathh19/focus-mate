@@ -26,9 +26,9 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
     if (configPomodoro.theme === 'darkTheme') return '#636069';
   };
 
-  const targetCurrentTask = tasks.filter(
-    (currentTask) => currentTask.day === currentDay,
-  );
+  const targetTasks = configPomodoro.routineMode
+    ? tasks.filter((task) => task.day === currentDay)
+    : tasks.filter((task) => task.day === undefined);
 
   return (
     <div className="mx-2 w-full max-w-[384px]">
@@ -53,33 +53,19 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
             {label === 'pomodoroTime' ? 'Time to work' : 'Break to rest'}
           </p>
           <Settings />
-          {configPomodoro.routineMode
-            ? targetCurrentTask.map(
-                (task, index) =>
-                  task.inFocus && (
-                    <p
-                      key={index}
-                      className="max-w-[240px] truncate font-semibold
+          {targetTasks.map(
+            (task, index) =>
+              task.inFocus && (
+                <p
+                  key={index}
+                  className="max-w-[240px] truncate font-semibold
                   max-[540px]:max-w-[160px]"
-                    >
-                      <span className="font-bold">Focused:</span> #{index + 1}{' '}
-                      {task.name}
-                    </p>
-                  ),
-              )
-            : tasks.map(
-                (task, index) =>
-                  task.inFocus && (
-                    <p
-                      key={index}
-                      className="max-w-[240px] truncate font-semibold
-                  max-[540px]:max-w-[160px]"
-                    >
-                      <span className="font-bold">Focused:</span> #{index + 1}{' '}
-                      {task.name}
-                    </p>
-                  ),
-              )}
+                >
+                  <span className="font-bold">Focused:</span> #{index + 1}{' '}
+                  {task.name}
+                </p>
+              ),
+          )}
         </div>
       </CircularProgressbarWithChildren>
     </div>
