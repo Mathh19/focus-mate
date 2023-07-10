@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { AnimatedCheck } from '../AnimatedCheck';
+import { Checkmark } from '../Checkmark';
 import { ConfigTasks } from '../ConfigTasks';
 import { TaskItemProps } from './types';
 import { TaskProps } from '../../shared-types/tasks';
@@ -23,7 +23,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
         {task.name}
       </p>
       <div className="flex gap-2">
-        <AnimatedCheck task={task} />
+        <Checkmark task={task} />
         <ConfigTasks task={task} />
       </div>
     </li>

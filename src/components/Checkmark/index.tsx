@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { AnimatedCheckProps } from './types';
 
-export const AnimatedCheck = ({ task }: AnimatedCheckProps) => {
+export const Checkmark = ({ task }: AnimatedCheckProps) => {
   const { doneTask } = useContext(TasksContext);
 
   const handleCheck = (e: React.MouseEvent<HTMLDivElement>) => {
