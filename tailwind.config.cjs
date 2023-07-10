@@ -56,6 +56,21 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '100%' },
         },
+        check: {
+          '0%': { width: '0', height: '0' },
+          '20%': {
+            height: 0,
+            width: '8px',
+          },
+          '40%': {
+            height: '20px',
+            width: '8px',
+          },
+          '100%': {
+            height: '20px',
+            width: '8px',
+          },
+        },
         earthquake: {
           '0%, 100%': { transform: 'translateX(0)' },
           '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-1px)' },
@@ -65,6 +80,7 @@ module.exports = {
       animation: {
         'check-short-line': 'short-line 0.2s ease-in-out',
         'check-long-line': 'long-line 0.4s ease-in-out',
+        checkmark: 'check 1s ease',
         'fade-in-slowly': 'slowly-element 0.3s ease-in-out',
         earthquake: 'earthquake 0.4s',
       },

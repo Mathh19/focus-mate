@@ -15,16 +15,15 @@ export const AnimatedCheck = ({ task }: AnimatedCheckProps) => {
       role="button"
       onClick={handleCheck}
       aria-label="A button to check your task"
-      className={`relative h-6 w-6 cursor-pointer rounded-full border-[2px] ${
+      className={`relative inline-block w-6 cursor-pointer rounded-full border-[2px] ${
         !task.finished ? 'border-white' : 'border-successColor'
       }`}
     >
-      {task.finished && (
-        <>
-          <span className="check bottom-[6px] right-[9px] w-[10px] rotate-45 animate-check-short-line"></span>
-          <span className="check bottom-[10px] left-[5px] w-[22px] -rotate-45 animate-check-long-line"></span>
-        </>
-      )}
+      <div
+        className={`${task.finished ? 'block' : 'hidden'} ${
+          task.finished && 'after:animate-checkmark'
+        } after:absolute after:left-[4px] after:top-[10px] after:h-5 after:w-2 after:origin-top-left after:rotate-[225deg] after:-scale-x-100 after:border-r-2 after:border-t-2 after:border-successColor after:content-['']`}
+      ></div>
     </div>
   );
 };
