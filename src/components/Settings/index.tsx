@@ -188,7 +188,7 @@ export const Settings = () => {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="rounded-md bg-tealBlue p-2 text-bluishPurple blueTheme:text-blueTheme dark:bg-darkTheme-600 dark:text-white"
+                  className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-darkTheme-600 dark:text-white"
                 >
                   cancel
                 </button>

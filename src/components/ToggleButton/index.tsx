@@ -6,7 +6,7 @@ export const ToggleButton = ({
   setToggle,
 }: ToggleButtonProps) => {
   return (
-    <div className="flex justify-between text-lg font-semibold">
+    <div className="flex justify-between text-lg font-semibold drop-shadow-md">
       <span>{label}</span>
       <label
         htmlFor={label}

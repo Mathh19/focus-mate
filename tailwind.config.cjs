@@ -45,6 +45,9 @@ module.exports = {
           '6px 6px 6px -1px rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.7)',
         shadowAllSides: '0 0 10px',
       },
+      dropShadow: {
+        '3xl': '-2px 2px 2px rgba(0, 0, 0, 0.2)',
+      },
       keyframes: {
         'short-line': {
           '0%': { width: '20px', bottom: '10px', right: '8px' },
