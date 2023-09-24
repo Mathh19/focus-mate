@@ -14,7 +14,7 @@ Focus Mate is a time management tool based on the popular Pomodoro technique. Wi
 
 To set up the project on your computer, follow these steps:
 
-* Clone the repository using Git: git clone <https://github.com/Mathh19/focus-mate.git>.
+* Clone the repository using Git: `git clone https://github.com/Mathh19/focus-mate.git`.
 * Navigate to the project directory: `cd focus-mate`.
 * Install the project dependencies: `npm install`.
 * Start the local development server: `npm run dev`.
