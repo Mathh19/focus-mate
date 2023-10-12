@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
+import { TasksContext } from '../../../contexts/TasksContext/TasksContext';
 import { AnimatedCheckProps } from './types';
 
 export const Checkmark = ({ task }: AnimatedCheckProps) => {

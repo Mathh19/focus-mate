@@ -5,7 +5,7 @@ import { DisplayTimeButton } from '../DisplayTimeButton';
 import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
-import { FeedbackCycles } from '../FeedbackCycles';
+import { FeedbackCycles } from '../UI/FeedbackCycles';
 
 export const Pomodoro = () => {
   const {

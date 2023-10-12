@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { VscExpandAll } from 'react-icons/vsc';
 import { IoMdClose } from 'react-icons/io';
-import { TaskInput } from '../TaskInput';
+import { TaskInput } from '../UI/TaskInput';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 import { TaskWeekOrganizerProps } from './types';

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { Checkmark } from '../Checkmark';
+import { Checkmark } from '../UI/Checkmark';
 import { ConfigTasks } from '../ConfigTasks';
 import { TaskItemProps } from './types';
 import { TaskProps } from '../../shared-types/tasks';

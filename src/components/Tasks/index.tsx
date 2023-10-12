@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { DropdownMenuTasks } from '../DropdownMenuTasks';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { TaskInput } from '../TaskInput';
+import { TaskInput } from '../UI/TaskInput';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
