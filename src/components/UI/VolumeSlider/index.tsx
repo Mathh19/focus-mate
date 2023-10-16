@@ -7,6 +7,8 @@ import {
   BsFillVolumeUpFill,
 } from 'react-icons/bs';
 import { VolumeSliderProps } from './types';
+import testSound from '../../../sounds/test-sound.mp3';
+const playTestSound = new Audio(testSound);
 
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   const volumeInMemo = useMemo(() => {
@@ -15,6 +17,11 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
     }
     return `${volume[0]}%`;
   }, [volume]);
+
+  const handlePlayTestAudio = () => {
+    playTestSound.volume = volume[0] / 100;
+    playTestSound.play();
+  };
 
   return (
     <div className="flex items-center">
@@ -29,6 +36,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
       <Slider.Root
         className="relative mx-2 flex h-5 w-[200px] touch-none select-none items-center"
         defaultValue={volume}
+        onClick={handlePlayTestAudio}
         max={100}
         step={1}
         onValueChange={setVolume}
