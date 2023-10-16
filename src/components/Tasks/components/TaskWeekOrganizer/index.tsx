@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { VscExpandAll } from 'react-icons/vsc';
 import { IoMdClose } from 'react-icons/io';
-import { TaskInput } from '../UI/TaskInput';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
+import { TaskInput } from '../../../UI/TaskInput';
+import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
+import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
 import { TaskWeekOrganizerProps } from './types';
-import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
-import { DayProps } from '../../shared-types/tasks';
+import { getCurrentDayOfWeek } from '../../../../utils/getCurrentDayOfWeek';
+import { DayProps } from '../../../../shared-types/tasks';
 import { ContainerTaskItem } from '../ContainerTaskItem';
 
 const days = [

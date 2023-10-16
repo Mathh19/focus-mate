@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 import { IoIosOptions } from 'react-icons/io';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
+import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
 import { ConfigTasksProps } from './types';
-import { alertWindow } from '../../utils/alertWindow';
-import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
+import { alertWindow } from '../../../../utils/alertWindow';
+import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
 
 export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const { tasks, updateTask, deleteTask } = useContext(TasksContext);

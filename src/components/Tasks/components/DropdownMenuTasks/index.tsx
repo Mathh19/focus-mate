@@ -3,9 +3,9 @@ import { HiMenu, HiCheck } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { VscClearAll } from 'react-icons/vsc';
-import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { alertWindow } from '../../utils/alertWindow';
+import { PomodoroContext } from '../../../../contexts/PomodoroContext/PomodoroContext';
+import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
+import { alertWindow } from '../../../../utils/alertWindow';
 import { TaskWeekOrganizer } from '../TaskWeekOrganizer';
 
 export const DropdownMenuTasks = () => {

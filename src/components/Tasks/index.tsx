@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
-import { DropdownMenuTasks } from '../DropdownMenuTasks';
+import { DropdownMenuTasks } from './components/DropdownMenuTasks';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { TaskInput } from '../UI/TaskInput';
 import { cleanInputSpaces } from '../../utils/cleanInputSpaces';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
 import { DayProps, TaskProps } from '../../shared-types/tasks';
-import { ContainerTaskItem } from '../ContainerTaskItem';
+import { ContainerTaskItem } from './components/ContainerTaskItem';
 
 export const Tasks = () => {
   const { tasks, addNewTask } = useContext(TasksContext);

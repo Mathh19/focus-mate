@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { TasksContext } from '../../contexts/TasksContext/TasksContext';
-import { Checkmark } from '../UI/Checkmark';
+import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
+import { Checkmark } from '../../../UI/Checkmark';
 import { ConfigTasks } from '../ConfigTasks';
 import { TaskItemProps } from './types';
-import { TaskProps } from '../../shared-types/tasks';
+import { TaskProps } from '../../../../shared-types/tasks';
 
 export const TaskItem = ({ task }: TaskItemProps) => {
   const { setFocusTask } = useContext(TasksContext);
