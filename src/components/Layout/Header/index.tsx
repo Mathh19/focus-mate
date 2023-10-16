@@ -1,5 +1,5 @@
-import { Logo } from '../Logo';
-import { About } from '../About';
+import { Logo } from '../../Logo';
+import { About } from '../../About';
 
 export const Header = () => {
   return (
