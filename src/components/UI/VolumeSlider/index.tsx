@@ -7,8 +7,8 @@ import {
   BsFillVolumeUpFill,
 } from 'react-icons/bs';
 import { VolumeSliderProps } from './types';
-import testSound from '../../../sounds/test-sound.mp3';
-const playTestSound = new Audio(testSound);
+import bellSound from '../../../sounds/play-bell-ding.mp3';
+const playTestSound = new Audio(bellSound);
 
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   const volumeInMemo = useMemo(() => {
