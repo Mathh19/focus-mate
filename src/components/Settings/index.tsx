@@ -33,11 +33,20 @@ export const Settings = () => {
     return `${min}`;
   };
 
+  const handleOpenOrCloseModal = (isOpen: boolean) => {
+    if (isOpen) {
+      setOpen(true);
+      document.body.style.overflow = 'hidden';
+    } else {
+      setOpen(false);
+      document.body.style.overflow = 'unset';
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setTimer(newTimer);
-    setOpen(false);
     setConfig({
       auto: autoPomodoro,
       volume: volume,
@@ -45,6 +54,8 @@ export const Settings = () => {
       notification: notification,
       routineMode: routineMode,
     });
+    document.body.style.overflow = 'unset';
+    setOpen(false);
   };
 
   const handleInputTimerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +88,7 @@ export const Settings = () => {
   return (
     <div>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => handleOpenOrCloseModal(true)}
         className="gap-2 px-2 py-1"
         aria-label="Settings"
         title="Settings"
@@ -86,7 +97,7 @@ export const Settings = () => {
       </button>
       {open && (
         <div
-          onClick={() => setOpen(false)}
+          onClick={() => handleOpenOrCloseModal(false)}
           className="fixed inset-0 z-50 flex items-center justify-center bg-backgroundColor/60 px-4"
         >
           <form
@@ -187,7 +198,7 @@ export const Settings = () => {
               <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xl font-semibold">
                 <button
                   type="button"
-                  onClick={() => setOpen(false)}
+                  onClick={() => handleOpenOrCloseModal(false)}
                   className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-darkTheme-600 dark:text-white"
                 >
                   cancel
