@@ -12,8 +12,9 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const [newTask, setNewTask] = useState(task);
   const [isEmpty, setIsEmpty] = useState(false);
 
-  const getTask = () => {
+  const openConfig = () => {
     setOpen(true);
+    document.body.style.overflow = 'hidden';
     const taskFound = tasks.find((element) => element === task);
     setNewTask(taskFound ?? task);
   };
@@ -28,6 +29,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
     const cleanTaskInput = cleanInputSpaces(newTask.name);
 
     updateTask(task, { ...newTask, name: cleanTaskInput });
+    document.body.style.overflow = 'unset';
     setOpen(false);
   };
 
@@ -36,6 +38,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
       `Do you really want to delete the "${task.name}" task ?`,
     );
     alert && deleteTask(task);
+    document.body.style.overflow = 'unset';
     setOpen(false);
   };
 
@@ -47,13 +50,14 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   };
 
   const handleClose = () => {
+    document.body.style.overflow = 'unset';
     setOpen(false);
     setIsEmpty(false);
   };
 
   return (
     <div onClick={(e) => e.stopPropagation()}>
-      <IoIosOptions className="cursor-pointer" onMouseDown={getTask} />
+      <IoIosOptions className="cursor-pointer" onMouseDown={openConfig} />
       {open && (
         <div
           onClick={handleClose}
