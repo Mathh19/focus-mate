@@ -12,7 +12,7 @@ import shortRestImage from '../imgs/Icon-Notifcation-Short-Break.png';
 import longRestImage from '../imgs/Icon-Notifcation-Long-Break.png';
 import workImage from '../imgs/Icon-Notifcation-Work.png';
 import iconNotification from '../imgs/Icon-Notification.png';
-import playBellSound from '../sounds/play-bell-ding.mp3';
+import playBellSound from '../sounds/play-bell-ding-long.mp3';
 import restBellSound from '../sounds/rest-bell-ding.mp3';
 
 const playBell = new Audio(playBellSound);
