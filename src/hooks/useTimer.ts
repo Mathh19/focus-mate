@@ -27,7 +27,7 @@ export const useTimer = () => {
   const [working, setWorking] = useState(false);
   const [completedCycles, setCompletedCycles] = useState(0);
   const [pause, setPause] = useState(false);
-  const [label, setLabel] = useState<
+  const [currentStatusPomodoro, setCurrentStatusPomodoro] = useState<
     'pomodoroTime' | 'shortRestTime' | 'longRestTime'
   >('pomodoroTime');
 
@@ -45,7 +45,7 @@ export const useTimer = () => {
     setWorking(true);
     setPause(true);
     setMainTime(timer.pomodoroTime);
-    setLabel('pomodoroTime');
+    setCurrentStatusPomodoro('pomodoroTime');
     if (configPomodoro.notification && !isMobile) {
       sendNotification("It's time for a work!", {
         body: workMessage,
@@ -82,7 +82,7 @@ export const useTimer = () => {
         });
       }
       setMainTime(timer.longRestTime);
-      setLabel('longRestTime');
+      setCurrentStatusPomodoro('longRestTime');
       if (!configPomodoro.auto) {
         setTimeCountingStatus(false);
       }
@@ -95,7 +95,7 @@ export const useTimer = () => {
         });
       }
       setMainTime(timer.shortRestTime);
-      setLabel('shortRestTime');
+      setCurrentStatusPomodoro('shortRestTime');
       if (!configPomodoro.auto) {
         setTimeCountingStatus(false);
       }
@@ -118,14 +118,14 @@ export const useTimer = () => {
   };
 
   useEffect(() => {
-    if (label === 'pomodoroTime') {
+    if (currentStatusPomodoro === 'pomodoroTime') {
       setMainTime(timer.pomodoroTime);
-    } else if (label === 'shortRestTime') {
+    } else if (currentStatusPomodoro === 'shortRestTime') {
       setMainTime(timer.shortRestTime);
     } else {
       setMainTime(timer.longRestTime);
     }
-  }, [label, timer]);
+  }, [currentStatusPomodoro, timer]);
 
   useEffect(() => {
     if (mainTime <= 0) {
@@ -147,13 +147,13 @@ export const useTimer = () => {
   return {
     mainTime,
     pause,
-    label,
+    currentStatusPomodoro,
     timeCountingStatus,
     completedCycles,
     timer,
     startTimer,
     setMainTime,
-    setLabel,
+    setCurrentStatusPomodoro,
     setTimeCountingStatus,
     nextTime,
   };

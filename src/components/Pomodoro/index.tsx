@@ -11,12 +11,12 @@ export const Pomodoro = () => {
   const {
     timer,
     mainTime,
-    label,
+    currentStatusPomodoro,
     pause,
     timeCountingStatus,
     completedCycles,
     setMainTime,
-    setLabel,
+    setCurrentStatusPomodoro,
     startTimer,
     setTimeCountingStatus,
     nextTime,
@@ -32,15 +32,15 @@ export const Pomodoro = () => {
       pause && setTitle('Stopped');
       pause && setIcon('/stop-pomodoro.ico');
     }
-  }, [label, pause, timeCountingStatus]);
+  }, [currentStatusPomodoro, pause, timeCountingStatus]);
 
   const displayTime = (
     time: number,
-    labelTime: 'pomodoroTime' | 'shortRestTime' | 'longRestTime',
+    currentStatusPomodoro: 'pomodoroTime' | 'shortRestTime' | 'longRestTime',
   ) => {
     setMainTime(time);
     setTimeCountingStatus(false);
-    setLabel(labelTime);
+    setCurrentStatusPomodoro(currentStatusPomodoro);
   };
 
   return (
@@ -48,22 +48,22 @@ export const Pomodoro = () => {
       <Head title={title} icon={icon} />
       <div className="flex gap-4">
         <DisplayTimeButton
-          focused={label === 'pomodoroTime' && true}
+          focused={currentStatusPomodoro === 'pomodoroTime' && true}
           text="Pomodoro"
           onClick={() => displayTime(timer.pomodoroTime, 'pomodoroTime')}
         />
         <DisplayTimeButton
-          focused={label === 'shortRestTime' && true}
+          focused={currentStatusPomodoro === 'shortRestTime' && true}
           text="Short Break"
           onClick={() => displayTime(timer.shortRestTime, 'shortRestTime')}
         />
         <DisplayTimeButton
-          focused={label === 'longRestTime' && true}
+          focused={currentStatusPomodoro === 'longRestTime' && true}
           text="Long Break"
           onClick={() => displayTime(timer.longRestTime, 'longRestTime')}
         />
       </div>
-      <Timer timer={mainTime} label={label} />
+      <Timer timer={mainTime} label={currentStatusPomodoro} />
       <div className="flex flex-col items-center gap-4">
         {!pause && (
           <button onClick={startTimer} className="btn-control">
