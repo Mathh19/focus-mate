@@ -46,7 +46,7 @@ export const DropdownMenuTasks = () => {
         <IoMdClose onClick={() => setOpen(!open)} className="cursor-pointer" />
       )}
       {open && (
-        <div className="absolute right-0 z-30 w-80 rounded-md bg-darkBlue p-2 text-2xl text-bluishPurple-dark blueTheme:text-blueTheme dark:bg-darkTheme-950 dark:text-white">
+        <div className="absolute right-0 z-30 w-80 rounded-md bg-darkBlue p-2 text-2xl text-bluishPurple-dark blueTheme:text-blueTheme dark:bg-darkTheme-dark-grey dark:text-white">
           <div className="flex flex-col">
             {configPomodoro.routineMode && (
               <TaskWeekOrganizer isDropdownOpen={setOpen} />

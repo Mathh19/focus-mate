@@ -93,7 +93,7 @@ export const Settings = () => {
         aria-label="Settings"
         title="Settings"
       >
-        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 max-[320px]:text-2xl" />
+        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 dark:fill-white max-[320px]:text-2xl" />
       </button>
       {open && (
         <div
@@ -103,7 +103,7 @@ export const Settings = () => {
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={handleSubmit}
-            className="my-6 max-h-[95%] space-y-5 overflow-auto rounded-lg bg-darkBlue p-4 dark:bg-darkTheme-950"
+            className="my-6 max-h-[95%] space-y-5 overflow-auto rounded-lg bg-darkBlue p-4 dark:bg-darkTheme-dark-grey"
           >
             <div className="relative">
               <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
@@ -199,7 +199,7 @@ export const Settings = () => {
                 <button
                   type="button"
                   onClick={() => handleOpenOrCloseModal(false)}
-                  className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-darkTheme-600 dark:text-white"
+                  className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-white dark:text-darkTheme-background"
                 >
                   cancel
                 </button>

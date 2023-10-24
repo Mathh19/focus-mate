@@ -16,7 +16,9 @@ export const Checkmark = ({ task }: AnimatedCheckProps) => {
       onClick={handleCheck}
       aria-label="A button to check your task"
       className={`relative inline-block w-6 cursor-pointer rounded-full border-[2px] ${
-        !task.finished ? 'border-white' : 'border-successColor'
+        !task.finished
+          ? 'border-white dark:border-darkTheme-background'
+          : 'border-successColor'
       }`}
     >
       <div

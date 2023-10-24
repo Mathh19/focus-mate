@@ -87,12 +87,12 @@ export const TaskWeekOrganizer = ({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="mx-4 flex w-full max-w-[826px] flex-col items-center space-y-6 rounded-3xl border border-white bg-darkGray py-6 text-white dark:bg-darkTheme-950"
+            className="mx-4 flex w-full max-w-[826px] flex-col items-center space-y-6 rounded-3xl border border-white bg-darkGray py-6 text-white dark:bg-darkTheme-dark-grey"
           >
             <div className="flex w-full items-center justify-between border-b-2 border-bluishGray px-4 pb-4 text-4xl font-semibold">
               <h2>
                 Add your tasks for{' '}
-                <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-darkTheme">
+                <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-white">
                   {days[countDay]}
                 </span>
               </h2>
@@ -118,13 +118,13 @@ export const TaskWeekOrganizer = ({
             <div className="flex w-full max-w-lg justify-between px-4 text-xl font-semibold text-bluishPurple blueTheme:text-blueTheme dark:text-white">
               <button
                 onClick={(e) => handlePrevOrNext(e, 'prev')}
-                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-600"
+                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-grey"
               >
                 Prev
               </button>
               <button
                 onClick={(e) => handlePrevOrNext(e, 'next')}
-                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-600"
+                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-grey"
               >
                 Next
               </button>

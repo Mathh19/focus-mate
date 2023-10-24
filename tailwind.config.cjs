@@ -8,10 +8,10 @@ module.exports = {
   theme: {
     colors: {
       darkTheme: {
+        background: '#000000',
+        grey: '#71717a',
+        'dark-grey': '#303036',
         DEFAULT: '#636069',
-        dark: '#4e4c52',
-        600: '#8F8DA3',
-        950: '#303036',
       },
       blueTheme: {
         DEFAULT: '#4f53ff',

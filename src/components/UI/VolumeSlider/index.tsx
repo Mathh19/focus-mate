@@ -27,7 +27,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
     <div className="flex items-center">
       {volume[0] === 0 ? (
         <BsFillVolumeMuteFill
-          className="h-7 w-7 text-bluishPurple blueTheme:text-blueTheme dark:text-darkTheme"
+          className="h-7 w-7 text-bluishPurple blueTheme:text-blueTheme dark:text-darkTheme-grey"
           aria-label="Volume mute"
         />
       ) : (
@@ -57,7 +57,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
           id="my-tooltip"
           data-tooltip-content={volumeInMemo}
           aria-label="Volume"
-          className="absolute top-0 rounded-sm bg-bluishGray px-1 font-semibold"
+          className="absolute top-0 rounded-sm bg-bluishGray px-1 font-semibold dark:bg-darkTheme-grey"
         />
       </Slider.Root>
       <BsFillVolumeUpFill className="h-7 w-7" aria-label="Volume up" />

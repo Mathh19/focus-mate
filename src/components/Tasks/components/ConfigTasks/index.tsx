@@ -65,14 +65,14 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[420px] cursor-default rounded-md bg-darkGray p-4 dark:bg-darkTheme-950"
+            className="w-full max-w-[420px] cursor-default rounded-md bg-darkGray p-4 dark:bg-darkTheme-dark-grey dark:text-white"
           >
             <div className="space-y-10">
-              <div className="flex justify-between border-b border-bluishGray pb-3">
+              <div className="flex justify-between border-b border-bluishGray pb-3 dark:border-darkTheme-grey">
                 <h2>Config task</h2>
                 <RiCloseLine
                   onClick={handleClose}
-                  className="cursor-pointer rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme dark:border-darkTheme dark:hover:bg-darkTheme"
+                  className="cursor-pointer rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme dark:border-darkTheme-grey dark:hover:bg-darkTheme-grey"
                 />
               </div>
               <div className="flex flex-col">
@@ -82,7 +82,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
                     placeholder="Edit your task..."
                     value={newTask.name}
                     onChange={handleChange}
-                    className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme dark:focus:border-white"
+                    className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme dark:bg-darkTheme-grey dark:focus:border-white"
                   />
                 </div>
                 {isEmpty && (
@@ -100,7 +100,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
                 </button>
                 <button
                   onClick={handleEditTask}
-                  className="rounded-md bg-bluishGray px-3 py-1"
+                  className="rounded-md bg-bluishGray px-3 py-1 dark:bg-darkTheme-grey"
                 >
                   Edit
                 </button>

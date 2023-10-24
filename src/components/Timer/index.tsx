@@ -23,7 +23,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
     if (configPomodoro.theme === 'defaultTheme' || !configPomodoro.theme)
       return '#7564e2';
     if (configPomodoro.theme === 'blueTheme') return '#4f53ff';
-    if (configPomodoro.theme === 'darkTheme') return '#636069';
+    if (configPomodoro.theme === 'darkTheme') return '#e8eaee';
   };
 
   const targetTasks = configPomodoro.routineMode
@@ -45,7 +45,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
         })}
         className="h-full w-full drop-shadow-lg"
       >
-        <div className="flex h-[90%] w-[90%] flex-col items-center justify-center gap-2 rounded-full border-[2px] border-bluishPurple shadow-shadowAllSides shadow-bluishPurple blueTheme:border-blueTheme blueTheme:shadow-blueTheme dark:border-darkTheme dark:shadow-darkTheme">
+        <div className="flex h-[90%] w-[90%] flex-col items-center justify-center gap-2 rounded-full border-[2px] border-bluishPurple shadow-shadowAllSides shadow-bluishPurple blueTheme:border-blueTheme blueTheme:shadow-blueTheme dark:border-white dark:shadow-white">
           <span className="font-sans text-8xl font-semibold max-[400px]:text-[5rem]">
             {secondsToMinutes(timer)}
           </span>

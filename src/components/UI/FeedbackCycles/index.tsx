@@ -9,7 +9,10 @@ export const FeedbackCycles = ({
 
   for (let i = 0; i < cycles; i++) {
     cyclesElement.push(
-      <span key={i} className="h-3 w-3 rounded-full bg-purplishGray"></span>,
+      <span
+        key={i}
+        className="h-3 w-3 rounded-full bg-purplishGray dark:stroke-darkTheme-dark-grey"
+      ></span>,
     );
   }
 
