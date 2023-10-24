@@ -93,7 +93,7 @@ export const Settings = () => {
         aria-label="Settings"
         title="Settings"
       >
-        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 dark:fill-white max-[320px]:text-2xl" />
+        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 blueTheme:fill-blueTheme-grey dark:fill-white max-[320px]:text-2xl" />
       </button>
       {open && (
         <div

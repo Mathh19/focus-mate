@@ -11,7 +11,7 @@ export const FeedbackCycles = ({
     cyclesElement.push(
       <span
         key={i}
-        className="h-3 w-3 rounded-full bg-purplishGray dark:stroke-darkTheme-dark-grey"
+        className="h-3 w-3 rounded-full bg-purplishGray blueTheme:bg-blueTheme-grey dark:stroke-darkTheme-dark-grey"
       ></span>,
     );
   }
@@ -22,7 +22,7 @@ export const FeedbackCycles = ({
         <span
           key={i}
           aria-label={`Cycle ${i + 1} of ${cycles}`}
-          className="inline-block h-3 w-3 rounded-full bg-bluishPurple-dark blueTheme:bg-blueTheme-dark dark:bg-white"
+          className="inline-block h-3 w-3 rounded-full bg-bluishPurple-dark blueTheme:bg-blueTheme dark:bg-white"
         ></span>
       );
     }

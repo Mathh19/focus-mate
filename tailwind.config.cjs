@@ -14,9 +14,13 @@ module.exports = {
         DEFAULT: '#636069',
       },
       blueTheme: {
-        DEFAULT: '#4f53ff',
-        dark: '#4136f5',
-        800: '#2d25ae',
+        DEFAULT: '#5B74E3',
+        'royal-blue': '#3c52c6',
+        background: '#030A11',
+        'light-blue': '#5BCAE3',
+        grey: '#4B4B5E',
+        dark: '#151434',
+        // 800: '#2d25ae',
       },
       bluishPurple: {
         DEFAULT: '#7564e2',

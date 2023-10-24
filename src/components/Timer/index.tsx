@@ -16,13 +16,19 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
   const { tasks } = useContext(TasksContext);
   const controlerTimer = timerContext[label as keyof TimerProps];
   const timerPercentage = (timer / controlerTimer) * 100;
+  const bgCicleProgressBar =
+    configPomodoro.theme === 'darkTheme'
+      ? '#202020'
+      : configPomodoro.theme === 'blueTheme'
+      ? '#151434'
+      : '#212034';
 
   const currentDay = getCurrentDayOfWeek();
 
   const pathColor = () => {
     if (configPomodoro.theme === 'defaultTheme' || !configPomodoro.theme)
       return '#7564e2';
-    if (configPomodoro.theme === 'blueTheme') return '#4f53ff';
+    if (configPomodoro.theme === 'blueTheme') return '#5B74E3';
     if (configPomodoro.theme === 'darkTheme') return '#e8eaee';
   };
 
@@ -38,8 +44,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
         backgroundPadding={3}
         value={timerPercentage}
         styles={buildStyles({
-          backgroundColor:
-            configPomodoro.theme === 'darkTheme' ? '#202020' : '#212034',
+          backgroundColor: bgCicleProgressBar,
           pathColor: pathColor(),
           strokeLinecap: 'round',
         })}
