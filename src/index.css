@@ -34,6 +34,6 @@
   }
 
   .btn-dropdown {
-    @apply flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white blueTheme:hover:bg-blueTheme-dark dark:hover:bg-darkTheme-grey
+    @apply flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white blueTheme:hover:bg-blueTheme dark:hover:bg-white dark:hover:text-darkTheme-background
   }
 }
