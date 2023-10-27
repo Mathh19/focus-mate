@@ -60,8 +60,13 @@ export const TaskWeekOrganizer = ({
     }
   };
 
-  const handleClose = (e: React.MouseEvent<SVGElement>) => {
-    e.preventDefault();
+  const handleOpen = () => {
+    setOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleClose = () => {
+    document.body.style.overflow = 'unset';
     setOpen(false);
     isDropdownOpen(false);
   };
@@ -73,7 +78,7 @@ export const TaskWeekOrganizer = ({
   return (
     <div>
       <button
-        onClick={() => setOpen(true)}
+        onClick={handleOpen}
         aria-label="Add weekly tasks"
         className="btn-dropdown w-full"
       >
@@ -82,7 +87,7 @@ export const TaskWeekOrganizer = ({
       </button>
       {open && (
         <div
-          onClick={() => setOpen(false)}
+          onClick={handleClose}
           className="fixed inset-0 z-50 flex items-center justify-center bg-backgroundColor/60"
         >
           <div
@@ -96,12 +101,13 @@ export const TaskWeekOrganizer = ({
                   {days[countDay]}
                 </span>
               </h2>
-              <span>
-                <IoMdClose
-                  onClick={handleClose}
-                  className="cursor-pointer hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:hover:text-darkTheme"
-                />
-              </span>
+              <button
+                onClick={handleClose}
+                aria-label="Close modal"
+                className="hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:hover:text-darkTheme"
+              >
+                <IoMdClose />
+              </button>
             </div>
             <div className="w-full max-w-lg px-4">
               <ContainerTaskItem
