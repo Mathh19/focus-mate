@@ -52,7 +52,7 @@ export const ContainerTaskItem = ({
             } after:to-transparent after:content-[''] ${
               shadowEffectColor === 'backgroundColor'
                 ? 'after:dark:from-darkBackgroundColor'
-                : 'after:dark:from-darkTheme-950'
+                : 'after:dark:from-darkTheme-dark-grey'
             }`
           }`}
         >
