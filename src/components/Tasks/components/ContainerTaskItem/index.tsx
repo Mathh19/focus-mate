@@ -47,13 +47,9 @@ export const ContainerTaskItem = ({
             isScrolledToTop &&
             `after:pointer-events-none after:absolute after:bottom-0 after:h-4 after:w-full after:animate-fade-in-slowly after:bg-gradient-to-t ${
               shadowEffectColor === 'backgroundColor'
-                ? 'after:from-backgroundColor'
-                : 'after:from-darkGray'
-            } after:to-transparent after:content-[''] ${
-              shadowEffectColor === 'backgroundColor'
-                ? 'after:dark:from-darkBackgroundColor'
-                : 'after:dark:from-darkTheme-dark-grey'
-            }`
+                ? 'after:from-backgroundColor after:blueTheme:from-blueTheme-background after:dark:from-darkTheme-background'
+                : 'after:from-darkGray after:dark:from-darkTheme-dark-grey'
+            } after:to-transparent after:content-['']`
           }`}
         >
           {tasks.map((task, index) => (
