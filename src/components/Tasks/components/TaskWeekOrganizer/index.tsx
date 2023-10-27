@@ -87,9 +87,9 @@ export const TaskWeekOrganizer = ({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="mx-4 flex w-full max-w-[826px] flex-col items-center space-y-6 rounded-3xl border border-white bg-darkGray py-6 text-white dark:bg-darkTheme-dark-grey"
+            className="mx-4 flex w-full max-w-[826px] flex-col items-center space-y-6 rounded-3xl border-2 border-white bg-darkGray py-6 text-white dark:bg-darkTheme-dark-grey"
           >
-            <div className="flex w-full items-center justify-between border-b-2 border-bluishGray px-4 pb-4 text-4xl font-semibold">
+            <div className="flex w-full items-center justify-between border-b-2 border-bluishGray px-4 pb-4 text-4xl font-semibold dark:border-white">
               <h2>
                 Add your tasks for{' '}
                 <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-white">
