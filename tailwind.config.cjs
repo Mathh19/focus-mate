@@ -20,7 +20,6 @@ module.exports = {
         'light-blue': '#5BCAE3',
         grey: '#4B4B5E',
         dark: '#151434',
-        // 800: '#2d25ae',
       },
       bluishPurple: {
         DEFAULT: '#7564e2',
