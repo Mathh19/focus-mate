@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FiSkipForward } from 'react-icons/fi';
 import { useTimer } from '../../hooks/useTimer';
 import { DisplayTimeButton } from '../UI/DisplayTimeButton';
@@ -6,6 +6,10 @@ import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
 import { FeedbackCycles } from '../UI/FeedbackCycles';
+import pauseSoundAudio from '../../sounds/pause-sound.mp3';
+import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
+
+const pauseSound = new Audio(pauseSoundAudio);
 
 export const Pomodoro = () => {
   const {
@@ -21,6 +25,7 @@ export const Pomodoro = () => {
     setTimeCountingStatus,
     nextTime,
   } = useTimer();
+  const { configPomodoro } = useContext(PomodoroContext);
   const [title, setTitle] = useState('');
   const [icon, setIcon] = useState('');
 
@@ -41,6 +46,12 @@ export const Pomodoro = () => {
     setMainTime(time);
     setTimeCountingStatus(false);
     setCurrentStatusPomodoro(currentStatusPomodoro);
+  };
+
+  const handleControlCountingStatus = () => {
+    pauseSound.volume = configPomodoro.volume[0] / 100;
+    pauseSound.play();
+    setTimeCountingStatus(!timeCountingStatus);
   };
 
   return (
@@ -73,7 +84,7 @@ export const Pomodoro = () => {
         {pause && (
           <div className="relative flex w-36 items-center justify-center">
             <button
-              onClick={() => setTimeCountingStatus(!timeCountingStatus)}
+              onClick={handleControlCountingStatus}
               className="btn-control"
             >
               {timeCountingStatus ? 'pause' : 'play'}
