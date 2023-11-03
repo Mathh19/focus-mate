@@ -7,10 +7,10 @@ import {
   BsFillVolumeUpFill,
 } from 'react-icons/bs';
 import { VolumeSliderProps } from './types';
-import bellSound from '../../../sounds/play-bell-ding.mp3';
-const playTestSound = new Audio(bellSound);
+import { useSound } from '../../../hooks/useSound';
 
 export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
+  const { testBell } = useSound();
   const volumeInMemo = useMemo(() => {
     if (volume[0] === 0) {
       return 'mute';
@@ -19,8 +19,8 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
   }, [volume]);
 
   const handlePlayTestAudio = () => {
-    playTestSound.volume = volume[0] / 100;
-    playTestSound.play();
+    testBell.volume = volume[0] / 100;
+    testBell.play();
   };
 
   return (

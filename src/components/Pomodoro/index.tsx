@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { FiSkipForward } from 'react-icons/fi';
 import { useTimer } from '../../hooks/useTimer';
 import { DisplayTimeButton } from '../UI/DisplayTimeButton';
@@ -6,10 +6,7 @@ import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
 import { FeedbackCycles } from '../UI/FeedbackCycles';
-import pauseSoundAudio from '../../sounds/pause-sound.mp3';
-import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-
-const pauseSound = new Audio(pauseSoundAudio);
+import { useSound } from '../../hooks/useSound';
 
 export const Pomodoro = () => {
   const {
@@ -25,7 +22,7 @@ export const Pomodoro = () => {
     setTimeCountingStatus,
     nextTime,
   } = useTimer();
-  const { configPomodoro } = useContext(PomodoroContext);
+  const { pauseSound } = useSound();
   const [title, setTitle] = useState('');
   const [icon, setIcon] = useState('');
 
@@ -49,7 +46,6 @@ export const Pomodoro = () => {
   };
 
   const handleControlCountingStatus = () => {
-    pauseSound.volume = configPomodoro.volume[0] / 100;
     pauseSound.play();
     setTimeCountingStatus(!timeCountingStatus);
   };

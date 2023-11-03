@@ -12,15 +12,11 @@ import shortRestImage from '../imgs/Icon-Notifcation-Short-Break.png';
 import longRestImage from '../imgs/Icon-Notifcation-Long-Break.png';
 import workImage from '../imgs/Icon-Notifcation-Work.png';
 import iconNotification from '../imgs/Icon-Notification.png';
-import playBellSound from '../sounds/play-bell-ding-long.mp3';
-import restBellSound from '../sounds/rest-bell-ding.mp3';
-
-const playBell = new Audio(playBellSound);
-const restBell = new Audio(restBellSound);
+import { useSound } from './useSound';
 
 export const useTimer = () => {
   const { timer, configPomodoro } = useContext(PomodoroContext);
-  const volume = configPomodoro.volume[0] / 100;
+  const { playBell, restBell } = useSound();
 
   const [mainTime, setMainTime] = useState(timer.pomodoroTime);
   const [timeCountingStatus, setTimeCountingStatus] = useState(false);
@@ -39,7 +35,6 @@ export const useTimer = () => {
   );
 
   const startTimer = useCallback(() => {
-    playBell.volume = volume;
     playBell.play();
     setTimeCountingStatus(true);
     setWorking(true);
@@ -62,12 +57,11 @@ export const useTimer = () => {
     completedCycles,
     configPomodoro.auto,
     configPomodoro.notification,
+    playBell,
     timer.pomodoroTime,
-    volume,
   ]);
 
   const configureToResting = useCallback(() => {
-    restBell.volume = volume;
     restBell.play();
     setTimeCountingStatus(true);
     setWorking(false);
@@ -104,10 +98,10 @@ export const useTimer = () => {
     completedCycles,
     configPomodoro.auto,
     configPomodoro.notification,
+    restBell,
     timer.cycles,
     timer.longRestTime,
     timer.shortRestTime,
-    volume,
   ]);
 
   const nextTime = () => {
