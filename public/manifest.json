@@ -11,8 +11,7 @@
     {
       "src": "/icons/icon-180x180.png",
       "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "apple touch icon"
+      "type": "image/png"
     },
     {
       "src": "/icons/icon-192x192.png",
