@@ -5,6 +5,7 @@ import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
 import { ConfigTasksProps } from './types';
 import { alertWindow } from '../../../../utils/alertWindow';
 import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
+import { Modal } from '../../../UI/Modal';
 
 export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const { tasks, updateTask, deleteTask } = useContext(TasksContext);
@@ -14,7 +15,6 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
 
   const openConfig = () => {
     setOpen(true);
-    document.body.style.overflow = 'hidden';
     const taskFound = tasks.find((element) => element === task);
     setNewTask(taskFound ?? task);
   };
@@ -50,65 +50,48 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   };
 
   const handleClose = () => {
-    document.body.style.overflow = 'unset';
     setOpen(false);
     setIsEmpty(false);
   };
 
   return (
-    <div onClick={(e) => e.stopPropagation()}>
-      <IoIosOptions className="cursor-pointer" onMouseDown={openConfig} />
-      {open && (
-        <div
-          onClick={handleClose}
-          className="fixed inset-0 z-50 flex min-h-screen cursor-pointer items-center justify-center bg-backgroundColor/50 p-4"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[420px] cursor-default rounded-md bg-darkGray p-4 dark:bg-darkTheme-dark-grey dark:text-white"
+    <div>
+      <IoIosOptions className="cursor-pointer" onClick={openConfig} />
+      <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
+        <Modal.Header>
+          <h2>Config task</h2>
+          <button
+            onClick={handleClose}
+            className="rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme dark:border-darkTheme-grey dark:hover:bg-darkTheme-grey"
           >
-            <div className="space-y-10">
-              <div className="flex justify-between border-b border-bluishGray pb-3 dark:border-darkTheme-grey">
-                <h2>Config task</h2>
-                <RiCloseLine
-                  onClick={handleClose}
-                  className="cursor-pointer rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme dark:border-darkTheme-grey dark:hover:bg-darkTheme-grey"
-                />
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-4">
-                  Edit:
-                  <textarea
-                    placeholder="Edit your task..."
-                    value={newTask.name}
-                    onChange={handleChange}
-                    className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme dark:bg-darkTheme-grey dark:focus:border-white"
-                  />
-                </div>
-                {isEmpty && (
-                  <span className="animate-earthquake text-dangerColor">
-                    Task field is empty!
-                  </span>
-                )}
-              </div>
-              <div className="flex w-full flex-wrap justify-between gap-2">
-                <button
-                  onClick={handleDeleteTask}
-                  className="rounded-md bg-dangerColor px-3 py-1"
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={handleEditTask}
-                  className="rounded-md bg-bluishGray px-3 py-1 dark:bg-darkTheme-grey"
-                >
-                  Edit
-                </button>
-              </div>
+            <RiCloseLine />
+          </button>
+        </Modal.Header>
+        <Modal.Content>
+          <div className="flex w-full flex-col">
+            <div className="flex items-center gap-4">
+              Edit:
+              <textarea
+                placeholder="Edit your task..."
+                value={newTask.name}
+                onChange={handleChange}
+                className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme dark:bg-darkTheme-grey dark:focus:border-white"
+              />
             </div>
+            {isEmpty && (
+              <span className="animate-earthquake text-dangerColor">
+                Task field is empty!
+              </span>
+            )}
           </div>
-        </div>
-      )}
+        </Modal.Content>
+        <Modal.Actions>
+          <Modal.Action danger onClick={handleDeleteTask}>
+            Delete
+          </Modal.Action>
+          <Modal.Action onClick={handleEditTask}>Edit</Modal.Action>
+        </Modal.Actions>
+      </Modal.Root>
     </div>
   );
 };
