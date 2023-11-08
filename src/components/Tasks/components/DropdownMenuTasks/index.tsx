@@ -48,9 +48,7 @@ export const DropdownMenuTasks = () => {
       {open && (
         <div className="absolute right-0 z-30 w-80 rounded-md bg-darkBlue p-2 text-2xl text-bluishPurple-dark blueTheme:text-blueTheme dark:bg-darkTheme-dark-grey dark:text-white">
           <div className="flex flex-col">
-            {configPomodoro.routineMode && (
-              <TaskWeekOrganizer isDropdownOpen={setOpen} />
-            )}
+            {configPomodoro.routineMode && <TaskWeekOrganizer />}
             <button onClick={handleCheckAllTasks} className="btn-dropdown">
               Check all tasks
               <HiCheck />

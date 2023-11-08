@@ -4,10 +4,10 @@ import { IoMdClose } from 'react-icons/io';
 import { TaskInput } from '../../../UI/TaskInput';
 import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
 import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
-import { TaskWeekOrganizerProps } from './types';
 import { getCurrentDayOfWeek } from '../../../../utils/getCurrentDayOfWeek';
 import { DayProps } from '../../../../shared-types/tasks';
 import { ContainerTaskItem } from '../ContainerTaskItem';
+import { Modal } from '../../../UI/Modal';
 
 const days = [
   'Monday',
@@ -19,9 +19,7 @@ const days = [
   'Sunday',
 ];
 
-export const TaskWeekOrganizer = ({
-  isDropdownOpen,
-}: TaskWeekOrganizerProps) => {
+export const TaskWeekOrganizer = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
   const [open, setOpen] = useState(false);
   const [newTask, setNewTask] = useState({
@@ -48,27 +46,12 @@ export const TaskWeekOrganizer = ({
     setNewTask({ ...newTask, name: value, finished: false });
   };
 
-  const handlePrevOrNext = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    state: 'prev' | 'next',
-  ) => {
-    e.preventDefault();
+  const handlePrevOrNext = (state: 'prev' | 'next') => {
     if (state === 'prev') {
       setCountDay((prevState) => (prevState === 0 ? 6 : prevState - 1));
     } else {
       setCountDay((prevState) => (prevState === 6 ? 0 : prevState + 1));
     }
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const handleClose = () => {
-    document.body.style.overflow = 'unset';
-    setOpen(false);
-    isDropdownOpen(false);
   };
 
   const targetCurrentTask = tasks.filter(
@@ -78,66 +61,58 @@ export const TaskWeekOrganizer = ({
   return (
     <div>
       <button
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
         aria-label="Add weekly tasks"
         className="btn-dropdown w-full"
       >
         Add weekly tasks
         <VscExpandAll />
       </button>
-      {open && (
-        <div
-          onClick={handleClose}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-backgroundColor/60"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="mx-4 flex w-full max-w-[826px] flex-col items-center space-y-6 rounded-3xl border-2 border-white bg-darkGray py-6 text-white dark:bg-darkTheme-dark-grey"
+      <Modal.Root overflow={false} isOpen={open} setOpen={() => setOpen(false)}>
+        <Modal.Header>
+          <h2 className="text-white">
+            Add your tasks for{' '}
+            <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-white">
+              {days[countDay]}
+            </span>
+          </h2>
+          <button
+            onClick={() => setOpen(false)}
+            aria-label="Close modal"
+            className="text-white hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:hover:text-darkTheme"
           >
-            <div className="flex w-full items-center justify-between border-b-2 border-bluishGray px-4 pb-4 text-4xl font-semibold dark:border-white">
-              <h2>
-                Add your tasks for{' '}
-                <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-white">
-                  {days[countDay]}
-                </span>
-              </h2>
-              <button
-                onClick={handleClose}
-                aria-label="Close modal"
-                className="hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:hover:text-darkTheme"
-              >
-                <IoMdClose />
-              </button>
-            </div>
-            <div className="w-full max-w-lg px-4">
-              <ContainerTaskItem
-                tasks={targetCurrentTask}
-                shadowEffectColor="darkGray"
-                dynamicHeight={false}
-              />
-              <TaskInput
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                newTask={newTask}
-              />
-            </div>
-            <div className="flex w-full max-w-lg justify-between px-4 text-xl font-semibold text-bluishPurple blueTheme:text-blueTheme dark:text-white">
-              <button
-                onClick={(e) => handlePrevOrNext(e, 'prev')}
-                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-grey"
-              >
-                Prev
-              </button>
-              <button
-                onClick={(e) => handlePrevOrNext(e, 'next')}
-                className="rounded-md bg-tealBlue px-4 py-2 dark:bg-darkTheme-grey"
-              >
-                Next
-              </button>
-            </div>
+            <IoMdClose />
+          </button>
+        </Modal.Header>
+        <Modal.Content>
+          <div className="w-full text-white">
+            <ContainerTaskItem
+              tasks={targetCurrentTask}
+              shadowEffectColor="darkGray"
+              dynamicHeight={false}
+            />
+            <TaskInput
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              newTask={newTask}
+            />
           </div>
-        </div>
-      )}
+        </Modal.Content>
+        <Modal.Actions>
+          <Modal.Action
+            onClick={() => handlePrevOrNext('prev')}
+            className="px-4 py-2"
+          >
+            Prev
+          </Modal.Action>
+          <Modal.Action
+            onClick={() => handlePrevOrNext('next')}
+            className="px-4 py-2"
+          >
+            Next
+          </Modal.Action>
+        </Modal.Actions>
+      </Modal.Root>
     </div>
   );
 };
