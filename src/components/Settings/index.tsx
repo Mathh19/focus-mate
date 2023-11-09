@@ -27,6 +27,7 @@ export const Settings = () => {
   const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
   const [notification, setNotification] = useState(configPomodoro.notification);
   const [routineMode, setRoutineMode] = useState(configPomodoro.routineMode);
+  const [vibrate, setVibrate] = useState(false);
 
   const displayInMinutes = (num: number) => {
     const min = num / 60;
@@ -53,6 +54,7 @@ export const Settings = () => {
       theme: theme,
       notification: notification,
       routineMode: routineMode,
+      vibrate: vibrate,
     });
     document.body.style.overflow = 'unset';
     setOpen(false);
@@ -155,6 +157,15 @@ export const Settings = () => {
                             label="Notification"
                             toggled={notification}
                             setToggle={handleToggleNotification}
+                          />
+                        </div>
+                      )}
+                      {isMobile && (
+                        <div>
+                          <ToggleButton
+                            label="Vibrate"
+                            toggled={vibrate}
+                            setToggle={setVibrate}
                           />
                         </div>
                       )}

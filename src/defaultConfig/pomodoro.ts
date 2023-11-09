@@ -13,5 +13,6 @@ export const defaultPomodoro = {
     theme: 'defaultTheme',
     notification: false,
     routineMode: false,
+    vibrate: false,
   } as ConfigPomodoroProps,
 };

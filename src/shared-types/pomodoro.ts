@@ -13,4 +13,5 @@ export type ConfigPomodoroProps = {
   theme: ThemeProps;
   notification: boolean;
   routineMode: boolean;
+  vibrate: boolean;
 };

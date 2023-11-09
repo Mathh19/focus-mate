@@ -36,6 +36,7 @@ export const useTimer = () => {
 
   const startTimer = useCallback(() => {
     playBell.play();
+    configPomodoro.vibrate && navigator.vibrate(200);
     setTimeCountingStatus(true);
     setWorking(true);
     setPause(true);
@@ -57,12 +58,14 @@ export const useTimer = () => {
     completedCycles,
     configPomodoro.auto,
     configPomodoro.notification,
+    configPomodoro.vibrate,
     playBell,
     timer.pomodoroTime,
   ]);
 
   const configureToResting = useCallback(() => {
     restBell.play();
+    configPomodoro.vibrate && navigator.vibrate(200);
     setTimeCountingStatus(true);
     setWorking(false);
     setCompletedCycles((prevCompletedCycles) => prevCompletedCycles + 1);
@@ -98,6 +101,7 @@ export const useTimer = () => {
     completedCycles,
     configPomodoro.auto,
     configPomodoro.notification,
+    configPomodoro.vibrate,
     restBell,
     timer.cycles,
     timer.longRestTime,
