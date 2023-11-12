@@ -15,7 +15,7 @@ export const ToggleButton = ({
         <input
           id={label}
           type="checkbox"
-          onChange={() => setToggle(!toggled)}
+          onChange={() => setToggle()}
           checked={toggled}
           className="peer h-0 w-0 opacity-0"
         />

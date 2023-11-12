@@ -6,14 +6,15 @@ import { RxOpenInNewWindow } from 'react-icons/rx';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { GiPaintRoller } from 'react-icons/gi';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
-import { SettingsInputTimer } from '../UI/SettingsInputTimer';
-import { SettingsBox } from '../SettingsBox';
 import { VolumeSlider } from '../UI/VolumeSlider';
 import { ToggleButton } from '../UI/ToggleButton';
-import { openWindow } from '../../utils/openWindow';
 import { minutesToSeconds } from '../../utils/minutesToSeconds';
 import { SelectTheme } from '../SelectTheme';
 import { ThemeProps, TimerProps } from '../../shared-types/pomodoro';
+import { SettingsBox } from './components/SettingsBox';
+import { SettingsInputTimer } from './components/SettingsInputTimer';
+import { openWindow } from './utils/openWindow';
+import { displayInMinutes } from './utils/displayInMinutes';
 
 export const Settings = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
@@ -27,12 +28,7 @@ export const Settings = () => {
   const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
   const [notification, setNotification] = useState(configPomodoro.notification);
   const [routineMode, setRoutineMode] = useState(configPomodoro.routineMode);
-  const [vibrate, setVibrate] = useState(false);
-
-  const displayInMinutes = (num: number) => {
-    const min = num / 60;
-    return `${min}`;
-  };
+  const [vibrate, setVibrate] = useState(configPomodoro.vibrate);
 
   const handleOpenOrCloseModal = (isOpen: boolean) => {
     if (isOpen) {
@@ -80,11 +76,6 @@ export const Settings = () => {
         console.log(`Failed to request notification permission: ${err}`),
       )
       .finally(() => setNotification(!notification));
-  };
-
-  const openPomodoroWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    openWindow(400, 800);
   };
 
   return (
@@ -148,7 +139,7 @@ export const Settings = () => {
                         <ToggleButton
                           label="Auto Pomodoro"
                           toggled={autoPomodoro}
-                          setToggle={setAutoPomodoro}
+                          setToggle={() => setAutoPomodoro(!autoPomodoro)}
                         />
                       </div>
                       {!isMobile && (
@@ -165,7 +156,7 @@ export const Settings = () => {
                           <ToggleButton
                             label="Vibrate"
                             toggled={vibrate}
-                            setToggle={setVibrate}
+                            setToggle={() => setVibrate(!vibrate)}
                           />
                         </div>
                       )}
@@ -176,7 +167,7 @@ export const Settings = () => {
                   <ToggleButton
                     label="routine mode"
                     toggled={routineMode}
-                    setToggle={setRoutineMode}
+                    setToggle={() => setRoutineMode(!routineMode)}
                   />
                 </SettingsBox>
                 <SettingsBox
@@ -189,7 +180,10 @@ export const Settings = () => {
                 {!isMobile && (
                   <SettingsBox title="Screen">
                     <button
-                      onClick={(e) => openPomodoroWindow(e)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openWindow(400, 800);
+                      }}
                       className="flex items-center gap-2 font-semibold"
                     >
                       Open in floating window
