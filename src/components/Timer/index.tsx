@@ -37,7 +37,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
     : tasks.filter((task) => task.day === undefined);
 
   return (
-    <div className="mx-2 w-full max-w-[384px]">
+    <div className="mx-2 w-full max-w-xs">
       <CircularProgressbarWithChildren
         strokeWidth={4}
         background
@@ -51,7 +51,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
         className="h-full w-full drop-shadow-lg"
       >
         <div className="flex h-[90%] w-[90%] flex-col items-center justify-center gap-2 rounded-full border-[2px] border-bluishPurple shadow-shadowAllSides shadow-bluishPurple blueTheme:border-blueTheme blueTheme:shadow-blueTheme dark:border-white dark:shadow-white">
-          <span className="font-sans text-8xl font-semibold max-[400px]:text-[5rem]">
+          <span className="font-sans text-7xl font-semibold max-[320px]:text-6xl">
             {secondsToMinutes(timer)}
           </span>
           <p className="font-semibold">
