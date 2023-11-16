@@ -61,14 +61,15 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
           {targetTasks.map(
             (task, index) =>
               task.inFocus && (
-                <p
+                <a
+                  href="#tasks"
                   key={index}
-                  className="max-w-[240px] truncate font-semibold
-                  max-[540px]:max-w-[160px]"
+                  className="max-w-[160px] truncate font-semibold
+                  max-[350px]:max-w-[130px]"
                 >
                   <span className="font-bold">Focused:</span> #{index + 1}{' '}
                   {task.name}
-                </p>
+                </a>
               ),
           )}
         </div>

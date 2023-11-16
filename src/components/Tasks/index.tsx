@@ -45,7 +45,7 @@ export const Tasks = () => {
   const targetCurrentTask = displayTasks();
 
   return (
-    <div className="w-full max-w-md space-y-4">
+    <div id="tasks" className="w-full max-w-md space-y-4">
       <h2 className="flex items-center justify-between border-b-2 pb-2 text-5xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[540px]:text-5xl">
         {!configPomodoro.routineMode ? 'Tasks' : `${currentDay}`}
         <DropdownMenuTasks />
