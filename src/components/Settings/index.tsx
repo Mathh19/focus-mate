@@ -201,7 +201,7 @@ export const Settings = () => {
               </button>
               <button
                 type="submit"
-                className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-white dark:text-darkTheme-background"
+                className="rounded-md bg-tealBlue px-2 py-1.5 text-center  drop-shadow-3xl dark:bg-white dark:text-darkTheme-background"
               >
                 apply
               </button>
