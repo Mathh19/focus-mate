@@ -15,6 +15,7 @@ import { SettingsBox } from './components/SettingsBox';
 import { SettingsInputTimer } from './components/SettingsInputTimer';
 import { openWindow } from './utils/openWindow';
 import { displayInMinutes } from './utils/displayInMinutes';
+import { Modal } from '../UI/Modal';
 
 export const Settings = () => {
   const { timer, setTimer, configPomodoro, setConfig } =
@@ -42,7 +43,6 @@ export const Settings = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setTimer(newTimer);
     setConfig({
       auto: autoPomodoro,
@@ -88,132 +88,127 @@ export const Settings = () => {
       >
         <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 blueTheme:fill-blueTheme-grey dark:fill-white max-[320px]:text-2xl" />
       </button>
-      {open && (
-        <div
-          onClick={() => handleOpenOrCloseModal(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-backgroundColor/60 px-4"
-        >
-          <form
-            onClick={(e) => e.stopPropagation()}
-            onSubmit={handleSubmit}
-            className="my-6 max-h-[95%] space-y-5 overflow-auto rounded-lg bg-darkBlue p-4 dark:bg-darkTheme-dark-grey"
-          >
-            <div className="relative">
-              <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
-              <div className="divide-y divide-bluishGray pb-16">
-                <SettingsBox title="Timer" icon={<RiTimerLine />}>
-                  <div>
-                    <span className="font-semibold">time in minutes</span>
-                    <div className="my-1 flex flex-wrap gap-8 max-[415px]:justify-between">
-                      <SettingsInputTimer
-                        onChange={handleInputTimerChange}
-                        labelText="Pomodoro:"
-                        name="pomodoroTime"
-                        type="number"
-                        defaultValue={displayInMinutes(timer.pomodoroTime)}
-                      />
-                      <SettingsInputTimer
-                        onChange={handleInputTimerChange}
-                        labelText="Short Break:"
-                        name="shortRestTime"
-                        type="number"
-                        defaultValue={displayInMinutes(timer.shortRestTime)}
-                      />
-                      <SettingsInputTimer
-                        onChange={handleInputTimerChange}
-                        labelText="Long Break:"
-                        name="longRestTime"
-                        type="number"
-                        defaultValue={displayInMinutes(timer.longRestTime)}
-                      />
-                      <SettingsInputTimer
-                        onChange={handleInputTimerChange}
-                        labelText="Cycles:"
-                        name="cycles"
-                        type="number"
-                        defaultValue={timer.cycles}
-                      />
-                    </div>
-                    <div className="mt-3 space-y-3">
-                      <div>
-                        <ToggleButton
-                          label="Auto Pomodoro"
-                          toggled={autoPomodoro}
-                          setToggle={() => setAutoPomodoro(!autoPomodoro)}
-                        />
-                      </div>
-                      {!isMobile && (
-                        <div>
-                          <ToggleButton
-                            label="Notification"
-                            toggled={notification}
-                            setToggle={handleToggleNotification}
-                          />
-                        </div>
-                      )}
-                      {isMobile && (
-                        <div>
-                          <ToggleButton
-                            label="Vibrate"
-                            toggled={vibrate}
-                            setToggle={() => setVibrate(!vibrate)}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </SettingsBox>
-                <SettingsBox title="Tasks" icon={<BsListCheck />}>
-                  <ToggleButton
-                    label="routine mode"
-                    toggled={routineMode}
-                    setToggle={() => setRoutineMode(!routineMode)}
+      <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
+        <Modal.Header>
+          <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
+        </Modal.Header>
+        <Modal.Content>
+          <form onSubmit={handleSubmit} className="divide-y divide-bluishGray">
+            <SettingsBox title="Timer" icon={<RiTimerLine />}>
+              <div>
+                <span className="font-semibold">time in minutes</span>
+                <div className="my-1 flex flex-wrap gap-6 max-[418px]:justify-between">
+                  <SettingsInputTimer
+                    onChange={handleInputTimerChange}
+                    labelText="Pomodoro:"
+                    name="pomodoroTime"
+                    type="number"
+                    defaultValue={displayInMinutes(timer.pomodoroTime)}
                   />
-                </SettingsBox>
-                <SettingsBox
-                  title="Sound"
-                  icon={<BsSoundwave className="h-7 w-7" />}
-                >
-                  <span className="mt-2 font-semibold">Volume:</span>
-                  <VolumeSlider volume={volume} setVolume={setVolume} />
-                </SettingsBox>
-                {!isMobile && (
-                  <SettingsBox title="Screen">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        openWindow(400, 800);
-                      }}
-                      className="flex items-center gap-2 font-semibold"
-                    >
-                      Open in floating window
-                      <RxOpenInNewWindow />
-                    </button>
-                  </SettingsBox>
-                )}
-                <SettingsBox
-                  title="Theme"
-                  icon={<GiPaintRoller className="h-6 w-6 rotate-45" />}
-                >
+                  <SettingsInputTimer
+                    onChange={handleInputTimerChange}
+                    labelText="Short Break:"
+                    name="shortRestTime"
+                    type="number"
+                    defaultValue={displayInMinutes(timer.shortRestTime)}
+                  />
+                  <SettingsInputTimer
+                    onChange={handleInputTimerChange}
+                    labelText="Long Break:"
+                    name="longRestTime"
+                    type="number"
+                    defaultValue={displayInMinutes(timer.longRestTime)}
+                  />
+                  <SettingsInputTimer
+                    onChange={handleInputTimerChange}
+                    labelText="Cycles:"
+                    name="cycles"
+                    type="number"
+                    defaultValue={timer.cycles}
+                  />
+                </div>
+                <div className="mt-3 space-y-3">
                   <div>
-                    <SelectTheme themeSelected={theme} setTheme={setTheme} />
+                    <ToggleButton
+                      label="Auto Pomodoro"
+                      toggled={autoPomodoro}
+                      setToggle={() => setAutoPomodoro(!autoPomodoro)}
+                    />
                   </div>
-                </SettingsBox>
+                  {!isMobile && (
+                    <div>
+                      <ToggleButton
+                        label="Notification"
+                        toggled={notification}
+                        setToggle={handleToggleNotification}
+                      />
+                    </div>
+                  )}
+                  {isMobile && (
+                    <div>
+                      <ToggleButton
+                        label="Vibrate"
+                        toggled={vibrate}
+                        setToggle={() => setVibrate(!vibrate)}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xl font-semibold">
+            </SettingsBox>
+            <SettingsBox title="Tasks" icon={<BsListCheck />}>
+              <ToggleButton
+                label="routine mode"
+                toggled={routineMode}
+                setToggle={() => setRoutineMode(!routineMode)}
+              />
+            </SettingsBox>
+            <SettingsBox
+              title="Sound"
+              icon={<BsSoundwave className="h-7 w-7" />}
+            >
+              <span className="mt-2 font-semibold">Volume:</span>
+              <VolumeSlider volume={volume} setVolume={setVolume} />
+            </SettingsBox>
+            {!isMobile && (
+              <SettingsBox title="Screen">
                 <button
-                  type="button"
-                  onClick={() => handleOpenOrCloseModal(false)}
-                  className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-white dark:text-darkTheme-background"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openWindow(400, 800);
+                  }}
+                  className="flex items-center gap-2 font-semibold"
                 >
-                  cancel
+                  Open in floating window
+                  <RxOpenInNewWindow />
                 </button>
-                <button type="submit">apply</button>
+              </SettingsBox>
+            )}
+            <SettingsBox
+              title="Theme"
+              icon={<GiPaintRoller className="h-6 w-6 rotate-45" />}
+            >
+              <div>
+                <SelectTheme themeSelected={theme} setTheme={setTheme} />
               </div>
+            </SettingsBox>
+            <div className="flex justify-between pt-4 text-xl font-semibold">
+              <button
+                type="button"
+                onClick={() => handleOpenOrCloseModal(false)}
+              >
+                cancel
+              </button>
+              <button
+                type="submit"
+                className="rounded-md bg-tealBlue p-2 text-bluishPurple drop-shadow-3xl blueTheme:text-blueTheme dark:bg-white dark:text-darkTheme-background"
+              >
+                apply
+              </button>
             </div>
           </form>
-        </div>
-      )}
+        </Modal.Content>
+      </Modal.Root>
     </div>
   );
 };
