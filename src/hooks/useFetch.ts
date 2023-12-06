@@ -1,7 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useContext, useEffect, useReducer } from 'react';
 import { api } from '../services/api';
+import { AuthContext } from '../contexts/AuthContext/AuthContext';
 
 type StateProps<T> = {
   data?: T;
@@ -15,6 +16,7 @@ type ActionProps<T> =
   | { type: 'error'; payload: Error };
 
 export const useFetch = <T = unknown>(url: string) => {
+  const { signed } = useContext(AuthContext);
   const initialState: StateProps<T> = {
     data: undefined,
     isLoading: true,
@@ -37,6 +39,7 @@ export const useFetch = <T = unknown>(url: string) => {
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   const handleFetch = useCallback(async () => {
+    if (!signed) return;
     dispatch({ type: 'loading' });
     try {
       const res = await api.get(url);
@@ -45,7 +48,7 @@ export const useFetch = <T = unknown>(url: string) => {
     } catch (err) {
       dispatch({ type: 'error', payload: err as Error });
     }
-  }, [url]);
+  }, [signed, url]);
 
   useEffect(() => {
     handleFetch();
