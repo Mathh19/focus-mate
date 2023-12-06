@@ -11,6 +11,7 @@ export const SettingsInputTimer = ({
     <label htmlFor={name} className="flex flex-col gap-2 font-semibold">
       {labelText}
       <input
+        id={name}
         type={type}
         name={name}
         min="1"
