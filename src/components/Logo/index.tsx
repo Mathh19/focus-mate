@@ -22,7 +22,9 @@ export const Logo = () => {
         src={logoPath}
         alt="An image of the website's logo"
       />
-      <span className=" font-sans text-2xl font-bold">Focus Mate</span>
+      <span className=" font-sans text-2xl font-bold max-[380px]:hidden">
+        Focus Mate
+      </span>
     </div>
   );
 };
