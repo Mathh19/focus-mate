@@ -24,7 +24,7 @@ export const TaskWeekOrganizer = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
   const [open, setOpen] = useState(false);
   const [newTask, setNewTask] = useState({
-    id: uuidv4(),
+    _id: uuidv4(),
     name: '',
     finished: false,
   });

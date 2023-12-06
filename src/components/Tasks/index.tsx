@@ -13,7 +13,7 @@ export const Tasks = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
   const { configPomodoro } = useContext(PomodoroContext);
   const [newTask, setNewTask] = useState<TaskProps>({
-    id: uuidv4(),
+    _id: uuidv4(),
     name: '',
     finished: false,
   });

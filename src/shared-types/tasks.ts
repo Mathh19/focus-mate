@@ -8,7 +8,7 @@ export type DayProps =
   | 'Saturday';
 
 export type TaskProps = {
-  id: string;
+  _id: string;
   name: string;
   day?: DayProps;
   finished: boolean;
