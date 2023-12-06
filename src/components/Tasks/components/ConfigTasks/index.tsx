@@ -72,6 +72,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
             <div className="flex items-center gap-4">
               Edit:
               <textarea
+                id="edit-task"
                 placeholder="Edit your task..."
                 value={newTask.name}
                 onChange={handleChange}
