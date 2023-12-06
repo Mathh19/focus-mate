@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@radix-ui/react-slider": "^1.1.1",
+    "axios": "^1.6.2",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-device-detect": "^2.2.3",
@@ -23,6 +25,8 @@
     "worker-timers": "^7.0.65"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20.10.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
