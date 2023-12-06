@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { DropdownMenuTasks } from './components/DropdownMenuTasks';
 import { TasksContext } from '../../contexts/TasksContext/TasksContext';
 import { TaskInput } from '../UI/TaskInput';
@@ -12,6 +13,7 @@ export const Tasks = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
   const { configPomodoro } = useContext(PomodoroContext);
   const [newTask, setNewTask] = useState<TaskProps>({
+    id: uuidv4(),
     name: '',
     finished: false,
   });

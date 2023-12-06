@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { VscExpandAll } from 'react-icons/vsc';
 import { IoMdClose } from 'react-icons/io';
+import { v4 as uuidv4 } from 'uuid';
 import { TaskInput } from '../../../UI/TaskInput';
 import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
 import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
@@ -23,6 +24,7 @@ export const TaskWeekOrganizer = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
   const [open, setOpen] = useState(false);
   const [newTask, setNewTask] = useState({
+    id: uuidv4(),
     name: '',
     finished: false,
   });
