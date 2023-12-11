@@ -40,8 +40,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     Cookies.remove('auth_token');
   };
 
+  const deleteAccount = async () => {
+    await api.delete('/user');
+    setSigned(false);
+    Cookies.remove('auth_token');
+  };
+
   return (
-    <AuthContext.Provider value={{ signed, signIn, logout }}>
+    <AuthContext.Provider value={{ signed, signIn, logout, deleteAccount }}>
       {children}
     </AuthContext.Provider>
   );
