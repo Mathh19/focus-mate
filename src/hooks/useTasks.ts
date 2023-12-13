@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react';
 import { TaskProps } from '../shared-types/tasks';
-import { api } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext/AuthContext';
 import { tasksReducer } from '../contexts/TasksContext/reduces/taskReducer';
 import { useLocalStorage } from './useLocalStorage';
@@ -24,6 +23,7 @@ import {
 } from '../services/tasks';
 import { PomodoroContext } from '../contexts/PomodoroContext/PomodoroContext';
 import { getCurrentDayOfWeek } from '../utils/getCurrentDayOfWeek';
+import { useFetch } from './useFetch';
 
 const currentDay = getCurrentDayOfWeek();
 
@@ -34,6 +34,7 @@ export const useTasks = () => {
     useLocalStorage<TaskProps[]>('tasks', []);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [state, dispatch] = useReducer(tasksReducer, storedTasksValue);
+  const { data, error } = useFetch<TaskProps[]>('/task');
 
   const addNewTask = useCallback(
     async (newTask: TaskProps) => {
@@ -181,21 +182,12 @@ export const useTasks = () => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (signed) {
-        try {
-          const response = await api.get('/task');
-          setTasks(response.data);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        setTasks(state);
-      }
-    };
+    if (error) console.log(error);
 
-    fetchData();
-  }, [signed, state]);
+    if (signed && !error && data) setTasks(data);
+
+    if (!signed) setTasks(state);
+  }, [data, error, signed, state]);
 
   useEffect(() => {
     setStoredValueTasks(state);
