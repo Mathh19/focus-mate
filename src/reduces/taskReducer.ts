@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { TaskProps } from '../../../shared-types/tasks';
-import { getCurrentDayOfWeek } from '../../../utils/getCurrentDayOfWeek';
+import { TaskProps } from '../shared-types/tasks';
+import { getCurrentDayOfWeek } from '../utils/getCurrentDayOfWeek';
 
 const currentDay = getCurrentDayOfWeek();
 

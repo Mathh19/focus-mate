@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { TaskProps } from '../shared-types/tasks';
 import { AuthContext } from '../contexts/AuthContext/AuthContext';
-import { tasksReducer } from '../contexts/TasksContext/reduces/taskReducer';
+import { tasksReducer } from '../reduces/taskReducer';
 import { useLocalStorage } from './useLocalStorage';
 import {
   addTaskAPI,
