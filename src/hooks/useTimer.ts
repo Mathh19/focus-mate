@@ -15,10 +15,10 @@ import iconNotification from '../imgs/Icon-Notification.png';
 import { useSound } from './useSound';
 
 export const useTimer = () => {
-  const { timer, configPomodoro } = useContext(PomodoroContext);
+  const { pomodoro } = useContext(PomodoroContext);
   const { playBell, restBell } = useSound();
 
-  const [mainTime, setMainTime] = useState(timer.pomodoroTime);
+  const [mainTime, setMainTime] = useState(pomodoro.pomodoroTime);
   const [timeCountingStatus, setTimeCountingStatus] = useState(false);
   const [working, setWorking] = useState(false);
   const [completedCycles, setCompletedCycles] = useState(0);
@@ -36,77 +36,61 @@ export const useTimer = () => {
 
   const startTimer = useCallback(() => {
     playBell.play();
-    configPomodoro.vibrate && navigator.vibrate(200);
+    pomodoro.vibrate && navigator.vibrate(200);
     setTimeCountingStatus(true);
     setWorking(true);
     setPause(true);
-    setMainTime(timer.pomodoroTime);
+    setMainTime(pomodoro.pomodoroTime);
     setCurrentStatusPomodoro('pomodoroTime');
-    if (configPomodoro.notification && !isMobile) {
+    if (pomodoro.notification && !isMobile) {
       sendNotification("It's time for a work!", {
         body: workMessage,
         image: workImage,
         icon: iconNotification,
       });
     }
-    if (!configPomodoro.auto) {
+    if (!pomodoro.auto) {
       if (completedCycles > 0) {
         setTimeCountingStatus(false);
       }
     }
-  }, [
-    completedCycles,
-    configPomodoro.auto,
-    configPomodoro.notification,
-    configPomodoro.vibrate,
-    playBell,
-    timer.pomodoroTime,
-  ]);
+  }, [completedCycles, pomodoro, playBell]);
 
   const configureToResting = useCallback(() => {
     restBell.play();
-    configPomodoro.vibrate && navigator.vibrate(200);
+    pomodoro.vibrate && navigator.vibrate(200);
     setTimeCountingStatus(true);
     setWorking(false);
     setCompletedCycles((prevCompletedCycles) => prevCompletedCycles + 1);
 
-    if ((completedCycles + 1) % timer.cycles === 0) {
-      if (configPomodoro.notification && !isMobile) {
+    if ((completedCycles + 1) % pomodoro.cycles === 0) {
+      if (pomodoro.notification && !isMobile) {
         sendNotification("It's time for a long break!", {
           body: randomLongBreakMessage,
           image: longRestImage,
           icon: iconNotification,
         });
       }
-      setMainTime(timer.longRestTime);
+      setMainTime(pomodoro.longRestTime);
       setCurrentStatusPomodoro('longRestTime');
-      if (!configPomodoro.auto) {
+      if (!pomodoro.auto) {
         setTimeCountingStatus(false);
       }
     } else {
-      if (configPomodoro.notification && !isMobile) {
+      if (pomodoro.notification && !isMobile) {
         sendNotification("It's time for a break!", {
           body: randomShortBreakMessage,
           image: shortRestImage,
           icon: iconNotification,
         });
       }
-      setMainTime(timer.shortRestTime);
+      setMainTime(pomodoro.shortRestTime);
       setCurrentStatusPomodoro('shortRestTime');
-      if (!configPomodoro.auto) {
+      if (!pomodoro.auto) {
         setTimeCountingStatus(false);
       }
     }
-  }, [
-    completedCycles,
-    configPomodoro.auto,
-    configPomodoro.notification,
-    configPomodoro.vibrate,
-    restBell,
-    timer.cycles,
-    timer.longRestTime,
-    timer.shortRestTime,
-  ]);
+  }, [completedCycles, pomodoro, restBell]);
 
   const nextTime = () => {
     if (working) {
@@ -117,13 +101,13 @@ export const useTimer = () => {
 
   useEffect(() => {
     if (currentStatusPomodoro === 'pomodoroTime') {
-      setMainTime(timer.pomodoroTime);
+      setMainTime(pomodoro.pomodoroTime);
     } else if (currentStatusPomodoro === 'shortRestTime') {
-      setMainTime(timer.shortRestTime);
+      setMainTime(pomodoro.shortRestTime);
     } else {
-      setMainTime(timer.longRestTime);
+      setMainTime(pomodoro.longRestTime);
     }
-  }, [currentStatusPomodoro, timer]);
+  }, [currentStatusPomodoro, pomodoro]);
 
   useEffect(() => {
     if (mainTime <= 0) {
@@ -139,16 +123,16 @@ export const useTimer = () => {
     completedCycles,
     configureToResting,
     startTimer,
-    configPomodoro.notification,
+    pomodoro,
   ]);
 
   return {
+    pomodoro,
     mainTime,
     pause,
     currentStatusPomodoro,
     timeCountingStatus,
     completedCycles,
-    timer,
     startTimer,
     setMainTime,
     setCurrentStatusPomodoro,

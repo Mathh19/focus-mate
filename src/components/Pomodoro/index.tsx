@@ -10,7 +10,7 @@ import { useSound } from '../../hooks/useSound';
 
 export const Pomodoro = () => {
   const {
-    timer,
+    pomodoro,
     mainTime,
     currentStatusPomodoro,
     pause,
@@ -57,17 +57,17 @@ export const Pomodoro = () => {
         <DisplayTimeButton
           focused={currentStatusPomodoro === 'pomodoroTime' && true}
           text="Pomodoro"
-          onClick={() => displayTime(timer.pomodoroTime, 'pomodoroTime')}
+          onClick={() => displayTime(pomodoro.pomodoroTime, 'pomodoroTime')}
         />
         <DisplayTimeButton
           focused={currentStatusPomodoro === 'shortRestTime' && true}
           text="Short Break"
-          onClick={() => displayTime(timer.shortRestTime, 'shortRestTime')}
+          onClick={() => displayTime(pomodoro.shortRestTime, 'shortRestTime')}
         />
         <DisplayTimeButton
           focused={currentStatusPomodoro === 'longRestTime' && true}
           text="Long Break"
-          onClick={() => displayTime(timer.longRestTime, 'longRestTime')}
+          onClick={() => displayTime(pomodoro.longRestTime, 'longRestTime')}
         />
       </div>
       <Timer timer={mainTime} label={currentStatusPomodoro} />
@@ -91,10 +91,10 @@ export const Pomodoro = () => {
           </div>
         )}
         <h2 className="text-xl font-bold">
-          Cycles {completedCycles}/{timer.cycles}
+          Cycles {completedCycles}/{pomodoro.cycles}
         </h2>
         <FeedbackCycles
-          cycles={timer.cycles}
+          cycles={pomodoro.cycles}
           completedCycles={completedCycles}
         />
       </div>

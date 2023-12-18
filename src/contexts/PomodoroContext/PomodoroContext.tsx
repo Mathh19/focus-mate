@@ -1,9 +1,7 @@
-import { createContext, useState, useEffect } from 'react';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { createContext, useEffect } from 'react';
 import { setClassTheme } from '../../utils/setClassTheme';
-import { ConfigPomodoroProps, TimerProps } from '../../shared-types/pomodoro';
 import { PomodoroContextProps } from './types';
-import { defaultPomodoro } from '../../defaultConfig/pomodoro';
+import { usePomodoro } from '../../hooks/usePomodoro';
 
 export const PomodoroContext = createContext({} as PomodoroContextProps);
 
@@ -12,43 +10,17 @@ export const PomodoroProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { storedValue: storedTimerValue, setValue: setTimerValue } =
-    useLocalStorage('timer', defaultPomodoro.timer);
-  const { storedValue: storedConfigValue, setValue: setConfigValue } =
-    useLocalStorage('config', defaultPomodoro.config);
-  const initialTimer = storedTimerValue;
-  const initialConfig = storedConfigValue;
-
-  const [timer, setTimer] = useState<TimerProps>(initialTimer);
-  const [config, setConfig] = useState<ConfigPomodoroProps>(initialConfig);
-
-  const handleSetTimer = (newTimer: TimerProps) => {
-    setTimer((prevTimer) => ({
-      ...prevTimer,
-      ...newTimer,
-    }));
-    setTimerValue(newTimer);
-  };
-
-  const handleSetConfig = (config: ConfigPomodoroProps) => {
-    setConfig((prevState) => ({
-      ...prevState,
-      ...config,
-    }));
-    setConfigValue(config);
-  };
+  const { pomodoro, handleSetSettingPomodoro } = usePomodoro();
 
   useEffect(() => {
-    setClassTheme(config.theme);
-  }, [config.theme]);
+    setClassTheme(pomodoro.theme);
+  }, [pomodoro.theme]);
 
   return (
     <PomodoroContext.Provider
       value={{
-        timer,
-        configPomodoro: config,
-        setTimer: handleSetTimer,
-        setConfig: handleSetConfig,
+        pomodoro,
+        setSettingPomodoro: handleSetSettingPomodoro,
       }}
     >
       {children}

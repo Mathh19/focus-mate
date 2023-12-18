@@ -11,11 +11,11 @@ const restBell = new Audio(restBellSound);
 const testBell = new Audio(testBellSound);
 
 export const useSound = () => {
-  const { configPomodoro } = useContext(PomodoroContext);
+  const { pomodoro } = useContext(PomodoroContext);
   const sounds = [pauseSound, playBell, restBell];
 
   sounds.map((sound) => {
-    sound.volume = configPomodoro.volume[0] / 100;
+    sound.volume = pomodoro.volume[0] / 100;
   });
 
   return {

@@ -11,7 +11,7 @@ import { ContainerTaskItem } from './components/ContainerTaskItem';
 
 export const Tasks = () => {
   const { tasks, addNewTask } = useContext(TasksContext);
-  const { configPomodoro } = useContext(PomodoroContext);
+  const { pomodoro } = useContext(PomodoroContext);
   const [newTask, setNewTask] = useState<TaskProps>({
     _id: uuidv4(),
     name: '',
@@ -22,7 +22,7 @@ export const Tasks = () => {
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
     const cleanTaskInput = cleanInputSpaces(newTask.name);
-    configPomodoro.routineMode
+    pomodoro.routineMode
       ? addNewTask({
           ...newTask,
           name: cleanTaskInput,
@@ -38,7 +38,7 @@ export const Tasks = () => {
   };
 
   const displayTasks = () => {
-    if (configPomodoro.routineMode) {
+    if (pomodoro.routineMode) {
       return tasks.filter((currentTask) => currentTask.day === currentDay);
     }
     return tasks.filter((tasks) => tasks.day === undefined);
@@ -49,7 +49,7 @@ export const Tasks = () => {
   return (
     <div id="tasks" className="w-full max-w-md space-y-4">
       <h2 className="flex items-center justify-between border-b-2 pb-2 text-5xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[540px]:text-5xl">
-        {!configPomodoro.routineMode ? 'Tasks' : `${currentDay}`}
+        {!pomodoro.routineMode ? 'Tasks' : `${currentDay}`}
         <DropdownMenuTasks />
       </h2>
       <div className="space-y-4">

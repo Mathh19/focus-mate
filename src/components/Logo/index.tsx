@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext';
 
 export const Logo = () => {
-  const { configPomodoro } = useContext(PomodoroContext);
+  const { pomodoro } = useContext(PomodoroContext);
 
   const logoPath =
-    configPomodoro.theme === 'defaultTheme'
+    pomodoro.theme === 'defaultTheme'
       ? '/logo-site.svg'
-      : configPomodoro.theme === 'blueTheme'
+      : pomodoro.theme === 'blueTheme'
       ? '/logo-site-blue-theme.svg'
       : '/logo-site-dark-theme.svg';
 

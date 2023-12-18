@@ -12,27 +12,28 @@ import { TimerProps } from '../../shared-types/pomodoro';
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
 
 export const Timer = ({ timer, label }: TimerComponentProps) => {
-  const { timer: timerContext, configPomodoro } = useContext(PomodoroContext);
+  const { pomodoro } = useContext(PomodoroContext);
+  const { pomodoroTime, shortRestTime, longRestTime, cycles } = pomodoro;
+  const timerContext = { pomodoroTime, shortRestTime, longRestTime, cycles };
   const { tasks } = useContext(TasksContext);
   const controlerTimer = timerContext[label as keyof TimerProps];
   const timerPercentage = (timer / controlerTimer) * 100;
   const bgCicleProgressBar =
-    configPomodoro.theme === 'darkTheme'
+    pomodoro.theme === 'darkTheme'
       ? '#202020'
-      : configPomodoro.theme === 'blueTheme'
+      : pomodoro.theme === 'blueTheme'
       ? '#151434'
       : '#212034';
 
   const currentDay = getCurrentDayOfWeek();
 
   const pathColor = () => {
-    if (configPomodoro.theme === 'defaultTheme' || !configPomodoro.theme)
-      return '#7564e2';
-    if (configPomodoro.theme === 'blueTheme') return '#5B74E3';
-    if (configPomodoro.theme === 'darkTheme') return '#e8eaee';
+    if (pomodoro.theme === 'defaultTheme' || !pomodoro.theme) return '#7564e2';
+    if (pomodoro.theme === 'blueTheme') return '#5B74E3';
+    if (pomodoro.theme === 'darkTheme') return '#e8eaee';
   };
 
-  const targetTasks = configPomodoro.routineMode
+  const targetTasks = pomodoro.routineMode
     ? tasks.filter((task) => task.day === currentDay)
     : tasks.filter((task) => task.day === undefined);
 

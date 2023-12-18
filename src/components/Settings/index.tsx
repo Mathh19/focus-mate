@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { RiTimerLine } from 'react-icons/ri';
 import { BsSoundwave, BsListCheck } from 'react-icons/bs';
@@ -10,7 +10,7 @@ import { VolumeSlider } from '../UI/VolumeSlider';
 import { ToggleButton } from '../UI/ToggleButton';
 import { minutesToSeconds } from '../../utils/minutesToSeconds';
 import { SelectTheme } from '../SelectTheme';
-import { ThemeProps, TimerProps } from '../../shared-types/pomodoro';
+import { PomodoroProps } from '../../shared-types/pomodoro';
 import { SettingsBox } from './components/SettingsBox';
 import { SettingsInputTimer } from './components/SettingsInputTimer';
 import { openWindow } from './utils/openWindow';
@@ -18,48 +18,28 @@ import { displayInMinutes } from './utils/displayInMinutes';
 import { Modal } from '../UI/Modal';
 
 export const Settings = () => {
-  const { timer, setTimer, configPomodoro, setConfig } =
-    useContext(PomodoroContext);
+  const { pomodoro, setSettingPomodoro } = useContext(PomodoroContext);
   const [open, setOpen] = useState(false);
-  const [newTimer, setNewTimer] = useState<TimerProps>({
-    ...timer,
-  });
-  const [volume, setVolume] = useState<number[]>([configPomodoro.volume[0]]);
-  const [autoPomodoro, setAutoPomodoro] = useState(configPomodoro.auto);
-  const [theme, setTheme] = useState<ThemeProps>(configPomodoro.theme);
-  const [notification, setNotification] = useState(configPomodoro.notification);
-  const [routineMode, setRoutineMode] = useState(configPomodoro.routineMode);
-  const [vibrate, setVibrate] = useState(configPomodoro.vibrate);
-
-  const handleOpenOrCloseModal = (isOpen: boolean) => {
-    if (isOpen) {
-      setOpen(true);
-      document.body.style.overflow = 'hidden';
-    } else {
-      setOpen(false);
-      document.body.style.overflow = 'unset';
-    }
-  };
+  const [newPomodoroSettings, setNewPomodoroSettings] =
+    useState<PomodoroProps>(pomodoro);
+  const [volume, setVolume] = useState<number[]>([pomodoro.volume[0]]);
+  const [theme, setTheme] = useState(pomodoro.theme);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTimer(newTimer);
-    setConfig({
-      auto: autoPomodoro,
+    setSettingPomodoro({
+      ...newPomodoroSettings,
       volume: volume,
       theme: theme,
-      notification: notification,
-      routineMode: routineMode,
-      vibrate: vibrate,
     });
-    document.body.style.overflow = 'unset';
+
     setOpen(false);
   };
 
   const handleInputTimerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewTimer((prevTimer) => ({
-      ...prevTimer,
+    setNewPomodoroSettings((prevPomodoro) => ({
+      ...prevPomodoro,
       [name]:
         name === 'cycles' ? parseInt(value) : minutesToSeconds(parseInt(value)),
     }));
@@ -69,19 +49,36 @@ export const Settings = () => {
     Notification.requestPermission()
       .then((permission) =>
         permission !== 'granted'
-          ? setNotification(false)
-          : setNotification(true),
+          ? setNewPomodoroSettings({
+              ...newPomodoroSettings,
+              notification: false,
+            })
+          : setNewPomodoroSettings({
+              ...newPomodoroSettings,
+              notification: false,
+            }),
       )
       .catch((err) =>
         console.log(`Failed to request notification permission: ${err}`),
       )
-      .finally(() => setNotification(!notification));
+      .finally(() =>
+        setNewPomodoroSettings({
+          ...newPomodoroSettings,
+          notification: !newPomodoroSettings.notification,
+        }),
+      );
   };
+
+  useEffect(() => {
+    setNewPomodoroSettings(newPomodoroSettings);
+    setVolume(pomodoro.volume);
+    setTheme(pomodoro.theme);
+  }, [newPomodoroSettings, pomodoro]);
 
   return (
     <div>
       <button
-        onClick={() => handleOpenOrCloseModal(true)}
+        onClick={() => setOpen(true)}
         className="gap-2 px-2 py-1"
         aria-label="Settings"
         title="Settings"
@@ -103,43 +100,48 @@ export const Settings = () => {
                     labelText="Pomodoro:"
                     name="pomodoroTime"
                     type="number"
-                    defaultValue={displayInMinutes(timer.pomodoroTime)}
+                    defaultValue={displayInMinutes(pomodoro.pomodoroTime)}
                   />
                   <SettingsInputTimer
                     onChange={handleInputTimerChange}
                     labelText="Short Break:"
                     name="shortRestTime"
                     type="number"
-                    defaultValue={displayInMinutes(timer.shortRestTime)}
+                    defaultValue={displayInMinutes(pomodoro.shortRestTime)}
                   />
                   <SettingsInputTimer
                     onChange={handleInputTimerChange}
                     labelText="Long Break:"
                     name="longRestTime"
                     type="number"
-                    defaultValue={displayInMinutes(timer.longRestTime)}
+                    defaultValue={displayInMinutes(pomodoro.longRestTime)}
                   />
                   <SettingsInputTimer
                     onChange={handleInputTimerChange}
                     labelText="Cycles:"
                     name="cycles"
                     type="number"
-                    defaultValue={timer.cycles}
+                    defaultValue={pomodoro.cycles}
                   />
                 </div>
                 <div className="mt-3 space-y-3">
                   <div>
                     <ToggleButton
                       label="Auto Pomodoro"
-                      toggled={autoPomodoro}
-                      setToggle={() => setAutoPomodoro(!autoPomodoro)}
+                      toggled={newPomodoroSettings.auto}
+                      setToggle={() =>
+                        setNewPomodoroSettings({
+                          ...newPomodoroSettings,
+                          auto: !newPomodoroSettings.auto,
+                        })
+                      }
                     />
                   </div>
                   {!isMobile && (
                     <div>
                       <ToggleButton
                         label="Notification"
-                        toggled={notification}
+                        toggled={newPomodoroSettings.notification}
                         setToggle={handleToggleNotification}
                       />
                     </div>
@@ -148,8 +150,13 @@ export const Settings = () => {
                     <div>
                       <ToggleButton
                         label="Vibrate"
-                        toggled={vibrate}
-                        setToggle={() => setVibrate(!vibrate)}
+                        toggled={newPomodoroSettings.vibrate}
+                        setToggle={() =>
+                          setNewPomodoroSettings({
+                            ...newPomodoroSettings,
+                            vibrate: !newPomodoroSettings.vibrate,
+                          })
+                        }
                       />
                     </div>
                   )}
@@ -159,8 +166,13 @@ export const Settings = () => {
             <SettingsBox title="Tasks" icon={<BsListCheck />}>
               <ToggleButton
                 label="routine mode"
-                toggled={routineMode}
-                setToggle={() => setRoutineMode(!routineMode)}
+                toggled={newPomodoroSettings.routineMode}
+                setToggle={() =>
+                  setNewPomodoroSettings({
+                    ...newPomodoroSettings,
+                    routineMode: !newPomodoroSettings.routineMode,
+                  })
+                }
               />
             </SettingsBox>
             <SettingsBox
@@ -193,10 +205,7 @@ export const Settings = () => {
               </div>
             </SettingsBox>
             <div className="flex justify-between pt-4 text-xl font-semibold">
-              <button
-                type="button"
-                onClick={() => handleOpenOrCloseModal(false)}
-              >
+              <button type="button" onClick={() => setOpen(false)}>
                 cancel
               </button>
               <button

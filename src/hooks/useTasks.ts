@@ -29,7 +29,7 @@ const currentDay = getCurrentDayOfWeek();
 
 export const useTasks = () => {
   const { signed } = useContext(AuthContext);
-  const { configPomodoro } = useContext(PomodoroContext);
+  const { pomodoro } = useContext(PomodoroContext);
   const { storedValue: storedTasksValue, setValue: setStoredValueTasks } =
     useLocalStorage<TaskProps[]>('tasks', []);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
@@ -82,7 +82,7 @@ export const useTasks = () => {
 
   const deleteAllTasks = useCallback(() => {
     if (signed) {
-      if (configPomodoro.routineMode) {
+      if (pomodoro.routineMode) {
         setTasks(tasks.filter((task) => task.day !== currentDay));
         deleteRoutineTasksAPI();
       } else {
@@ -94,13 +94,13 @@ export const useTasks = () => {
 
     dispatch({
       type: 'delete_all_task',
-      routineMode: configPomodoro.routineMode,
+      routineMode: pomodoro.routineMode,
     });
-  }, [configPomodoro.routineMode, signed, tasks]);
+  }, [pomodoro.routineMode, signed, tasks]);
 
   const deleteAllFinishedTasks = useCallback(() => {
     if (signed) {
-      if (configPomodoro.routineMode) {
+      if (pomodoro.routineMode) {
         setTasks(
           tasks.filter((task) => task.day !== currentDay || !task.finished),
         );
@@ -116,9 +116,9 @@ export const useTasks = () => {
 
     dispatch({
       type: 'delete_all_finished_tasks',
-      routineMode: configPomodoro.routineMode,
+      routineMode: pomodoro.routineMode,
     });
-  }, [configPomodoro.routineMode, signed, tasks]);
+  }, [pomodoro.routineMode, signed, tasks]);
 
   const doneTask = useCallback(
     (check: boolean, taskCheck: TaskProps) => {
@@ -138,7 +138,7 @@ export const useTasks = () => {
 
   const doneAllTasks = useCallback(() => {
     if (signed) {
-      if (configPomodoro.routineMode) {
+      if (pomodoro.routineMode) {
         setTasks(
           tasks.map((task) =>
             task.day !== undefined && task.day === currentDay
@@ -159,9 +159,9 @@ export const useTasks = () => {
     }
     dispatch({
       type: 'done_all_tasks',
-      routineMode: configPomodoro.routineMode,
+      routineMode: pomodoro.routineMode,
     });
-  }, [configPomodoro.routineMode, signed, tasks]);
+  }, [pomodoro.routineMode, signed, tasks]);
 
   const setFocusTask = useCallback(
     (taskCheck: TaskProps) => {
