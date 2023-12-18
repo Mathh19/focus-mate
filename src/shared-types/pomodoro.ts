@@ -15,3 +15,5 @@ export type ConfigPomodoroProps = {
   routineMode: boolean;
   vibrate: boolean;
 };
+
+export type PomodoroProps = TimerProps & ConfigPomodoroProps;
