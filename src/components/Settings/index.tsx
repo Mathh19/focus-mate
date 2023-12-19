@@ -70,10 +70,10 @@ export const Settings = () => {
   };
 
   useEffect(() => {
-    setNewPomodoroSettings(newPomodoroSettings);
+    setNewPomodoroSettings(pomodoro);
     setVolume(pomodoro.volume);
     setTheme(pomodoro.theme);
-  }, [newPomodoroSettings, pomodoro]);
+  }, [pomodoro]);
 
   return (
     <div>
@@ -100,28 +100,34 @@ export const Settings = () => {
                     labelText="Pomodoro:"
                     name="pomodoroTime"
                     type="number"
-                    defaultValue={displayInMinutes(pomodoro.pomodoroTime)}
+                    defaultValue={displayInMinutes(
+                      newPomodoroSettings.pomodoroTime,
+                    )}
                   />
                   <SettingsInputTimer
                     onChange={handleInputTimerChange}
                     labelText="Short Break:"
                     name="shortRestTime"
                     type="number"
-                    defaultValue={displayInMinutes(pomodoro.shortRestTime)}
+                    defaultValue={displayInMinutes(
+                      newPomodoroSettings.shortRestTime,
+                    )}
                   />
                   <SettingsInputTimer
                     onChange={handleInputTimerChange}
                     labelText="Long Break:"
                     name="longRestTime"
                     type="number"
-                    defaultValue={displayInMinutes(pomodoro.longRestTime)}
+                    defaultValue={displayInMinutes(
+                      newPomodoroSettings.longRestTime,
+                    )}
                   />
                   <SettingsInputTimer
                     onChange={handleInputTimerChange}
                     labelText="Cycles:"
                     name="cycles"
                     type="number"
-                    defaultValue={pomodoro.cycles}
+                    defaultValue={newPomodoroSettings.cycles}
                   />
                 </div>
                 <div className="mt-3 space-y-3">
