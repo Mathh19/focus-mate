@@ -1,17 +1,10 @@
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext/AuthContext';
 import { PomodoroProps, ThemeProps } from '../shared-types/pomodoro';
 import { useFetch } from './useFetch';
 import { useLocalStorage } from './useLocalStorage';
 import { defaultPomodoro } from '../defaultConfig/pomodoro';
 import { updateSettingAPI } from '../services/pomodoro';
-import { pomodoroReducer } from '../reduces/pomodoroReducer';
 
 type DataPomodoroProps = {
   pomodoroTime: number;
@@ -36,35 +29,22 @@ export const usePomodoro = () => {
 
   const [pomodoro, setPomodoro] = useState<PomodoroProps>(storedValue);
 
-  const [state, dispatch] = useReducer(pomodoroReducer, storedValue);
-
   const handleSetSettingPomodoro = useCallback(
     (setting: PomodoroProps) => {
-      if (signed) {
-        updateSettingAPI(setting);
-        setPomodoro(setting);
-        return;
-      }
-      dispatch({ type: 'set_setting', setting: setting });
+      if (signed) updateSettingAPI(setting);
+      if (!signed) setValue(setting);
+      setPomodoro(setting);
     },
-    [signed],
+    [setValue, signed],
   );
 
   useEffect(() => {
     if (error) return console.log(error);
 
-    if (signed && data) {
-      setPomodoro({ ...data, volume: [data.volume] });
-    }
+    if (signed && data) setPomodoro({ ...data, volume: [data.volume] });
 
-    if (!signed) {
-      setPomodoro(state);
-    }
-  }, [data, error, signed, state]);
-
-  useEffect(() => {
-    setValue(state);
-  }, [setValue, state]);
+    if (!signed) setPomodoro(storedValue);
+  }, [data, error, signed, storedValue]);
 
   return {
     pomodoro,
