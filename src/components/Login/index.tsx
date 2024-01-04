@@ -117,14 +117,6 @@ export const Login = () => {
                   contentImage={contentAvatar}
                   onChange={handleOnChange}
                 />
-                {contentAvatar && (
-                  <button
-                    onClick={() => setContentAvatar(undefined)}
-                    className="rounded-sm border-2 border-blueTheme-grey px-1.5"
-                  >
-                    remove avatar
-                  </button>
-                )}
                 <Input
                   {...register('username')}
                   error={errors.username && errors.username.message}
