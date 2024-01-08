@@ -3,8 +3,17 @@ import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useEffect, useState } from 'react';
 import { UploadInputProps } from './types';
 
-export const UploadAvatar = ({ contentImage, ...rest }: UploadInputProps) => {
+export const UploadAvatar = ({
+  contentImage,
+  setPreviewImage,
+  ...rest
+}: UploadInputProps) => {
   const [avatar, setAvatar] = useState(contentImage);
+
+  const handleRemoveImage = () => {
+    setAvatar(undefined);
+    setPreviewImage && setPreviewImage(undefined);
+  };
 
   useEffect(() => {
     setAvatar(contentImage);
@@ -41,7 +50,7 @@ export const UploadAvatar = ({ contentImage, ...rest }: UploadInputProps) => {
       </label>
       {avatar && (
         <button
-          onClick={() => setAvatar(undefined)}
+          onClick={handleRemoveImage}
           className="mt-3 rounded-sm border-2 border-dangerColor px-1.5"
         >
           remove avatar
