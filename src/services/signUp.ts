@@ -15,13 +15,3 @@ export const signUp = async (data: DataSignUpProps) => {
     throw error;
   }
 };
-
-export const uploadAvatar = async (avatar: FormData) => {
-  try {
-    const response = await api.post('/user/avatar', avatar);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};

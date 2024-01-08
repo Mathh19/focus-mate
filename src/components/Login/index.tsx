@@ -5,11 +5,12 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Modal } from '../UI/Modal';
 import { Input } from '../UI/Input';
-import { signUp, uploadAvatar } from '../../services/signUp';
+import { uploadAvatar } from '../../services/user';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { ErrorMessage } from '../UI/ErrorMessage';
 import { UploadAvatar } from '../UI/UploadAvatar';
 import { validateAvatar } from '../../utils/validateAvatar';
+import { signUp } from '../../services/signUp';
 
 const schema = z.object({
   username: z
