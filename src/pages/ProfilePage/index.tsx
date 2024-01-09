@@ -75,12 +75,10 @@ export const ProfilePage = () => {
 
   return (
     <div className="mx-4">
-      <h2 className="my-4 text-center text-4xl font-semibold">
-        Edit your account
-      </h2>
+      <h2 className="text-center text-4xl font-semibold">Edit your account</h2>
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
-        className="flex w-full flex-col items-center gap-4"
+        className="flex min-h-screen w-full flex-col items-center justify-center gap-4"
       >
         <UploadAvatar
           contentImage={contentAvatar ? contentAvatar : previewAvatar}
