@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = async () => {
     setSigned(false);
     Cookies.remove('auth_token');
+    location.reload();
   };
 
   const deleteAccount = async () => {
