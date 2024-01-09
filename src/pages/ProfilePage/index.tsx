@@ -64,8 +64,6 @@ export const ProfilePage = () => {
     if (!previewAvatar && !contentAvatar) {
       removeAvatar();
     }
-
-    location.reload();
   };
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
