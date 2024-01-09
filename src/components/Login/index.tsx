@@ -88,7 +88,7 @@ export const Login = () => {
   return (
     <div>
       <button
-        aria-label="Opens the option for you to log in or log out"
+        aria-label="login"
         onClick={() => setOpen(true)}
         className="rounded-sm bg-bluishPurple px-2 py-1 font-semibold outline-4 blueTheme:bg-blueTheme dark:bg-white dark:text-backgroundColor"
       >
