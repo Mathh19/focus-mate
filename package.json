@@ -1,7 +1,7 @@
 {
   "name": "focus-mate",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-slider": "^1.1.1",
     "@types/uuid": "^9.0.7",
     "axios": "^1.6.2",
@@ -21,10 +22,13 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",
+    "react-hook-form": "^7.49.2",
     "react-icons": "^4.8.0",
+    "react-router-dom": "^6.21.1",
     "react-tooltip": "^5.10.5",
     "uuid": "^9.0.1",
-    "worker-timers": "^7.0.65"
+    "worker-timers": "^7.0.65",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
