@@ -82,6 +82,10 @@ module.exports = {
           '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-1px)' },
           '20%, 40%, 60%, 80%': { transform: 'translateX(1px)' },
         },
+        dropdown: {
+          '0%': { opacity: 0, transform: 'translateY(-0.5rem)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
       },
       animation: {
         'check-short-line': 'short-line 0.2s ease-in-out',
@@ -89,6 +93,7 @@ module.exports = {
         checkmark: 'check 1s ease',
         'fade-in-slowly': 'slowly-element 0.3s ease-in-out',
         earthquake: 'earthquake 0.4s',
+        dropdown: 'dropdown 400ms ease-in-out',
       },
     },
   },
