@@ -1,5 +1,3 @@
-'use client';
-
 import { useCallback, useContext, useEffect, useReducer } from 'react';
 import { api } from '../services/api';
 import { AuthContext } from '../contexts/AuthContext/AuthContext';
