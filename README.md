@@ -3,7 +3,7 @@
 </div>
 
 <h3 align="center">
-  <a href="https://pomodoromate.vercel.app">Focus Mate</a>
+  <a href="https://pomodoromate.vercel.app">Pomodoro</a>
 </h3>
 
 # ❓ What is this app?
