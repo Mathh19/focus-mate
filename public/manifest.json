@@ -1,7 +1,7 @@
 {
-  "name": "Focus mate",
-  "short_name": "Focus mate",
-  "description": "Focus Mate is a productivity application that uses the Pomodoro technique to maintain your focus along with a task manager.",
+  "name": "Pomodoro",
+  "short_name": "Pomodoro",
+  "description": "This is a productivity application that uses the Pomodoro technique to maintain your focus along with a task manager.",
   "scope": "/",
   "start_url": "/",
   "theme_color": "#7564E2",

@@ -25,7 +25,7 @@ export const Logo = () => {
         alt="An image of the website's logo"
       />
       <span className="font-sans text-2xl font-bold max-[490px]:hidden">
-        Focus Mate
+        Pomodoro
       </span>
     </div>
   );

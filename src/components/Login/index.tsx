@@ -157,9 +157,7 @@ export const Login = () => {
                 {createAcc ? 'register' : 'login'}
               </button>
               <p className="text-sm">
-                {!createAcc
-                  ? 'First time using Focus mate?'
-                  : 'Already part of Focus mate?'}{' '}
+                {!createAcc ? 'First time using ?' : 'Already part ?'}{' '}
                 <span
                   onClick={() => setCreateAcc(!createAcc)}
                   className="cursor-pointer text-bluishPurple blueTheme:text-blueTheme dark:text-white"
