@@ -50,6 +50,7 @@ export const UploadAvatar = ({
       </label>
       {avatar && (
         <button
+          type="button"
           onClick={handleRemoveImage}
           className="mt-3 rounded-sm border-2 border-dangerColor px-1.5 text-xl duration-200 hover:bg-dangerColor"
         >

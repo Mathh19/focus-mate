@@ -54,15 +54,15 @@ export const ProfilePage = () => {
   const { username, password } = getValues();
 
   const handleSubmitForm = (data: FormProps) => {
-    updateUser(data);
+    updateUser(data).then(() => location.reload());
     if (contentAvatar) {
       const formData = new FormData();
       formData.append('file', contentAvatar as File);
-      uploadAvatar(formData);
+      uploadAvatar(formData).then(() => location.reload());
     }
 
     if (!previewAvatar && !contentAvatar) {
-      removeAvatar();
+      removeAvatar().then(() => location.reload());
     }
   };
 
