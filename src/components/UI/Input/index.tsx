@@ -13,15 +13,15 @@ export const Input = forwardRef(function Input(
       <label className="text-3xl font-semibold" htmlFor={name}>
         {label}:
       </label>
-      <div className="relative flex items-center">
+      <div className="flex items-center rounded-sm border-[3px] border-bluishPurple focus-within:shadow-shadowAllSides focus-within:shadow-bluishPurple blueTheme:border-blueTheme blueTheme:focus-within:shadow-blueTheme dark:border-white dark:focus-within:shadow-white">
         <input
           id={name}
           name={name}
           ref={ref}
           {...rest}
-          className="block w-full rounded-sm border-[3px] border-bluishPurple bg-transparent px-2 py-1 text-2xl font-semibold blueTheme:border-blueTheme dark:border-white"
+          className="block w-full bg-transparent px-2 py-1 text-2xl font-semibold outline-none"
         />
-        <span className="absolute right-0 mr-2">
+        <span className="pr-2">
           {!error && valueInput && (
             <FaCheck size={20} className="text-successColor" />
           )}
