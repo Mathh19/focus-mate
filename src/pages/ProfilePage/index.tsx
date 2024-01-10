@@ -74,11 +74,13 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="mx-4">
-      <h2 className="text-center text-4xl font-semibold">Edit your account</h2>
+    <div className="mx-4 mb-24">
+      <h2 className="my-4 text-center text-4xl font-semibold">
+        Edit your account
+      </h2>
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
-        className="flex min-h-screen w-full flex-col items-center justify-center gap-4"
+        className="flex w-full flex-col items-center justify-center gap-4"
       >
         <UploadAvatar
           contentImage={contentAvatar ? contentAvatar : previewAvatar}
@@ -107,7 +109,7 @@ export const ProfilePage = () => {
         </div>
         <button
           type="submit"
-          className="mt-4 w-full max-w-xs rounded-sm bg-bluishPurple py-1 text-lg font-semibold blueTheme:bg-blueTheme dark:bg-white dark:text-darkTheme-background"
+          className="mt-4 w-full max-w-xs rounded-sm bg-bluishPurple py-1.5 text-2xl font-semibold blueTheme:bg-blueTheme dark:bg-white dark:text-darkTheme-background"
         >
           save changes
         </button>

@@ -9,8 +9,8 @@ export const Input = forwardRef(function Input(
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   return (
-    <div className="w-full space-y-1.5">
-      <label className="text-xl font-semibold" htmlFor={name}>
+    <div className="w-full space-y-2.5">
+      <label className="text-3xl font-semibold" htmlFor={name}>
         {label}:
       </label>
       <div className="relative flex items-center">
@@ -19,13 +19,13 @@ export const Input = forwardRef(function Input(
           name={name}
           ref={ref}
           {...rest}
-          className="block w-full rounded-sm border-2 border-bluishPurple bg-transparent px-2 text-lg blueTheme:border-blueTheme dark:border-white"
+          className="block w-full rounded-sm border-[3px] border-bluishPurple bg-transparent px-2 py-1 text-2xl font-semibold blueTheme:border-blueTheme dark:border-white"
         />
         <span className="absolute right-0 mr-2">
           {!error && valueInput && (
-            <FaCheck size={15} className="text-successColor" />
+            <FaCheck size={20} className="text-successColor" />
           )}
-          {error && <VscError size={15} className="text-dangerColor" />}
+          {error && <VscError size={20} className="text-dangerColor" />}
         </span>
       </div>
       {error && <ErrorMessage error={error} />}

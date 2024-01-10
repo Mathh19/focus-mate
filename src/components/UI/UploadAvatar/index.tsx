@@ -20,7 +20,7 @@ export const UploadAvatar = ({
   }, [contentImage]);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <label
         htmlFor="avatar"
         className="relative flex h-32 w-32 cursor-pointer items-center justify-center rounded-full border-4 border-bluishPurple bg-white blueTheme:border-blueTheme dark:border-white dark:bg-darkTheme"
@@ -51,7 +51,7 @@ export const UploadAvatar = ({
       {avatar && (
         <button
           onClick={handleRemoveImage}
-          className="mt-3 rounded-sm border-2 border-dangerColor px-1.5"
+          className="mt-3 rounded-sm border-2 border-dangerColor px-1.5 text-xl duration-200 hover:bg-dangerColor"
         >
           remove avatar
         </button>
