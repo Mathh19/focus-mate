@@ -18,7 +18,7 @@ export const DropDownProfile = () => {
       </p>
       <div className="relative">
         <button onClick={() => setOpen(!open)} className="relative">
-          <div className="w-1h-14 flex h-14">
+          <div className="flex h-14 w-14">
             <img
               src={`${!data?.avatar ? './no-avatar.png' : `${avatar}`}`}
               width={56}
