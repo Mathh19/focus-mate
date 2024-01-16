@@ -1,8 +1,10 @@
 import { useState, useContext } from 'react';
 import { IoClose } from 'react-icons/io5';
+import { FcGoogle } from 'react-icons/fc';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useGoogleLogin } from '@react-oauth/google';
 import { Modal } from '../UI/Modal';
 import { Input } from '../UI/Input';
 import { uploadAvatar } from '../../services/user';
@@ -11,6 +13,7 @@ import { ErrorMessage } from '../UI/ErrorMessage';
 import { UploadAvatar } from '../UI/UploadAvatar';
 import { validateAvatar } from '../../utils/validateAvatar';
 import { signUp } from '../../services/signUp';
+import { loginWithGoogle } from '../../services/loginWithGoogle';
 
 const schema = z.object({
   username: z
@@ -30,7 +33,7 @@ export const Login = () => {
   const [createAcc, setCreateAcc] = useState(false);
   const [contentAvatar, setContentAvatar] = useState<File | undefined>();
   const [errorMessage, setErrorMessage] = useState('');
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
   const {
     handleSubmit,
     getValues,
@@ -84,6 +87,19 @@ export const Login = () => {
     };
     setContentAvatar(target.files[0]);
   };
+
+  const googleLoginButton = useGoogleLogin({
+    onSuccess: (response) => {
+      loginWithGoogle(response)
+        .then((response) => {
+          googleSignIn({
+            email: response.email,
+            username: response.name,
+          }).catch((err) => setErrorMessage(err.response.data.message));
+        })
+        .catch((err) => console.log(err));
+    },
+  });
 
   return (
     <div>
@@ -151,12 +167,20 @@ export const Login = () => {
             {errorMessage.length > 0 && <ErrorMessage error={errorMessage} />}
             <div className="flex w-full flex-col gap-4 py-5">
               <button
+                type="button"
+                onClick={() => googleLoginButton()}
+                className="flex w-full justify-center gap-3 rounded-sm bg-white p-2 font-semibold text-backgroundColor"
+              >
+                <FcGoogle size={24} />
+                <span className="max-[256px]:hidden">Login with google</span>
+              </button>
+              <button
                 type="submit"
                 className="w-full rounded-sm bg-bluishPurple p-2 font-semibold blueTheme:bg-blueTheme dark:bg-white dark:text-darkBackgroundColor"
               >
                 {createAcc ? 'register' : 'login'}
               </button>
-              <p className="text-sm">
+              <p className="text-md font-medium">
                 {!createAcc ? 'First time using ?' : 'Already part ?'}{' '}
                 <span
                   onClick={() => setCreateAcc(!createAcc)}

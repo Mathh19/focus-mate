@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { AuthContextProps } from './types';
+import { AuthContextProps, DataGoogleLogin } from './types';
 import { api } from '../../services/api';
 
 export const AuthContext = createContext<AuthContextProps>(
@@ -35,6 +35,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     Cookies.set('auth_token', token, { expires: 3, secure: true });
   };
 
+  const googleSignIn = async (data: DataGoogleLogin) => {
+    const response = await api.post('/auth/google/login', data);
+
+    if (response.data.error) {
+      return response.data.error;
+    }
+
+    const { token } = response.data;
+
+    setSigned(true);
+    api.defaults.headers.common['Authorization'] = token;
+    Cookies.set('auth_token', token, { expires: 3, secure: true });
+  };
+
   const logout = async () => {
     setSigned(false);
     Cookies.remove('auth_token');
@@ -48,7 +62,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ signed, signIn, logout, deleteAccount }}>
+    <AuthContext.Provider
+      value={{ signed, signIn, googleSignIn, logout, deleteAccount }}
+    >
       {children}
     </AuthContext.Provider>
   );
