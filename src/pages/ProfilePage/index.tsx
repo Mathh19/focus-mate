@@ -28,8 +28,8 @@ type FormProps = z.infer<typeof schema>;
 
 export const ProfilePage = () => {
   const { data } = useFetch<UserProps>('/user');
-  const avatarUrl = data ? import.meta.env.VITE_IMG_URL + data.avatar : '';
-  const hasAvatar = data && data.avatar;
+  const avatarUrl = data ? data.avatar_url : '';
+  const hasAvatar = data && data.avatar_url;
   const { previewAvatar, setPreviewAvatar } = usePreviewAvatar(
     hasAvatar && avatarUrl,
   );

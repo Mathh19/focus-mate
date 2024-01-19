@@ -3,13 +3,11 @@ import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
 import { UserProps } from '../../../contexts/AuthContext/types';
 import { useFetch } from '../../../hooks/useFetch';
 
-const urlImage = import.meta.env.VITE_IMG_URL;
-
 export const DropDownProfile = () => {
   const { logout } = useContext(AuthContext);
   const { data } = useFetch<UserProps>('/user');
   const [open, setOpen] = useState(false);
-  const avatar = `${urlImage + data?.avatar}`;
+  const avatar = data?.avatar_url;
 
   return (
     <div className="flex items-center gap-2">

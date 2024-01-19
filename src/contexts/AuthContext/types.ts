@@ -1,6 +1,7 @@
 export type UserProps = {
   username?: string;
   avatar?: string;
+  avatar_url?: string;
   email?: string;
   token?: string;
 };
