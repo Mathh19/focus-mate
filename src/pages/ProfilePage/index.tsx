@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi';
 import { UserProps } from '../../contexts/AuthContext/types';
 import { useFetch } from '../../hooks/useFetch';
 import { Input } from '../../components/UI/Input';
@@ -9,6 +11,8 @@ import { UploadAvatar } from '../../components/UI/UploadAvatar';
 import { usePreviewAvatar } from './hooks/usePreviewAvatar';
 import { removeAvatar, updateUser } from '../../services/user';
 import { uploadAvatar } from '../../services/user';
+import { AuthContext } from '../../contexts/AuthContext/AuthContext';
+import { FormButton } from '../../components/UI/FormButton';
 
 const schema = z.object({
   username: z
@@ -27,6 +31,8 @@ const schema = z.object({
 type FormProps = z.infer<typeof schema>;
 
 export const ProfilePage = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { data } = useFetch<UserProps>('/user');
   const avatarUrl = data ? data.avatar_url : '';
   const hasAvatar = data && data.avatar_url;
@@ -73,6 +79,11 @@ export const ProfilePage = () => {
     setContentAvatar(target.files[0]);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <div className="mx-4 mb-24">
       <h2 className="my-4 text-center text-4xl font-semibold">
@@ -107,12 +118,16 @@ export const ProfilePage = () => {
             valueInput={password}
           />
         </div>
-        <button
-          type="submit"
-          className="mt-4 w-full max-w-xs rounded-sm bg-bluishPurple py-1.5 text-2xl font-semibold blueTheme:bg-blueTheme dark:bg-white dark:text-darkTheme-background"
-        >
-          save changes
-        </button>
+        <div className="flex w-full flex-col items-center">
+          <FormButton type="submit" text="save changes" />
+          <FormButton
+            type="button"
+            text="logout"
+            danger={true}
+            onClick={handleLogout}
+            icon={FiLogOut}
+          />
+        </div>
       </form>
     </div>
   );

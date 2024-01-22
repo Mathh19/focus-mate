@@ -14,6 +14,7 @@ import { UploadAvatar } from '../UI/UploadAvatar';
 import { validateAvatar } from '../../utils/validateAvatar';
 import { signUp } from '../../services/signUp';
 import { loginWithGoogle } from '../../services/loginWithGoogle';
+import { FormButton } from '../UI/FormButton';
 
 const schema = z.object({
   username: z
@@ -166,20 +167,19 @@ export const Login = () => {
             />
             {errorMessage.length > 0 && <ErrorMessage error={errorMessage} />}
             <div className="flex w-full flex-col gap-4 py-5">
-              <button
-                type="button"
-                onClick={() => googleLoginButton()}
-                className="flex w-full justify-center gap-3 rounded-sm bg-white p-2 font-semibold text-backgroundColor"
-              >
-                <FcGoogle size={24} />
-                <span className="max-[256px]:hidden">Login with google</span>
-              </button>
-              <button
+              <FormButton
                 type="submit"
-                className="w-full rounded-sm bg-bluishPurple p-2 font-semibold blueTheme:bg-blueTheme dark:bg-white dark:text-darkBackgroundColor"
-              >
-                {createAcc ? 'register' : 'login'}
-              </button>
+                loginGoogle={true}
+                text="Login with google"
+                className="text-xl"
+                onClick={() => googleLoginButton()}
+                icon={FcGoogle}
+              />
+              <FormButton
+                type="submit"
+                text={createAcc ? 'register' : 'login'}
+                className="text-xl"
+              />
               <p className="text-md font-medium">
                 {!createAcc ? 'First time using ?' : 'Already part ?'}{' '}
                 <span
