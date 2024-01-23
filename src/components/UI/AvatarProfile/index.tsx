@@ -1,9 +1,12 @@
 import { UserProps } from '../../../contexts/AuthContext/types';
 import { useFetch } from '../../../hooks/useFetch';
+import { Skeleton } from '../Skeleton';
 
 export const AvatarProfile = () => {
-  const { data } = useFetch<UserProps>('/user');
+  const { data, isLoading } = useFetch<UserProps>('/user');
   const avatar = data?.avatar_url;
+
+  if (isLoading) return <Skeleton type="circle" size="md" />;
 
   return (
     <div className="flex items-center gap-2">

@@ -3,6 +3,7 @@ import { TaskInputProps } from './types';
 
 export const TaskInput = ({
   newTask,
+  disabled,
   handleChange,
   handleSubmit,
 }: TaskInputProps) => {
@@ -17,9 +18,10 @@ export const TaskInput = ({
       <input
         type="text"
         name="addTask"
+        disabled={disabled}
         value={newTask.name}
         placeholder="Add a task..."
-        className="w-full bg-transparent text-2xl font-semibold outline-none"
+        className="w-full bg-transparent text-2xl font-semibold outline-none disabled:cursor-not-allowed"
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

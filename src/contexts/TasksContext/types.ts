@@ -2,6 +2,7 @@ import { TaskProps } from '../../shared-types/tasks';
 
 export type TasksContextProps = {
   tasks: TaskProps[];
+  isLoadingTasks: boolean;
   addNewTask: (newTask: TaskProps) => void;
   updateTask: (updateTask: TaskProps, newTask: TaskProps) => void;
   deleteTask: (deleteTask: TaskProps) => void;

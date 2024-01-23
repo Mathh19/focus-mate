@@ -13,6 +13,7 @@ import { removeAvatar, updateUser } from '../../services/user';
 import { uploadAvatar } from '../../services/user';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { FormButton } from '../../components/UI/FormButton';
+import { Skeleton } from '../../components/UI/Skeleton';
 
 const schema = z.object({
   username: z
@@ -33,7 +34,7 @@ type FormProps = z.infer<typeof schema>;
 export const ProfilePage = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { data } = useFetch<UserProps>('/user');
+  const { data, isLoading } = useFetch<UserProps>('/user');
   const avatarUrl = data ? data.avatar_url : '';
   const hasAvatar = data && data.avatar_url;
   const { previewAvatar, setPreviewAvatar } = usePreviewAvatar(
@@ -93,11 +94,15 @@ export const ProfilePage = () => {
         onSubmit={handleSubmit(handleSubmitForm)}
         className="flex w-full flex-col items-center justify-center gap-4"
       >
-        <UploadAvatar
-          contentImage={contentAvatar ? contentAvatar : previewAvatar}
-          setPreviewImage={setPreviewAvatar}
-          onChange={handleOnChange}
-        />
+        {isLoading ? (
+          <Skeleton type="circle" size="lg" />
+        ) : (
+          <UploadAvatar
+            contentImage={contentAvatar ? contentAvatar : previewAvatar}
+            setPreviewImage={setPreviewAvatar}
+            onChange={handleOnChange}
+          />
+        )}
         <div className="w-full max-w-xs space-y-4">
           <Input
             {...register('username')}

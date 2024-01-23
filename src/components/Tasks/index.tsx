@@ -8,9 +8,10 @@ import { PomodoroContext } from '../../contexts/PomodoroContext/PomodoroContext'
 import { getCurrentDayOfWeek } from '../../utils/getCurrentDayOfWeek';
 import { DayProps, TaskProps } from '../../shared-types/tasks';
 import { ContainerTaskItem } from './components/ContainerTaskItem';
+import { SkeletonTasks } from './components/SkeletonTasks';
 
 export const Tasks = () => {
-  const { tasks, addNewTask } = useContext(TasksContext);
+  const { tasks, isLoadingTasks, addNewTask } = useContext(TasksContext);
   const { pomodoro } = useContext(PomodoroContext);
   const [newTask, setNewTask] = useState<TaskProps>({
     _id: uuidv4(),
@@ -53,14 +54,19 @@ export const Tasks = () => {
         <DropdownMenuTasks />
       </h2>
       <div className="space-y-4">
-        <ContainerTaskItem
-          tasks={targetCurrentTask}
-          shadowEffectColor="backgroundColor"
-          dynamicHeight={true}
-        />
+        {isLoadingTasks ? (
+          <SkeletonTasks />
+        ) : (
+          <ContainerTaskItem
+            tasks={targetCurrentTask}
+            shadowEffectColor="backgroundColor"
+            dynamicHeight={true}
+          />
+        )}
         <div className="px-2">
           <TaskInput
             handleChange={handleChange}
+            disabled={isLoadingTasks}
             handleSubmit={handleSubmit}
             newTask={newTask}
           />

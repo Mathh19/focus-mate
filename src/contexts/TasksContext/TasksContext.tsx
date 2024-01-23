@@ -7,6 +7,7 @@ export const TasksContext = createContext({} as TasksContextProps);
 export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
   const {
     tasks,
+    isLoadingTasks,
     doneActions,
     deleteActions,
     addNewTask,
@@ -17,7 +18,8 @@ export const TasksProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <TasksContext.Provider
       value={{
-        tasks: tasks,
+        tasks,
+        isLoadingTasks,
         addNewTask,
         updateTask,
         deleteTask: deleteActions.deleteTask,

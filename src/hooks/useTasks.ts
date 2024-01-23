@@ -34,7 +34,7 @@ export const useTasks = () => {
     useLocalStorage<TaskProps[]>('tasks', []);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [state, dispatch] = useReducer(tasksReducer, storedTasksValue);
-  const { data, error } = useFetch<TaskProps[]>('/task');
+  const { data, isLoading, error } = useFetch<TaskProps[]>('/task');
 
   const addNewTask = useCallback(
     async (newTask: TaskProps) => {
@@ -195,6 +195,7 @@ export const useTasks = () => {
 
   return {
     tasks,
+    isLoadingTasks: isLoading,
     deleteActions: {
       deleteTask,
       deleteAllTasks,
