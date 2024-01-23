@@ -88,7 +88,7 @@ export const ProfilePage = () => {
 
   return (
     <div className="mx-4 mb-24">
-      <Head title={`Profile • ${data?.username}`} />
+      <Head title={`Profile ${data ? `• ${data.username}` : ''}`} />
       <h2 className="my-4 text-center text-4xl font-semibold">
         Edit your account
       </h2>
