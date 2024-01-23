@@ -125,16 +125,14 @@ export const ProfilePage = () => {
             valueInput={password}
           />
         </div>
-        <div className="flex w-full flex-col items-center">
-          <FormButton type="submit" text="save changes" />
-          <FormButton
-            type="button"
-            text="logout"
-            danger={true}
-            onClick={handleLogout}
-            icon={FiLogOut}
-          />
-        </div>
+        <FormButton type="submit" text="save changes" />
+        <FormButton
+          type="button"
+          text="logout"
+          danger={true}
+          onClick={handleLogout}
+          icon={FiLogOut}
+        />
       </form>
     </div>
   );
