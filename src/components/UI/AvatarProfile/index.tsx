@@ -10,7 +10,10 @@ export const AvatarProfile = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <p className="max-w-[100px] truncate text-xl font-semibold">
+      <p
+        title={data?.username}
+        className="max-w-[100px] truncate text-xl font-semibold"
+      >
         {data?.username}
       </p>
       <div className="relative">
