@@ -1,4 +1,4 @@
 export type HeadProps = {
   title: string;
-  icon: string;
+  icon?: string;
 };

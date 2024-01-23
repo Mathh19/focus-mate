@@ -14,6 +14,7 @@ import { uploadAvatar } from '../../services/user';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { FormButton } from '../../components/UI/FormButton';
 import { Skeleton } from '../../components/UI/Skeleton';
+import { Head } from '../../components/Head';
 
 const schema = z.object({
   username: z
@@ -87,6 +88,7 @@ export const ProfilePage = () => {
 
   return (
     <div className="mx-4 mb-24">
+      <Head title={`Profile • ${data?.username}`} />
       <h2 className="my-4 text-center text-4xl font-semibold">
         Edit your account
       </h2>

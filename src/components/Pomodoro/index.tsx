@@ -31,7 +31,7 @@ export const Pomodoro = () => {
       pause && setIcon('/run-pomodoro.ico');
       setTitle('');
     } else {
-      pause && setTitle('Stopped');
+      pause && setTitle('Stopped • Pomodoro');
       pause && setIcon('/stop-pomodoro.ico');
     }
   }, [currentStatusPomodoro, pause, timeCountingStatus]);
