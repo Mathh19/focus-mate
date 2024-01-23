@@ -195,7 +195,7 @@ export const useTasks = () => {
 
   return {
     tasks,
-    isLoadingTasks: isLoading,
+    isLoadingTasks: signed && isLoading,
     deleteActions: {
       deleteTask,
       deleteAllTasks,
