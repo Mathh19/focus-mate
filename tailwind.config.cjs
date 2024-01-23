@@ -32,6 +32,8 @@ module.exports = {
       successColor: '#48d877',
       darkGray: '#31354c',
       bluishGray: '#636078',
+      defaultGray: '#71717a',
+      defaultDarkGray: '#3f3f46',
       vibrantPurple: '#a855f7',
       purplishGray: '#636069',
       darkBlue: '#31354c',
