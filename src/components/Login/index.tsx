@@ -38,6 +38,7 @@ export const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
   const {
     handleSubmit,
+    reset,
     getValues,
     register,
     formState: { errors },
@@ -110,6 +111,16 @@ export const Login = () => {
     },
   });
 
+  const handleClose = () => {
+    setOpen(false);
+    reset();
+  };
+
+  const handleToggleLoginOrRegister = () => {
+    reset();
+    setCreateAcc(!createAcc);
+  };
+
   return (
     <div>
       <button
@@ -119,13 +130,13 @@ export const Login = () => {
       >
         Login
       </button>
-      <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
+      <Modal.Root isOpen={open} setOpen={handleClose}>
         <Modal.Header>
           <h2 className="text-xl font-semibold">
             {createAcc ? 'Sign up' : 'Sign in'}
           </h2>
           <button
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
             aria-label="close modal"
             className="text-2xl"
           >
@@ -191,12 +202,13 @@ export const Login = () => {
               />
               <p className="text-md font-medium">
                 {!createAcc ? 'First time using ?' : 'Already part ?'}{' '}
-                <span
-                  onClick={() => setCreateAcc(!createAcc)}
+                <button
+                  type="button"
+                  onClick={handleToggleLoginOrRegister}
                   className="cursor-pointer text-bluishPurple blueTheme:text-blueTheme dark:text-white"
                 >
                   {!createAcc ? 'Register' : 'Login'}
-                </span>
+                </button>
               </p>
             </div>
           </form>
