@@ -34,6 +34,7 @@ export const Login = () => {
   const [createAcc, setCreateAcc] = useState(false);
   const [contentAvatar, setContentAvatar] = useState<File | undefined>();
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { signIn, googleSignIn } = useContext(AuthContext);
   const {
     handleSubmit,
@@ -62,6 +63,8 @@ export const Login = () => {
       }
     }
 
+    setIsLoading(true);
+
     if (createAcc && username) {
       signUp({ email, password, username })
         .then(() => {
@@ -72,14 +75,19 @@ export const Login = () => {
               uploadAvatar(formData);
             }
           });
+          setIsLoading(false);
           setOpen(false);
         })
-        .catch((err) => setErrorMessage(err.response.data.message));
+        .catch((err) => {
+          setIsLoading(false);
+          setErrorMessage(err.response.data.message);
+        });
       return;
     }
-    signIn(email, password).catch((err) =>
-      setErrorMessage(err.response.data.message),
-    );
+    signIn(email, password).catch((err) => {
+      setIsLoading(false);
+      setErrorMessage(err.response.data.message);
+    });
   };
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -168,7 +176,7 @@ export const Login = () => {
             {errorMessage.length > 0 && <ErrorMessage error={errorMessage} />}
             <div className="flex w-full flex-col gap-4 py-5">
               <FormButton
-                type="submit"
+                type="button"
                 loginGoogle={true}
                 text="Login with google"
                 className="text-xl"
@@ -176,6 +184,7 @@ export const Login = () => {
                 icon={FcGoogle}
               />
               <FormButton
+                isLoading={isLoading}
                 type="submit"
                 text={createAcc ? 'register' : 'login'}
                 className="text-xl"
