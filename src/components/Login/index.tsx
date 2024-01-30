@@ -76,19 +76,19 @@ export const Login = () => {
               uploadAvatar(formData);
             }
           });
-          setIsLoading(false);
-          setOpen(false);
         })
         .catch((err) => {
-          setIsLoading(false);
           setErrorMessage(err.response.data.message);
-        });
+        })
+        .finally(() => setIsLoading(false));
       return;
     }
-    signIn(email, password).catch((err) => {
-      setIsLoading(false);
-      setErrorMessage(err.response.data.message);
-    });
+
+    signIn(email, password)
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
