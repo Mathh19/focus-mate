@@ -1,9 +1,9 @@
 export type UserProps = {
-  username?: string;
+  username: string;
   avatar?: string;
   avatar_url?: string;
-  email?: string;
-  token?: string;
+  email: string;
+  token: string;
 };
 
 export type DataGoogleLogin = {

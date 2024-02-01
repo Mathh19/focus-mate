@@ -4,7 +4,7 @@ import { Skeleton } from '../Skeleton';
 
 export const AvatarProfile = () => {
   const { data, isLoading } = useFetch<UserProps>('/user');
-  const avatar = data?.avatar_url;
+  const avatar = data && data.avatar_url ? data.avatar_url : './no-avatar.png';
 
   if (isLoading) return <Skeleton type="circle" size="md" />;
 
@@ -20,7 +20,7 @@ export const AvatarProfile = () => {
         <a href="/profile">
           <div className="flex h-14 w-14">
             <img
-              src={`${!data?.avatar ? './no-avatar.png' : `${avatar}`}`}
+              src={avatar}
               width={56}
               height={56}
               alt="Profile image"

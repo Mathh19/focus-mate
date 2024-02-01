@@ -36,10 +36,9 @@ export const ProfilePage = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const { data, isLoading } = useFetch<UserProps>('/user');
-  const avatarUrl = data ? data.avatar_url : '';
-  const hasAvatar = data && data.avatar_url;
+  const [disabled, setDisabled] = useState(false);
   const { previewAvatar, setPreviewAvatar } = usePreviewAvatar(
-    hasAvatar && avatarUrl,
+    data ? data.avatar_url : '',
   );
   const [contentAvatar, setContentAvatar] = useState<
     File | Blob | null | undefined
@@ -62,16 +61,22 @@ export const ProfilePage = () => {
   const { username, password } = getValues();
 
   const handleSubmitForm = (data: FormProps) => {
-    updateUser(data).then(() => location.reload());
     if (contentAvatar) {
       const formData = new FormData();
       formData.append('file', contentAvatar as File);
-      uploadAvatar(formData).then(() => location.reload());
+      uploadAvatar(formData);
     }
 
     if (!previewAvatar && !contentAvatar) {
-      removeAvatar().then(() => location.reload());
+      removeAvatar();
     }
+
+    updateUser(data);
+
+    setDisabled(true);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -108,6 +113,7 @@ export const ProfilePage = () => {
         <div className="w-full max-w-xs space-y-4">
           <Input
             {...register('username')}
+            disabled={disabled}
             error={errors.username && errors.username.message}
             label="username"
             name="username"
@@ -117,6 +123,7 @@ export const ProfilePage = () => {
           />
           <Input
             {...register('password')}
+            disabled={disabled}
             error={errors.password && errors.password.message}
             label="password"
             name="password"
@@ -125,11 +132,12 @@ export const ProfilePage = () => {
             valueInput={password}
           />
         </div>
-        <FormButton type="submit" text="save changes" />
+        <FormButton type="submit" text="save changes" disabled={disabled} />
         <FormButton
           type="button"
           text="logout"
           danger={true}
+          disabled={disabled}
           onClick={handleLogout}
           icon={FiLogOut}
         />

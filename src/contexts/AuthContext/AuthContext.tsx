@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [signed, setSigned] = useState(false);
 
   useEffect(() => {
-    const loadingStoredData = async () => {
+    const loadingStoredData = () => {
       const storedToken = Cookies.get('auth_token');
 
       if (storedToken) {
