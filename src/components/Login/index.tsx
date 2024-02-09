@@ -15,6 +15,7 @@ import { validateAvatar } from '../../utils/validateAvatar';
 import { signUp } from '../../services/signUp';
 import { loginWithGoogle } from '../../services/loginWithGoogle';
 import { FormButton } from '../UI/FormButton';
+import { ShowPassword } from './components/ShowPassword';
 
 const schema = z.object({
   username: z
@@ -35,6 +36,7 @@ export const Login = () => {
   const [contentAvatar, setContentAvatar] = useState<File | undefined>();
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [displayPassword, setDisplayPassword] = useState(false);
   const { signIn, googleSignIn } = useContext(AuthContext);
   const {
     handleSubmit,
@@ -180,9 +182,13 @@ export const Login = () => {
               error={errors.password && errors.password.message}
               name="password"
               label="Password"
-              type="password"
+              type={displayPassword ? 'text' : 'password'}
               placeholder="passsword"
               valueInput={password}
+            />
+            <ShowPassword
+              value={displayPassword}
+              setValue={setDisplayPassword}
             />
             {errorMessage.length > 0 && <ErrorMessage error={errorMessage} />}
             <div className="flex w-full flex-col gap-4 py-5">
