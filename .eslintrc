@@ -45,6 +45,7 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/display-name": "off"
   }
 }

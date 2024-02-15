@@ -18,7 +18,7 @@ export const ShowPassword = ({ value, setValue }: ShowPasswordProps) => {
       />
       <label
         htmlFor="display-password"
-        className="inline-block cursor-pointer font-medium"
+        className="inline-block cursor-pointer text-lg font-medium"
       >
         Show password
       </label>
