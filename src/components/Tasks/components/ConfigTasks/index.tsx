@@ -26,9 +26,9 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
     }
     setIsEmpty(false);
 
-    const cleanTaskInput = cleanInputSpaces(newTask.name);
+    const cleanTacustomput = cleanInputSpaces(newTask.name);
 
-    updateTask(task, { ...newTask, name: cleanTaskInput });
+    updateTask(task, { ...newTask, name: cleanTacustomput });
     document.body.style.overflow = 'unset';
     setOpen(false);
   };
@@ -62,7 +62,7 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
           <h2>Config task</h2>
           <button
             onClick={handleClose}
-            className="rounded-md border-[2px] border-bluishPurple text-3xl duration-200 ease-in-out hover:bg-bluishPurple blueTheme:border-blueTheme blueTheme:hover:bg-blueTheme dark:border-darkTheme-grey dark:hover:bg-darkTheme-grey"
+            className="rounded-md border-[2px] border-skin-base text-3xl duration-200 ease-in-out hover:bg-skin-base"
           >
             <RiCloseLine />
           </button>
@@ -76,11 +76,11 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
                 placeholder="Edit your task..."
                 value={newTask.name}
                 onChange={handleChange}
-                className="w-full rounded-md border-[2px] border-bluishGray bg-bluishGray px-2 outline-none focus:border-bluishPurple blueTheme:focus:border-blueTheme dark:bg-darkTheme-grey dark:focus:border-white"
+                className="w-full rounded-md border-[2px] border-skin-base bg-skin-input-primary px-2 outline-none focus:border-skin-base"
               />
             </div>
             {isEmpty && (
-              <span className="animate-earthquake text-dangerColor">
+              <span className="animate-earthquake text-red-600">
                 Task field is empty!
               </span>
             )}

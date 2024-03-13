@@ -2,7 +2,7 @@ export const LoadingSpinner = () => {
   return (
     <div role="status">
       <svg
-        className="h-6 w-6 animate-spin text-white dark:text-backgroundColor"
+        className="h-6 w-6 animate-spin text-skin-primary-text"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

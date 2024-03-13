@@ -14,7 +14,7 @@ export const About = () => {
           className="gap-2 px-2 py-1"
           aria-label="A button to open a modal"
         >
-          <BsQuestionCircle className="text-3xl transition duration-200 ease-in-out hover:text-bluishPurple focus:text-bluishPurple blueTheme:hover:text-blueTheme blueTheme:focus:text-blueTheme dark:hover:text-white dark:focus:text-white" />
+          <BsQuestionCircle className="text-3xl transition duration-200 ease-in-out hover:text-skin-secondary-text focus:text-skin-secondary-text" />
         </button>
         <Modal.Root isOpen={open} setOpen={() => setOpen(!open)}>
           <Modal.Content>
@@ -22,8 +22,8 @@ export const About = () => {
               onClick={() => setOpen(false)}
               className="flex max-w-[450px] flex-col items-center justify-center gap-2  text-center"
             >
-              <BsQuestionCircle className="text-7xl text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[432px]:min-h-[72px] max-[432px]:min-w-[72px]" />
-              <h2 className="text-3xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white">
+              <BsQuestionCircle className="text-7xl text-skin-secondary-text max-[432px]:min-h-[72px] max-[432px]:min-w-[72px]" />
+              <h2 className="text-3xl font-bold text-skin-secondary-text">
                 What is the Pomodoro ?
               </h2>
               <p className="text-lg font-semibold">{about}</p>

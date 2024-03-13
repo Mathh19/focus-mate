@@ -83,14 +83,14 @@ export const Settings = () => {
         aria-label="Settings"
         title="Settings"
       >
-        <IoSettingsSharp className="fill-purplishGray text-4xl transition duration-300 ease-in-out hover:-rotate-90 blueTheme:fill-blueTheme-grey dark:fill-white max-[320px]:text-2xl" />
+        <IoSettingsSharp className="fill-skin-input-primary text-4xl transition duration-300 ease-in-out hover:-rotate-90 max-[320px]:text-2xl" />
       </button>
       <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
           <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
         </Modal.Header>
         <Modal.Content>
-          <form onSubmit={handleSubmit} className="divide-y divide-bluishGray">
+          <form onSubmit={handleSubmit} className="divide-bluishGray divide-y">
             <SettingsBox title="Timer" icon={<RiTimerLine />}>
               <div>
                 <span className="font-semibold">time in minutes</span>
@@ -216,7 +216,7 @@ export const Settings = () => {
               </button>
               <button
                 type="submit"
-                className="rounded-md bg-tealBlue px-2 py-1.5 text-center  drop-shadow-3xl dark:bg-white dark:text-darkTheme-background"
+                className="rounded-md bg-skin-base px-2 py-1.5 text-center drop-shadow-3xl"
               >
                 apply
               </button>

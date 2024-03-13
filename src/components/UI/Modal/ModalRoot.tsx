@@ -22,13 +22,13 @@ export const ModalRoot = ({
       {isOpen && (
         <div
           onClick={setOpen}
-          className="fixed inset-0 z-40 flex items-center justify-center bg-backgroundColor/60 px-4"
+          className="bg-backgroundColor/60 fixed inset-0 z-40 flex items-center justify-center px-4"
         >
           <div
             onClick={(e) => e.stopPropagation()}
             className={`z-50 max-h-[95%] w-full max-w-lg ${
               overflow && 'overflow-auto'
-            } rounded-lg bg-darkBlue dark:bg-darkTheme-dark-grey`}
+            } rounded-lg bg-skin-modal-background`}
           >
             {children}
           </div>

@@ -11,7 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <label className="text-3xl font-semibold" htmlFor={name}>
           {label}:
         </label>
-        <div className="flex items-center rounded-sm border-[3px] border-bluishPurple px-2 py-1 focus-within:shadow-shadowAllSides focus-within:shadow-bluishPurple blueTheme:border-blueTheme blueTheme:focus-within:shadow-blueTheme dark:border-white dark:focus-within:shadow-white">
+        <div className="flex items-center rounded-sm border-[3px] border-skin-border-primary px-2 py-1 focus-within:shadow-shadowAllSides focus-within:shadow-skin-base">
           <input
             id={name}
             name={name}
@@ -21,9 +21,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
           <span>
             {!error && valueInput && (
-              <FaCheck size={20} className="text-successColor" />
+              <FaCheck size={20} className="text-green-400" />
             )}
-            {error && <VscError size={20} className="text-dangerColor" />}
+            {error && <VscError size={20} className="text-red-600" />}
           </span>
         </div>
         {error && <ErrorMessage error={error} />}

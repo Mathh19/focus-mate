@@ -22,14 +22,14 @@ export const Tasks = () => {
 
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
-    const cleanTaskInput = cleanInputSpaces(newTask.name);
+    const cleanTacustomput = cleanInputSpaces(newTask.name);
     pomodoro.routineMode
       ? addNewTask({
           ...newTask,
-          name: cleanTaskInput,
+          name: cleanTacustomput,
           day: currentDay as DayProps,
         })
-      : addNewTask({ ...newTask, name: cleanTaskInput });
+      : addNewTask({ ...newTask, name: cleanTacustomput });
     setNewTask({ ...newTask, name: '', finished: false });
   };
 
@@ -49,7 +49,7 @@ export const Tasks = () => {
 
   return (
     <div id="tasks" className="w-full max-w-md space-y-4">
-      <h2 className="flex items-center justify-between border-b-2 pb-2 text-5xl font-bold text-bluishPurple blueTheme:text-blueTheme dark:text-white max-[540px]:text-5xl">
+      <h2 className="flex items-center justify-between border-b-2 border-skin-border-primary pb-2 text-5xl font-bold text-skin-secondary-text max-[540px]:text-5xl">
         {!pomodoro.routineMode ? 'Tasks' : `${currentDay}`}
         <DropdownMenuTasks />
       </h2>
@@ -59,8 +59,8 @@ export const Tasks = () => {
         ) : (
           <ContainerTaskItem
             tasks={targetCurrentTask}
-            shadowEffectColor="backgroundColor"
             dynamicHeight={true}
+            shadowEffectColor="bg-skin-background"
           />
         )}
         <div className="px-2">

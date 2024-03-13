@@ -86,7 +86,7 @@ export const Pomodoro = () => {
               {timeCountingStatus ? 'pause' : 'play'}
             </button>
             <button onClick={nextTime} className="absolute right-2">
-              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:text-white" />
+              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-skin-secondary-text" />
             </button>
           </div>
         )}

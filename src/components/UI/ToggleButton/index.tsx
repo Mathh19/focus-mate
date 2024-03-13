@@ -20,7 +20,7 @@ export const ToggleButton = ({
           className="peer h-0 w-0 opacity-0"
         />
 
-        <span className="absolute inset-0 rounded-full bg-bluishGray transition duration-300 ease-in-out before:absolute before:bottom-1 before:left-1 before:h-5 before:w-5 before:rounded-full before:bg-white before:transition before:duration-300 before:ease-in-out before:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-bluishPurple peer-checked:to-vibrantPurple peer-checked:before:translate-x-7 blueTheme:peer-checked:from-blueTheme-light-blue blueTheme:peer-checked:to-blueTheme dark:bg-darkTheme-grey dark:peer-checked:from-darkTheme-grey dark:peer-checked:to-white/50"></span>
+        <span className="absolute inset-0 rounded-full bg-skin-input-primary transition duration-300 ease-in-out before:absolute before:bottom-1 before:left-1 before:h-5 before:w-5 before:rounded-full before:bg-white before:transition before:duration-300 before:ease-in-out before:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-skin-primary-gradient peer-checked:to-skin-secondary-gradient peer-checked:before:translate-x-7"></span>
       </label>
     </div>
   );

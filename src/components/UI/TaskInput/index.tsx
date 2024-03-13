@@ -14,7 +14,7 @@ export const TaskInput = ({
   };
 
   return (
-    <label className="flex w-full items-center justify-between gap-1 rounded-md border-4 border-dashed border-bluishPurple/60 bg-none p-2 text-white/50 transition duration-200 ease-in-out focus-within:border-bluishPurple focus-within:text-white hover:border-bluishPurple hover:text-white blueTheme:border-blueTheme/60 blueTheme:focus-within:border-blueTheme blueTheme:hover:border-blueTheme dark:border-darkTheme/60 dark:focus-within:border-white dark:hover:border-white">
+    <label className="flex w-full items-center justify-between gap-1 rounded-md border-4 border-dashed border-skin-border-primary bg-none p-2 text-skin-primary-text opacity-70 transition duration-200 ease-in-out focus-within:opacity-100 hover:opacity-100">
       <input
         type="text"
         name="addTask"

@@ -14,7 +14,7 @@ export const UserAccount = () => {
       <button
         aria-label="login"
         onClick={() => setOpen(true)}
-        className="rounded-sm bg-bluishPurple px-2 py-1 font-semibold outline-4 blueTheme:bg-blueTheme dark:bg-white dark:text-backgroundColor"
+        className="rounded-sm bg-skin-base px-2 py-1 font-semibold outline-4"
       >
         Login
       </button>
@@ -26,7 +26,7 @@ export const UserAccount = () => {
           <button
             onClick={() => setOpen(false)}
             aria-label="close modal"
-            className="text-2xl"
+            className="text-2xl transition duration-200 hover:text-skin-secondary-text"
           >
             <IoClose />
           </button>
@@ -39,7 +39,7 @@ export const UserAccount = () => {
               <button
                 type="button"
                 onClick={toggleFormMode}
-                className="cursor-pointer text-bluishPurple blueTheme:text-blueTheme dark:text-white"
+                className="cursor-pointer text-skin-secondary-text"
               >
                 {formMode === 'login' ? 'Register' : 'Login'}
               </button>

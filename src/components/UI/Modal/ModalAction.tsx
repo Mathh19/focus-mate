@@ -16,10 +16,9 @@ export const ModalAction = ({
       {...rest}
       onClick={onClick}
       className={`${className} rounded-md ${
-        danger ? 'bg-dangerColor' : 'bg-tealBlue'
-      } px-2 py-1.5 text-xl font-semibold text-white drop-shadow-3xl ${
-        !danger &&
-        'hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:bg-darkTheme-grey dark:hover:text-white'
+        danger ? 'bg-red-600' : 'bg-skin-base'
+      } px-2 py-1.5 text-xl font-semibold text-skin-primary-text drop-shadow-3xl ${
+        !danger && 'hover:text-skin-primary-text'
       }`}
     >
       {children}

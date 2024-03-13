@@ -27,7 +27,7 @@ export const AvatarProfile = () => {
               className="h-14 w-full rounded-full object-cover object-center p-[2px]"
             />
           </div>
-          <div className="absolute inset-0 -z-10 h-full w-full rounded-full bg-gradient-to-b from-bluishPurple from-10% to-pink blueTheme:from-blueTheme blueTheme:to-blueTheme-light-blue dark:from-white dark:to-white"></div>
+          <div className="absolute inset-0 -z-10 h-full w-full rounded-full bg-gradient-to-b from-skin-primary-gradient from-10% to-skin-secondary-gradient"></div>
         </a>
       </div>
     </div>

@@ -1,50 +1,49 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const plugin = require('tailwindcss/plugin');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
-    colors: {
-      darkTheme: {
-        background: '#000000',
-        grey: '#71717a',
-        'dark-grey': '#303036',
-        DEFAULT: '#636069',
-      },
-      blueTheme: {
-        DEFAULT: '#5B74E3',
-        'royal-blue': '#3c52c6',
-        background: '#030A11',
-        'light-blue': '#5BCAE3',
-        grey: '#4B4B5E',
-        dark: '#151434',
-      },
-      bluishPurple: {
-        DEFAULT: '#7564e2',
-        dark: '#695acb',
-      },
-      white: '#e8eaee',
-      backgroundColor: '#181920',
-      darkBackgroundColor: '#15161A',
-      dangerColor: '#cd2f2c',
-      successColor: '#48d877',
-      darkGray: '#31354c',
-      bluishGray: '#636078',
-      defaultGray: '#71717a',
-      defaultDarkGray: '#3f3f46',
-      vibrantPurple: '#a855f7',
-      purplishGray: '#636069',
-      darkBlue: '#31354c',
-      pink: '#d34dbb',
-      tealBlue: '#39415b',
-      transparent: 'transparent',
-    },
     fontFamily: {
       sans: ['Quicksand', 'sans-serif'],
     },
     extend: {
+      colors: {
+        skin: {
+          base: 'var(--color-primary)',
+          dark: 'var(--color-dark-primary)',
+          'input-primary': 'var(--color-input-primary)',
+          'volume-slider': 'var(--color-volume-slider)',
+          'shadow-primary': 'var(--color-shadow-primary)',
+          'volume-input-mute': 'var(--color-volume-input-mute)',
+          'neon-light-effect': 'var(--color-neon-light-effect)',
+          'modal-background': 'var(--color-modal-background)',
+          'cycles-fill': 'var(--color-cycles-fill)',
+        },
+      },
+      borderColor: {
+        skin: {
+          'border-primary': 'var(--color-border-primary)',
+          'border-timer': 'var(--color-border-timer)',
+        },
+      },
+      gradientColorStops: {
+        skin: {
+          'primary-gradient': 'var(--color-gradient-primary)',
+          'secondary-gradient': 'var(--color-gradient-secondary)',
+          'bg-gradient': 'var(--color-background)',
+        },
+      },
+      textColor: {
+        skin: {
+          'primary-text': 'var(--color-text-primary)',
+          'secondary-text': 'var(--color-text-secondary)',
+        },
+      },
+      backgroundColor: {
+        skin: {
+          background: 'var(--color-background)',
+        },
+      },
       boxShadow: {
         boxShadowTimer:
           '6px 6px 6px -1px rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.7)',
@@ -99,13 +98,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    plugin(function ({ addVariant, e }) {
-      addVariant('blueTheme', ({ modifySelectors, separator }) => {
-        modifySelectors(({ className }) => {
-          return `.blueTheme .${e(`blueTheme${separator}${className}`)}`;
-        });
-      });
-    }),
-  ],
+  plugins: [],
 };

@@ -46,7 +46,7 @@ export const DropdownMenuTasks = () => {
         <IoMdClose onClick={() => setOpen(!open)} className="cursor-pointer" />
       )}
       {open && (
-        <div className="absolute right-0 z-30 w-80 rounded-md bg-darkBlue p-2 text-2xl text-bluishPurple-dark blueTheme:text-blueTheme dark:bg-darkTheme-dark-grey dark:text-white">
+        <div className="text-skin-primary absolute right-0 z-30 w-80 rounded-md bg-skin-modal-background p-2 text-2xl">
           <div className="flex flex-col">
             {pomodoro.routineMode && <TaskWeekOrganizer />}
             <button onClick={handleCheckAllTasks} className="btn-dropdown">
@@ -62,7 +62,7 @@ export const DropdownMenuTasks = () => {
             </button>
             <button
               onClick={handleDeleteAllTask}
-              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-dangerColor hover:text-white"
+              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-red-600 hover:text-skin-primary-text"
             >
               Delete all tasks
               <MdDelete />

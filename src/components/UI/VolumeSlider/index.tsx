@@ -27,7 +27,7 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
     <div className="flex items-center">
       {volume[0] === 0 ? (
         <BsFillVolumeMuteFill
-          className="h-7 w-7 text-bluishPurple blueTheme:text-blueTheme dark:text-darkTheme-grey"
+          className="h-7 w-7 text-skin-volume-input-mute"
           aria-label="Volume mute"
         />
       ) : (
@@ -45,19 +45,19 @@ export const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
         aria-valuenow={volume[0]}
         aria-valuetext={volumeInMemo}
       >
-        <Slider.Track className="relative h-[3px] grow cursor-pointer rounded-full bg-bluishPurple/25 blueTheme:bg-blueTheme/25 dark:bg-darkTheme/25">
-          <Slider.Range className="absolute h-full rounded-full bg-bluishPurple blueTheme:bg-blueTheme dark:bg-white" />
+        <Slider.Track className="relative h-[3px] grow cursor-pointer rounded-full bg-skin-volume-slider">
+          <Slider.Range className="absolute h-full rounded-full bg-skin-volume-slider" />
         </Slider.Track>
         <Slider.Thumb
           data-tooltip-id="my-tooltip"
           data-tooltip-content={`${volume[0] === 0 ? 'mute' : `${volume}%`}`}
-          className="block h-5 w-5 cursor-pointer rounded-[10px] bg-bluishPurple transition-all hover:shadow-shadowAllSides hover:shadow-bluishPurple blueTheme:bg-blueTheme blueTheme:hover:shadow-blueTheme dark:bg-white dark:hover:shadow-white"
+          className="block h-5 w-5 cursor-pointer rounded-[10px] bg-skin-volume-slider transition-all hover:shadow-shadowAllSides hover:shadow-skin-base"
         />
         <Tooltip
           id="my-tooltip"
           data-tooltip-content={volumeInMemo}
           aria-label="Volume"
-          className="absolute top-0 rounded-sm bg-bluishGray px-1 font-semibold dark:bg-darkTheme-grey"
+          className="absolute top-0 rounded-sm bg-skin-input-primary px-1 font-semibold"
         />
       </Slider.Root>
       <BsFillVolumeUpFill className="h-7 w-7" aria-label="Volume up" />

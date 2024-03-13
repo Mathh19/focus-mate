@@ -23,14 +23,11 @@ export const UploadAvatar = ({
     <div className="flex flex-col items-center">
       <label
         htmlFor="avatar"
-        className="relative flex h-32 w-32 cursor-pointer items-center justify-center rounded-full border-4 border-bluishPurple bg-white blueTheme:border-blueTheme dark:border-white dark:bg-darkTheme"
+        className="relative flex h-32 w-32 cursor-pointer items-center justify-center rounded-full border-4 border-skin-base bg-white"
       >
         {avatar !== undefined ||
           (avatar !== null && (
-            <FiUpload
-              size={40}
-              className="absolute text-bluishPurple blueTheme:text-blueTheme dark:text-white"
-            />
+            <FiUpload size={40} className="absolute text-skin-primary-text" />
           ))}
         <input
           {...rest}
@@ -40,7 +37,7 @@ export const UploadAvatar = ({
           name="avatar"
           className="hidden"
         />
-        <div className="absolute bottom-0 right-0 z-20 -translate-x-1 rounded-full bg-white text-bluishPurple blueTheme:text-blueTheme dark:bg-darkTheme-grey dark:text-white">
+        <div className="absolute bottom-0 right-0 z-20 -translate-x-1 rounded-full bg-white text-skin-base">
           <IoIosAddCircleOutline size={26} />
         </div>
         <img
@@ -52,7 +49,7 @@ export const UploadAvatar = ({
         <button
           type="button"
           onClick={handleRemoveImage}
-          className="mt-3 rounded-sm border-2 border-dangerColor px-1.5 text-xl duration-200 hover:bg-dangerColor"
+          className="mt-3 rounded-sm border-2 border-red-600 px-1.5 text-xl duration-200 hover:bg-red-600"
         >
           remove avatar
         </button>

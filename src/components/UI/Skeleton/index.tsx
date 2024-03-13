@@ -14,7 +14,7 @@ export const Skeleton = ({ size, type = 'rectangle' }: SkeletonProps) => {
     <div className="flex justify-center gap-5">
       <div
         className={twMerge(
-          'relative w-full animate-pulse rounded-md bg-gradient-to-r from-defaultGray to-defaultDarkGray p-5',
+          'relative w-full animate-pulse rounded-md bg-gradient-to-r from-zinc-400 to-zinc-500 p-5',
           `${size && variants.avatar[size]}`,
           `${type === 'circle' && 'rounded-full'}`,
         )}

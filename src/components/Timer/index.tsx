@@ -30,7 +30,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
   const pathColor = () => {
     if (pomodoro.theme === 'defaultTheme' || !pomodoro.theme) return '#7564e2';
     if (pomodoro.theme === 'blueTheme') return '#5B74E3';
-    if (pomodoro.theme === 'darkTheme') return '#e8eaee';
+    if (pomodoro.theme === 'darkTheme') return '#f6f6f6';
   };
 
   const targetTasks = pomodoro.routineMode
@@ -51,7 +51,7 @@ export const Timer = ({ timer, label }: TimerComponentProps) => {
         })}
         className="h-full w-full drop-shadow-lg"
       >
-        <div className="flex h-[90%] w-[90%] flex-col items-center justify-center gap-2 rounded-full border-[2px] border-bluishPurple shadow-shadowAllSides shadow-bluishPurple blueTheme:border-blueTheme blueTheme:shadow-blueTheme dark:border-white dark:shadow-white">
+        <div className="flex h-[90%] w-[90%] flex-col items-center justify-center gap-2 rounded-full border-[2px] border-skin-border-timer shadow-shadowAllSides shadow-skin-shadow-primary">
           <span className="font-sans text-7xl font-semibold max-[320px]:text-6xl">
             {secondsToMinutes(timer)}
           </span>

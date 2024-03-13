@@ -20,9 +20,9 @@ export const SelectTheme = ({ themeSelected, setTheme }: SelectThemesProps) => {
           key={theme}
           onClick={(e) => handleSelectTheme(e, theme)}
           className={`
-          ${theme === 'defaultTheme' && 'bg-bluishPurple'}
-          ${theme === 'blueTheme' && 'bg-blueTheme'}
-          ${theme === 'darkTheme' && 'bg-darkBackgroundColor'}
+          ${theme === 'defaultTheme' && 'bg-[#7564e2]'}
+          ${theme === 'blueTheme' && 'bg-[#5B74E3]'}
+          ${theme === 'darkTheme' && 'bg-[#000000]'}
            flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg ring-white duration-300 ease-in-out hover:brightness-75 focus:ring-2`}
           aria-label={`${
             theme === themeSelected ? 'Selected' : 'Select'

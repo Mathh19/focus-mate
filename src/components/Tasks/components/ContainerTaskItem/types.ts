@@ -2,6 +2,6 @@ import { TaskProps } from '../../../../shared-types/tasks';
 
 export type ContainerTaskItemProps = {
   tasks: TaskProps[];
-  shadowEffectColor: 'backgroundColor' | 'darkGray';
+  shadowEffectColor: 'bg-skin-background' | 'skin-modal-bakcground';
   dynamicHeight: boolean;
 };

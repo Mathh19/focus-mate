@@ -2,28 +2,87 @@
 
 @tailwind base;
 
-:root {
-  --primary: #636078;
-  --secondary: transparent;
-}
+@layer base {
+  :root {
+    --color-scrollbar-primary: #636078;
+    --color-scrollbar-secondary: transparent;
+    --color-primary: #7564e2;
+    --color-dark-primary: #695acc;
+    --color-border-timer: #7564e2;
+    --color-text-primary: #e8eaee;
+    --color-text-secondary: #7564e2;
+    --color-gradient-primary: #7564e2;
+    --color-gradient-secondary: #d34dbb;
+    --color-neon-light-effect: #a855f7;
+    --color-background: #181920;
+    --color-modal-background: #31354c;
+    --color-volume-slider: #7564e2;
+    --color-volume-input-mute: #7564e2;
+    --color-input-primary: #636069;
+    --color-border-primary: #7564e2;
+    --color-shadow-primary: #7564e2;
+    --color-cycles-fill: #7564e2;
+  }
 
-* {
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) var(--secondary);
-}
+  .blueTheme {
+    --color-scrollbar-primary: #484d64;
+    --color-primary: #5B74E3;
+    --color-dark-primary: #3c52c6;
+    --color-border-timer: #5B74E3;
+    --color-text-primary: #e8eaee;
+    --color-text-secondary: #5B74E3;
+    --color-gradient-primary: #5B74E3;
+    --color-gradient-secondary: #5BCAE3;
+    --color-neon-light-effect: #3c52c6;
+    --color-background: #030A11;
+    --color-modal-background: #31354c;
+    --color-volume-slider: #5B74E3;
+    --color-volume-input-mute: #5B74E3;
+    --color-input-primary: #636069;
+    --color-border-primary: #5B74E3;
+    --color-shadow-primary: #5B74E3;
+    --color-cycles-fill: #5B74E3;
+  }
 
-*::-webkit-scrollbar {
-  width: 8px;
-}
 
-*::-webkit-scrollbar-track {
-  border-radius: 5px;
-}
+  .dark {
+    --color-scrollbar-primary: #f6f6f6;
+    --color-primary: #6d6d6d;
+    --color-dark-primary: #3d3d3d;
+    --color-border-timer: #f6f6f6;
+    --color-text-base: #000000;
+    --color-text-secondary: #f6f6f6;
+    --color-gradient-primary: #3d3d3d;
+    --color-gradient-secondary: #5d5d5d;
+    --color-neon-light-effect: #f6f6f6;
+    --color-background: #000000;
+    --color-modal-background: #3d3d3d;
+    --color-volume-slider: #f6f6f6;
+    --color-volume-input-mute: #6d6d6d;
+    --color-input-primary: #888888;
+    --color-border-primary: #f6f6f6;
+    --color-shadow-primary: #f6f6f6;
+    --color-cycles-fill: #f6f6f6;
+  }
 
-*::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 14px;
+  * {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-scrollbar-primary) var(--color-scrollbar-secondary);
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-scrollbar-primary);
+    border-radius: 14px;
+  }
 }
 
 @tailwind components;
@@ -31,10 +90,10 @@
 
 @layer components {
   .btn-control {
-    @apply rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-bluishPurple hover:text-bluishPurple hover:shadow-shadowAllSides hover:shadow-bluishPurple blueTheme:hover:border-blueTheme blueTheme:hover:text-blueTheme blueTheme:hover:shadow-blueTheme dark:hover:border-white dark:hover:text-white dark:hover:shadow-white
+    @apply rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-skin-border-primary hover:text-skin-secondary-text
   }
 
   .btn-dropdown {
-    @apply flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-bluishPurple-dark hover:text-white blueTheme:hover:bg-blueTheme dark:hover:bg-white dark:hover:text-darkTheme-background
+    @apply flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-skin-base border-skin-dark hover:text-skin-primary-text
   }
 }

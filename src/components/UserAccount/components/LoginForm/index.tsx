@@ -101,7 +101,7 @@ export const LoginForm = () => {
           type="button"
           loginGoogle={true}
           text="Login with google"
-          className="text-xl"
+          className="text-xl text-black"
           onClick={() => googleLoginButton()}
           icon={FcGoogle}
         />

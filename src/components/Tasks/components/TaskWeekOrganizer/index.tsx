@@ -2,13 +2,13 @@ import { useState, useContext } from 'react';
 import { VscExpandAll } from 'react-icons/vsc';
 import { IoMdClose } from 'react-icons/io';
 import { v4 as uuidv4 } from 'uuid';
-import { TaskInput } from '../../../UI/TaskInput';
 import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
 import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
 import { getCurrentDayOfWeek } from '../../../../utils/getCurrentDayOfWeek';
 import { DayProps } from '../../../../shared-types/tasks';
 import { ContainerTaskItem } from '../ContainerTaskItem';
 import { Modal } from '../../../UI/Modal';
+import { TaskInput } from '../../../UI/TaskInput';
 
 const days = [
   'Monday',
@@ -34,11 +34,11 @@ export const TaskWeekOrganizer = () => {
 
   const handleSubmit = () => {
     if (newTask.name.trim() === '') return;
-    const cleanTaskInput = cleanInputSpaces(newTask.name);
+    const cleanTacustomput = cleanInputSpaces(newTask.name);
     setNewTask({ ...newTask, name: '', finished: false });
     addNewTask({
       ...newTask,
-      name: cleanTaskInput,
+      name: cleanTacustomput,
       day: days[countDay] as DayProps,
     });
   };
@@ -72,25 +72,23 @@ export const TaskWeekOrganizer = () => {
       </button>
       <Modal.Root overflow={false} isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
-          <h2 className="text-white">
+          <h2 className="text-skin-primary-text">
             Add your tasks for{' '}
-            <span className="text-bluishPurple blueTheme:text-blueTheme dark:text-white">
-              {days[countDay]}
-            </span>
+            <span className="text-skin-secondary-text">{days[countDay]}</span>
           </h2>
           <button
             onClick={() => setOpen(false)}
             aria-label="Close modal"
-            className="text-white hover:text-bluishPurple blueTheme:hover:text-blueTheme dark:hover:text-darkTheme"
+            className="text-skin-primary-text hover:text-skin-secondary-text"
           >
             <IoMdClose />
           </button>
         </Modal.Header>
         <Modal.Content>
-          <div className="w-full text-white">
+          <div className="w-full text-skin-primary-text">
             <ContainerTaskItem
               tasks={targetCurrentTask}
-              shadowEffectColor="darkGray"
+              shadowEffectColor="skin-modal-bakcground"
               dynamicHeight={false}
             />
             <TaskInput

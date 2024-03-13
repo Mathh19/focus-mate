@@ -31,7 +31,7 @@ export const ContainerTaskItem = ({
     <div>
       {tasks.length === 0 ? (
         <span
-          className={`flex items-center justify-center px-2 text-2xl font-semibold text-white/40 ${
+          className={`flex items-center justify-center px-2 text-2xl font-semibold ${
             !dynamicHeight && 'min-h-[288px]'
           }`}
         >
@@ -46,9 +46,9 @@ export const ContainerTaskItem = ({
             hasScroll &&
             isScrolledToTop &&
             `after:pointer-events-none after:absolute after:bottom-0 after:h-4 after:w-full after:animate-fade-in-slowly after:bg-gradient-to-t ${
-              shadowEffectColor === 'backgroundColor'
-                ? 'after:from-backgroundColor after:blueTheme:from-blueTheme-background after:dark:from-darkTheme-background'
-                : 'after:from-darkGray after:dark:from-darkTheme-dark-grey'
+              shadowEffectColor === 'bg-skin-background'
+                ? 'after:from-skin-bg-gradient'
+                : 'after:from-skin-modal-background'
             } after:to-transparent after:content-['']`
           }`}
         >
