@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useState } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { FormButton } from '../../../UI/FormButton';
 import { UploadAvatar } from '../../../UI/UploadAvatar';
 import { Input } from '../../../UI/Input';
 import { ShowPassword } from '../ShowPassword';
@@ -14,6 +13,7 @@ import { AuthContext } from '../../../../contexts/AuthContext/AuthContext';
 import { uploadAvatar } from '../../../../services/user';
 import { signUp } from '../../../../services/signUp';
 import { validateAvatar } from '../../../../utils/validateAvatar';
+import { Button } from '../../../UI/Button';
 
 const schema = z.object({
   username: z
@@ -44,7 +44,10 @@ export const RegisterForm = () => {
   const { username, email, password } = getValues();
 
   const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    authLoading: false,
+    googleLoading: false,
+  });
   const [contentAvatar, setContentAvatar] = useState<File | undefined>();
   const [displayPassword, setDisplayPassword] = useState(false);
   const { signIn, googleSignIn } = useContext(AuthContext);
@@ -59,7 +62,7 @@ export const RegisterForm = () => {
       }
     }
 
-    setIsLoading(true);
+    setIsLoading({ ...isLoading, authLoading: true });
 
     signUp({ email, password, username })
       .then(() => {
@@ -74,7 +77,7 @@ export const RegisterForm = () => {
       .catch((err) => {
         setErrorMessage(err.response.data.message);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoading({ ...isLoading, authLoading: false }));
     return;
   };
 
@@ -89,12 +92,14 @@ export const RegisterForm = () => {
     onSuccess: (response) => {
       loginWithGoogle(response)
         .then((response) => {
+          setIsLoading({ ...isLoading, googleLoading: true });
           googleSignIn({
             email: response.email,
             username: response.name,
           }).catch((err) => setErrorMessage(err.response.data.message));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading({ ...isLoading, googleLoading: false }));
     },
   });
 
@@ -134,20 +139,22 @@ export const RegisterForm = () => {
       />
       <ShowPassword value={displayPassword} setValue={setDisplayPassword} />
       {errorMessage.length > 0 && <ErrorMessage error={errorMessage} />}
-      <div>
-        <FormButton
-          type="button"
-          loginGoogle={true}
-          text="Login with google"
-          className="text-xl text-black"
-          onClick={() => googleLoginButton()}
-          icon={FcGoogle}
-        />
-        <FormButton
-          isLoading={isLoading}
+      <div className="space-y-4">
+        <Button
+          disabled={isLoading.authLoading}
+          isLoading={isLoading.authLoading}
           type="submit"
-          text={'register'}
-          className="text-xl"
+          text="register"
+          className="w-full px-2 py-1.5 text-xl disabled:cursor-no-drop"
+        />
+        <Button
+          type="button"
+          disabled={isLoading.googleLoading}
+          isLoading={isLoading.googleLoading}
+          text="Google"
+          className="w-full bg-white px-2 py-1.5 text-xl text-black hover:bg-zinc-200 active:bg-zinc-300 disabled:cursor-no-drop disabled:bg-zinc-600 disabled:text-white"
+          onClick={() => googleLoginButton()}
+          icon={<FcGoogle size={24} />}
         />
       </div>
     </form>

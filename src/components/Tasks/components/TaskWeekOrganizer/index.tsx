@@ -9,6 +9,7 @@ import { DayProps } from '../../../../shared-types/tasks';
 import { ContainerTaskItem } from '../ContainerTaskItem';
 import { Modal } from '../../../UI/Modal';
 import { TaskInput } from '../../../UI/TaskInput';
+import { ButtonDropdown } from '../ButtonDropdown';
 
 const days = [
   'Monday',
@@ -62,14 +63,15 @@ export const TaskWeekOrganizer = () => {
 
   return (
     <div>
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Add weekly tasks"
-        className="btn-dropdown w-full"
-      >
+      {/* <button onClick={() => setOpen(true)} className="btn-dropdown w-full">
         Add weekly tasks
         <VscExpandAll />
-      </button>
+      </button> */}
+      <ButtonDropdown
+        onClick={() => setOpen(true)}
+        text="Add weekly tasks"
+        icon={<VscExpandAll />}
+      />
       <Modal.Root overflow={false} isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
           <h2 className="text-skin-primary-text">
@@ -100,17 +102,17 @@ export const TaskWeekOrganizer = () => {
         </Modal.Content>
         <Modal.Actions>
           <Modal.Action
+            text="Prev"
             onClick={() => handlePrevOrNext('prev')}
-            className="px-4 py-2"
+            className="px-4 py-2 text-white"
           >
             Prev
           </Modal.Action>
           <Modal.Action
+            text="Next"
             onClick={() => handlePrevOrNext('next')}
-            className="px-4 py-2"
-          >
-            Next
-          </Modal.Action>
+            className="px-4 py-2 text-white"
+          />
         </Modal.Actions>
       </Modal.Root>
     </div>

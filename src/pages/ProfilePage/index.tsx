@@ -12,9 +12,9 @@ import { usePreviewAvatar } from './hooks/usePreviewAvatar';
 import { removeAvatar, updateUser } from '../../services/user';
 import { uploadAvatar } from '../../services/user';
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
-import { FormButton } from '../../components/UI/FormButton';
 import { Skeleton } from '../../components/UI/Skeleton';
 import { Head } from '../../components/Head';
+import { Button } from '../../components/UI/Button';
 
 const schema = z.object({
   username: z
@@ -132,14 +132,21 @@ export const ProfilePage = () => {
             valueInput={password}
           />
         </div>
-        <FormButton type="submit" text="save changes" disabled={disabled} />
-        <FormButton
+        <Button
+          type="submit"
+          text="save changes"
+          disabled={disabled}
+          isLoading={disabled}
+          className="w-full max-w-xs px-2 py-1.5 text-2xl"
+        />
+        <Button
           type="button"
           text="logout"
           danger={true}
           disabled={disabled}
           onClick={handleLogout}
-          icon={FiLogOut}
+          icon={<FiLogOut />}
+          className="w-full max-w-xs px-2 py-1.5 text-2xl"
         />
       </form>
     </div>

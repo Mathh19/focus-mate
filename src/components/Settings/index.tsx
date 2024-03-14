@@ -16,6 +16,7 @@ import { SettingsInputTimer } from './components/SettingsInputTimer';
 import { openWindow } from './utils/openWindow';
 import { displayInMinutes } from './utils/displayInMinutes';
 import { Modal } from '../UI/Modal';
+import { Button } from '../UI/Button';
 
 export const Settings = () => {
   const { pomodoro, setSettingPomodoro } = useContext(PomodoroContext);
@@ -77,14 +78,17 @@ export const Settings = () => {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => setOpen(true)}
-        className="gap-2 px-2 py-1"
-        aria-label="Settings"
-        title="Settings"
-      >
-        <IoSettingsSharp className="fill-skin-input-primary text-4xl transition duration-300 ease-in-out hover:-rotate-90 max-[320px]:text-2xl" />
-      </button>
+        aria-label="Open settings"
+        icon={
+          <IoSettingsSharp
+            size={26}
+            className="transition duration-300 ease-in-out group-hover:-rotate-90"
+          />
+        }
+        className="group rounded-full bg-transparent p-1.5"
+      />
       <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
           <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
@@ -211,15 +215,13 @@ export const Settings = () => {
               </div>
             </SettingsBox>
             <div className="flex justify-between pt-4 text-xl font-semibold">
-              <button type="button" onClick={() => setOpen(false)}>
-                cancel
-              </button>
-              <button
-                type="submit"
-                className="rounded-md bg-skin-base px-2 py-1.5 text-center drop-shadow-3xl"
-              >
-                apply
-              </button>
+              <Button
+                type="button"
+                onClick={() => setOpen(false)}
+                text="cancel"
+                className="bg-transparent hover:bg-transparent active:bg-transparent"
+              />
+              <Button type="submit" text="apply" />
             </div>
           </form>
         </Modal.Content>

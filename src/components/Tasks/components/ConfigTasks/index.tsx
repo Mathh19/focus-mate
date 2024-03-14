@@ -6,6 +6,7 @@ import { ConfigTasksProps } from './types';
 import { alertWindow } from '../../../../utils/alertWindow';
 import { cleanInputSpaces } from '../../../../utils/cleanInputSpaces';
 import { Modal } from '../../../UI/Modal';
+import { Button } from '../../../UI/Button';
 
 export const ConfigTasks = ({ task }: ConfigTasksProps) => {
   const { tasks, updateTask, deleteTask } = useContext(TasksContext);
@@ -60,12 +61,11 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
       <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
           <h2>Config task</h2>
-          <button
+          <Button
             onClick={handleClose}
-            className="rounded-md border-[2px] border-skin-base text-3xl duration-200 ease-in-out hover:bg-skin-base"
-          >
-            <RiCloseLine />
-          </button>
+            icon={<RiCloseLine size={28} />}
+            className="rounded-md border-2 border-skin-border-primary bg-transparent p-0 hover:border-skin-button-hover active:border-skin-button-active"
+          />
         </Modal.Header>
         <Modal.Content>
           <div className="flex w-full flex-col">
@@ -87,10 +87,8 @@ export const ConfigTasks = ({ task }: ConfigTasksProps) => {
           </div>
         </Modal.Content>
         <Modal.Actions>
-          <Modal.Action danger onClick={handleDeleteTask}>
-            Delete
-          </Modal.Action>
-          <Modal.Action onClick={handleEditTask}>Edit</Modal.Action>
+          <Modal.Action danger onClick={handleDeleteTask} text="Delete" />
+          <Modal.Action onClick={handleEditTask} text="Edit" />
         </Modal.Actions>
       </Modal.Root>
     </div>

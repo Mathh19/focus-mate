@@ -7,6 +7,7 @@ import { PomodoroContext } from '../../../../contexts/PomodoroContext/PomodoroCo
 import { TasksContext } from '../../../../contexts/TasksContext/TasksContext';
 import { alertWindow } from '../../../../utils/alertWindow';
 import { TaskWeekOrganizer } from '../TaskWeekOrganizer';
+import { ButtonDropdown } from '../ButtonDropdown';
 
 export const DropdownMenuTasks = () => {
   const [open, setOpen] = useState(false);
@@ -49,24 +50,22 @@ export const DropdownMenuTasks = () => {
         <div className="text-skin-primary absolute right-0 z-30 w-80 rounded-md bg-skin-modal-background p-2 text-2xl">
           <div className="flex flex-col">
             {pomodoro.routineMode && <TaskWeekOrganizer />}
-            <button onClick={handleCheckAllTasks} className="btn-dropdown">
-              Check all tasks
-              <HiCheck />
-            </button>
-            <button
+            <ButtonDropdown
+              onClick={handleCheckAllTasks}
+              text="Check all tasks"
+              icon={<HiCheck />}
+            />
+            <ButtonDropdown
               onClick={handleDeleteAllFinishedTasks}
-              className="btn-dropdown"
-            >
-              Delete finished tasks
-              <VscClearAll />
-            </button>
-            <button
+              text="Delete finished tasks"
+              icon={<VscClearAll />}
+            />
+            <ButtonDropdown
               onClick={handleDeleteAllTask}
-              className="flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-red-600 hover:text-skin-primary-text"
-            >
-              Delete all tasks
-              <MdDelete />
-            </button>
+              danger
+              text="Delete all tasks"
+              icon={<MdDelete />}
+            />
           </div>
         </div>
       )}

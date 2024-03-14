@@ -22,6 +22,10 @@
     --color-border-primary: #7564e2;
     --color-shadow-primary: #7564e2;
     --color-cycles-fill: #7564e2;
+    --color-button: #7564e2;
+    --color-button-hover: #7054d7;
+    --color-button-disabled: #281f47;
+    --color-button-active: #6145bd;
   }
 
   .blueTheme {
@@ -42,6 +46,10 @@
     --color-border-primary: #5B74E3;
     --color-shadow-primary: #5B74E3;
     --color-cycles-fill: #5B74E3;
+    --color-button: #678aed;
+    --color-button-hover: #5b74e3;
+    --color-button-disabled: #1c244a;
+    --color-button-active: #3c52c6;
   }
 
 
@@ -63,6 +71,10 @@
     --color-border-primary: #f6f6f6;
     --color-shadow-primary: #f6f6f6;
     --color-cycles-fill: #f6f6f6;
+    --color-button: #6d6d6d;
+    --color-button-hover: #5d5d5d;
+    --color-button-disabled: #3d3d3d;
+    --color-button-active: #4f4f4f;
   }
 
   * {
@@ -87,13 +99,3 @@
 
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .btn-control {
-    @apply rounded-md border-2 p-1 text-lg font-semibold uppercase shadow-lg transition duration-300 ease-in-out hover:border-skin-border-primary hover:text-skin-secondary-text
-  }
-
-  .btn-dropdown {
-    @apply flex items-center justify-between rounded-md px-2 py-1 duration-200 ease-in hover:bg-skin-base border-skin-dark hover:text-skin-primary-text
-  }
-}

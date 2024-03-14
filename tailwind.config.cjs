@@ -11,6 +11,10 @@ module.exports = {
         skin: {
           base: 'var(--color-primary)',
           dark: 'var(--color-dark-primary)',
+          'button-base': 'var(--color-button)',
+          'button-hover': 'var(--color-button-hover)',
+          'button-disabled': 'var(--color-button-disabled)',
+          'button-active': 'var(--color-button-active)',
           'input-primary': 'var(--color-input-primary)',
           'volume-slider': 'var(--color-volume-slider)',
           'shadow-primary': 'var(--color-shadow-primary)',

@@ -4,6 +4,7 @@ import { Modal } from '../UI/Modal';
 import { LoginForm } from './components/LoginForm';
 import { RegisterForm } from './components/RegisterForm';
 import { FormContext } from '../../contexts/FormContext/FormContext';
+import { Button } from '../UI/Button';
 
 export const UserAccount = () => {
   const { formMode, toggleFormMode } = useContext(FormContext);
@@ -11,38 +12,35 @@ export const UserAccount = () => {
 
   return (
     <div>
-      <button
-        aria-label="login"
-        onClick={() => setOpen(true)}
-        className="rounded-sm bg-skin-base px-2 py-1 font-semibold outline-4"
-      >
-        Login
-      </button>
+      <Button onClick={() => setOpen(true)} text="Login" />
       <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
           <h2 className="text-xl font-semibold">
             {formMode === 'login' ? 'Sign in' : 'Sign up'}
           </h2>
-          <button
+          <Button
             onClick={() => setOpen(false)}
             aria-label="close modal"
-            className="text-2xl transition duration-200 hover:text-skin-secondary-text"
-          >
-            <IoClose />
-          </button>
+            icon={
+              <IoClose
+                size={24}
+                className="transition duration-150 group-hover:text-skin-base"
+              />
+            }
+            className="group bg-transparent shadow-none hover:bg-transparent active:bg-transparent"
+          />
         </Modal.Header>
         <Modal.Content>
           <div className="flex w-full max-w-xs flex-col items-center">
             {formMode === 'login' ? <LoginForm /> : <RegisterForm />}
             <p className="mt-3 w-full text-lg font-medium">
               {formMode === 'login' ? 'First time using ?' : 'Already part ?'}{' '}
-              <button
-                type="button"
+              <span
                 onClick={toggleFormMode}
                 className="cursor-pointer text-skin-secondary-text"
               >
                 {formMode === 'login' ? 'Register' : 'Login'}
-              </button>
+              </span>
             </p>
           </div>
         </Modal.Content>

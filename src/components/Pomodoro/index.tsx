@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { FiSkipForward } from 'react-icons/fi';
 import { useTimer } from '../../hooks/useTimer';
-import { DisplayTimeButton } from '../UI/DisplayTimeButton';
+import { DisplayTimeButton } from './components/DisplayTimeButton';
 import { Timer } from '../Timer';
 import { Head } from '../Head';
 import { Tasks } from '../Tasks';
 import { FeedbackCycles } from '../UI/FeedbackCycles';
 import { useSound } from '../../hooks/useSound';
+import { Button } from '../UI/Button';
 
 export const Pomodoro = () => {
   const {
@@ -73,21 +74,27 @@ export const Pomodoro = () => {
       <Timer timer={mainTime} label={currentStatusPomodoro} />
       <div className="flex flex-col items-center gap-4">
         {!pause && (
-          <button onClick={startTimer} className="btn-control">
-            Start
-          </button>
+          <Button
+            onClick={startTimer}
+            text="Start"
+            className="rounded-md border-2 bg-transparent p-1 text-lg font-semibold uppercase hover:border-skin-border-primary hover:bg-transparent hover:text-skin-secondary-text active:bg-transparent"
+          />
         )}
         {pause && (
           <div className="relative flex w-36 items-center justify-center">
-            <button
+            <Button
               onClick={handleControlCountingStatus}
-              className="btn-control"
-            >
-              {timeCountingStatus ? 'pause' : 'play'}
-            </button>
-            <button onClick={nextTime} className="absolute right-2">
-              <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-skin-secondary-text" />
-            </button>
+              text={timeCountingStatus ? 'pause' : 'play'}
+              className="rounded-md border-2 bg-transparent p-1 text-lg font-semibold uppercase hover:border-skin-border-primary hover:bg-transparent hover:text-skin-secondary-text active:bg-transparent"
+            />
+            <Button
+              onClick={nextTime}
+              aria-label="skip timer"
+              icon={
+                <FiSkipForward className="text-2xl transition duration-300 ease-in-out hover:text-skin-secondary-text" />
+              }
+              className="absolute right-2 bg-transparent p-0 hover:bg-transparent active:bg-transparent"
+            />
           </div>
         )}
         <h2 className="text-xl font-bold">

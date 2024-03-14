@@ -2,6 +2,7 @@ import { FiUpload } from 'react-icons/fi';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useEffect, useState } from 'react';
 import { UploadInputProps } from './types';
+import { Button } from '../Button';
 
 export const UploadAvatar = ({
   contentImage,
@@ -46,13 +47,13 @@ export const UploadAvatar = ({
         />
       </label>
       {avatar && (
-        <button
+        <Button
           type="button"
+          text="Remove avatar"
+          danger={true}
           onClick={handleRemoveImage}
-          className="mt-3 rounded-sm border-2 border-red-600 px-1.5 text-xl duration-200 hover:bg-red-600"
-        >
-          remove avatar
-        </button>
+          className="mt-3 rounded-sm border-2 border-red-600 bg-transparent p-0 px-1.5 text-xl font-normal hover:border-red-700 active:border-red-800 disabled:border-red-900 data-[danger=true]:bg-transparent"
+        />
       )}
     </div>
   );

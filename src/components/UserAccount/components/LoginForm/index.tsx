@@ -5,11 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext, useState } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { ErrorMessage } from '../../../UI/ErrorMessage';
-import { FormButton } from '../../../UI/FormButton';
 import { Input } from '../../../UI/Input';
 import { ShowPassword } from '../ShowPassword';
 import { loginWithGoogle } from '../../../../services/loginWithGoogle';
 import { AuthContext } from '../../../../contexts/AuthContext/AuthContext';
+import { Button } from '../../../UI/Button';
 
 const schema = z.object({
   email: z.string().email('Please enter a valid email.'),
@@ -35,7 +35,10 @@ export const LoginForm = () => {
   });
   const [errorMessage, setErrorMessage] = useState('');
   const [displayPassword, setDisplayPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    authLoading: false,
+    googleLoading: false,
+  });
   const { signIn, googleSignIn } = useContext(AuthContext);
 
   const { email, password } = getValues();
@@ -43,23 +46,28 @@ export const LoginForm = () => {
   const handleSubmitForm = (data: FormProps) => {
     const { email, password } = data;
 
-    setIsLoading(true);
+    setIsLoading({ ...isLoading, authLoading: true });
 
     signIn(email, password)
       .catch((err) => {
         setErrorMessage(err.response.data.message);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoading({ ...isLoading, authLoading: false }));
   };
 
-  const googleLoginButton = useGoogleLogin({
+  const handleGoogleLogin = useGoogleLogin({
     onSuccess: (response) => {
       loginWithGoogle(response)
         .then((response) => {
+          setIsLoading({ ...isLoading, googleLoading: true });
           googleSignIn({
             email: response.email,
             username: response.name,
-          }).catch((err) => setErrorMessage(err.response.data.message));
+          })
+            .catch((err) => setErrorMessage(err.response.data.message))
+            .finally(() =>
+              setIsLoading({ ...isLoading, googleLoading: false }),
+            );
         })
         .catch((err) => console.log(err));
     },
@@ -90,20 +98,22 @@ export const LoginForm = () => {
       />
       <ShowPassword value={displayPassword} setValue={setDisplayPassword} />
       {errorMessage.length > 0 && <ErrorMessage error={errorMessage} />}
-      <div>
-        <FormButton
-          isLoading={isLoading}
+      <div className="space-y-4">
+        <Button
+          disabled={isLoading.authLoading}
+          isLoading={isLoading.authLoading}
           type="submit"
-          text={'login'}
-          className="text-xl"
+          text="login"
+          className="w-full px-2 py-1.5 text-xl disabled:cursor-no-drop"
         />
-        <FormButton
+        <Button
           type="button"
-          loginGoogle={true}
-          text="Login with google"
-          className="text-xl text-black"
-          onClick={() => googleLoginButton()}
-          icon={FcGoogle}
+          disabled={isLoading.googleLoading}
+          isLoading={isLoading.googleLoading}
+          text="Google"
+          className="w-full bg-white px-2 py-1.5 text-xl text-black hover:bg-zinc-200 active:bg-zinc-300 disabled:cursor-no-drop disabled:bg-zinc-600 disabled:text-white"
+          onClick={() => handleGoogleLogin()}
+          icon={<FcGoogle size={24} />}
         />
       </div>
     </form>

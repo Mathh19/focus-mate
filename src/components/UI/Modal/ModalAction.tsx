@@ -1,27 +1,18 @@
+import { ComponentProps, ReactNode } from 'react';
+import { Button } from '../Button';
+
 type ModalActionProps = {
-  children: React.ReactNode;
+  text?: string;
+  icon?: ReactNode;
+  isLoading?: boolean;
   danger?: boolean;
-  onClick: () => void;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & ComponentProps<'button'>;
 
 export const ModalAction = ({
-  children,
+  text,
   className,
   danger = false,
-  onClick,
   ...rest
 }: ModalActionProps) => {
-  return (
-    <button
-      {...rest}
-      onClick={onClick}
-      className={`${className} rounded-md ${
-        danger ? 'bg-red-600' : 'bg-skin-base'
-      } px-2 py-1.5 text-xl font-semibold text-skin-primary-text drop-shadow-3xl ${
-        !danger && 'hover:text-skin-primary-text'
-      }`}
-    >
-      {children}
-    </button>
-  );
+  return <Button text={text} danger={danger} className={className} {...rest} />;
 };
