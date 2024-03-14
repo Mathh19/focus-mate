@@ -28,7 +28,7 @@ export const UploadAvatar = ({
       >
         {avatar !== undefined ||
           (avatar !== null && (
-            <FiUpload size={40} className="absolute text-skin-primary-text" />
+            <FiUpload size={40} className="absolute text-skin-base" />
           ))}
         <input
           {...rest}
