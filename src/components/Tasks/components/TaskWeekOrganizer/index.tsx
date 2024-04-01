@@ -8,7 +8,7 @@ import { getCurrentDayOfWeek } from '../../../../utils/getCurrentDayOfWeek';
 import { DayProps } from '../../../../shared-types/tasks';
 import { ContainerTaskItem } from '../ContainerTaskItem';
 import { Modal } from '../../../UI/Modal';
-import { TaskInput } from '../../../UI/TaskInput';
+import { TaskInput } from '../TaskInput';
 import { ButtonDropdown } from '../ButtonDropdown';
 
 const days = [
