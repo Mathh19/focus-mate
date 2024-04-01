@@ -22,7 +22,7 @@ export const ModalRoot = ({
       {isOpen && (
         <div
           onClick={setOpen}
-          className="bg-backgroundColor/60 fixed inset-0 z-40 flex items-center justify-center px-4"
+          className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 px-4"
         >
           <div
             onClick={(e) => e.stopPropagation()}
