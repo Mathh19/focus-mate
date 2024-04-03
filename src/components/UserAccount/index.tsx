@@ -1,14 +1,13 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { Modal } from '../UI/Modal';
 import { LoginForm } from './components/LoginForm';
 import { RegisterForm } from './components/RegisterForm';
-import { FormContext } from '../../contexts/FormContext/FormContext';
 import { Button } from '../UI/Button';
 
 export const UserAccount = () => {
-  const { formMode, toggleFormMode } = useContext(FormContext);
   const [open, setOpen] = useState(false);
+  const [authState, setAuthState] = useState<'login' | 'register'>('login');
 
   return (
     <div>
@@ -16,7 +15,7 @@ export const UserAccount = () => {
       <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
           <h2 className="text-xl font-semibold">
-            {formMode === 'login' ? 'Sign in' : 'Sign up'}
+            {authState === 'login' ? 'Sign in' : 'Sign up'}
           </h2>
           <Button
             onClick={() => setOpen(false)}
@@ -32,14 +31,16 @@ export const UserAccount = () => {
         </Modal.Header>
         <Modal.Content>
           <div className="flex w-full max-w-xs flex-col items-center">
-            {formMode === 'login' ? <LoginForm /> : <RegisterForm />}
+            {authState === 'login' ? <LoginForm /> : <RegisterForm />}
             <p className="mt-3 w-full text-lg font-medium">
-              {formMode === 'login' ? 'First time using?' : 'Already part?'}{' '}
+              {authState === 'login' ? 'First time using?' : 'Already part?'}{' '}
               <span
-                onClick={toggleFormMode}
+                onClick={() =>
+                  setAuthState(authState === 'login' ? 'register' : 'login')
+                }
                 className="cursor-pointer text-skin-secondary-text"
               >
-                {formMode === 'login' ? 'Register' : 'Login'}
+                {authState === 'login' ? 'Register' : 'Login'}
               </span>
             </p>
           </div>
