@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ShowPasswordProps } from './type';
 
-export const ShowPassword = ({ value, setValue }: ShowPasswordProps) => {
+export const ShowPassword = ({ value, onChange }: ShowPasswordProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = () => {
-    setValue(!value);
+    setShowPassword(!showPassword);
+    onChange(showPassword);
   };
 
   return (

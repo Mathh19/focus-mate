@@ -34,7 +34,7 @@ export const UserAccount = () => {
           <div className="flex w-full max-w-xs flex-col items-center">
             {formMode === 'login' ? <LoginForm /> : <RegisterForm />}
             <p className="mt-3 w-full text-lg font-medium">
-              {formMode === 'login' ? 'First time using ?' : 'Already part ?'}{' '}
+              {formMode === 'login' ? 'First time using?' : 'Already part?'}{' '}
               <span
                 onClick={toggleFormMode}
                 className="cursor-pointer text-skin-secondary-text"
