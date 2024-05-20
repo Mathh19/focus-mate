@@ -82,19 +82,6 @@
     scrollbar-width: thin;
     scrollbar-color: var(--color-scrollbar-primary) var(--color-scrollbar-secondary);
   }
-
-  *::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  *::-webkit-scrollbar-track {
-    border-radius: 5px;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background-color: var(--color-scrollbar-primary);
-    border-radius: 14px;
-  }
 }
 
 @tailwind components;
