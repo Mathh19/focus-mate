@@ -13,7 +13,7 @@ export const ButtonDropdown = ({
       text={text}
       onClick={onClick}
       icon={icon}
-      className="w-full flex-row-reverse justify-between rounded-md bg-transparent text-skin-secondary-text shadow-none hover:text-skin-primary-text active:text-skin-primary-text data-[danger=true]:bg-transparent"
+      className="w-full flex-row-reverse justify-between rounded-md bg-transparent font-bold text-skin-secondary-text shadow-none hover:text-skin-primary-text active:text-skin-primary-text data-[danger=true]:bg-transparent"
     />
   );
 };

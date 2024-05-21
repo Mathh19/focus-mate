@@ -53,18 +53,18 @@ export const DropdownMenuTasks = () => {
             <ButtonDropdown
               onClick={handleCheckAllTasks}
               text="Check all tasks"
-              icon={<HiCheck />}
+              icon={<HiCheck size={26} />}
             />
             <ButtonDropdown
               onClick={handleDeleteAllFinishedTasks}
               text="Delete finished tasks"
-              icon={<VscClearAll />}
+              icon={<VscClearAll size={26} />}
             />
             <ButtonDropdown
               onClick={handleDeleteAllTask}
               danger
               text="Delete all tasks"
-              icon={<MdDelete />}
+              icon={<MdDelete size={26} />}
             />
           </div>
         </div>

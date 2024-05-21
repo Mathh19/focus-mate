@@ -1,3 +1,5 @@
+import { createPortal } from 'react-dom';
+
 type ModalRootProps = {
   isOpen: boolean;
   setOpen: () => void;
@@ -19,21 +21,22 @@ export const ModalRoot = ({
 
   return (
     <>
-      {isOpen && (
-        <div
-          onClick={setOpen}
-          className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 px-4"
-        >
+      {isOpen &&
+        createPortal(
           <div
-            onClick={(e) => e.stopPropagation()}
-            className={`z-50 max-h-[95%] w-full max-w-lg ${
-              overflow && 'overflow-auto'
-            } rounded-lg bg-skin-modal-background`}
+            onClick={setOpen}
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 px-4"
           >
-            {children}
-          </div>
-        </div>
-      )}
+            <div
+              onClick={(e) => e.stopPropagation()}
+              data-overflow={overflow}
+              className='max-h-[95%] w-full max-w-lg rounded-lg bg-skin-modal-background data-[overflow="true"]:overflow-auto'
+            >
+              {children}
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 };

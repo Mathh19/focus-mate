@@ -63,27 +63,22 @@ export const TaskWeekOrganizer = () => {
 
   return (
     <div>
-      {/* <button onClick={() => setOpen(true)} className="btn-dropdown w-full">
-        Add weekly tasks
-        <VscExpandAll />
-      </button> */}
       <ButtonDropdown
         onClick={() => setOpen(true)}
         text="Add weekly tasks"
-        icon={<VscExpandAll />}
+        icon={<VscExpandAll size={26} />}
       />
       <Modal.Root overflow={false} isOpen={open} setOpen={() => setOpen(false)}>
         <Modal.Header>
-          <h2 className="text-skin-primary-text">
-            Add your tasks for{' '}
-            <span className="text-skin-secondary-text">{days[countDay]}</span>
+          <h2 className="text-4xl font-semibold text-skin-secondary-text">
+            {days[countDay]}
           </h2>
           <button
             onClick={() => setOpen(false)}
             aria-label="Close modal"
             className="text-skin-primary-text hover:text-skin-secondary-text"
           >
-            <IoMdClose />
+            <IoMdClose size={28} />
           </button>
         </Modal.Header>
         <Modal.Content>
@@ -104,14 +99,14 @@ export const TaskWeekOrganizer = () => {
           <Modal.Action
             text="Prev"
             onClick={() => handlePrevOrNext('prev')}
-            className="px-4 py-2 text-white"
+            className="px-3 py-1 text-xl text-white"
           >
             Prev
           </Modal.Action>
           <Modal.Action
             text="Next"
             onClick={() => handlePrevOrNext('next')}
-            className="px-4 py-2 text-white"
+            className="px-3 py-1 text-xl text-white"
           />
         </Modal.Actions>
       </Modal.Root>
