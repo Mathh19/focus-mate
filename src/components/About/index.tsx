@@ -20,7 +20,7 @@ export const About = () => {
           <Modal.Content>
             <div
               onClick={() => setOpen(false)}
-              className="flex max-w-[450px] flex-col items-center justify-center gap-2 text-center"
+              className="flex flex-col items-center justify-center gap-2 text-center"
             >
               <BsQuestionCircle className="text-7xl text-skin-secondary-text max-[432px]:min-h-[72px] max-[432px]:min-w-[72px]" />
               <h2 className="text-3xl font-bold text-skin-secondary-text">
