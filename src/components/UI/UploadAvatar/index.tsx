@@ -43,7 +43,7 @@ export const UploadAvatar = ({
         </div>
         <img
           src={avatar ? URL.createObjectURL(avatar) : undefined}
-          className="asbolute z-10 aspect-square rounded-full object-cover"
+          className="asbolute z-10 aspect-square w-full rounded-full object-cover"
         />
       </label>
       {avatar && (
