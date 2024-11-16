@@ -7,6 +7,7 @@ export const Skeleton = ({ size, type = 'rectangle' }: SkeletonProps) => {
       sm: 'w-12 h-12',
       md: 'w-14 h-14',
       lg: 'w-32 h-32',
+      xlg: 'w-52 h-52',
     },
   };
 

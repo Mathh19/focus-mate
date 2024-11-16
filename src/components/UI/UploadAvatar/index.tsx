@@ -24,7 +24,7 @@ export const UploadAvatar = ({
     <div className="flex flex-col items-center">
       <label
         htmlFor="avatar"
-        className="relative flex h-32 w-32 cursor-pointer items-center justify-center rounded-full border-4 border-skin-base bg-white"
+        className="relative flex h-52 w-52 cursor-pointer items-center justify-center rounded-full border-4 border-skin-base bg-white"
       >
         {avatar !== undefined ||
           (avatar !== null && (

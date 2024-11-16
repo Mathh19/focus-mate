@@ -59,17 +59,17 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="mx-4 mb-24">
+    <div className="mx-4 h-svh">
       <Head title={`Profile ${data ? `• ${data.username}` : ''}`} />
-      <h2 className="my-4 text-center text-4xl font-semibold">
+      <h2 className="my-8 text-center text-4xl font-semibold">
         Edit your account
       </h2>
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
-        className="flex w-full flex-col items-center justify-center gap-4"
+        className="flex w-full flex-col items-center justify-center gap-8"
       >
         {isLoading ? (
-          <Skeleton type="circle" size="lg" />
+          <Skeleton type="circle" size="xlg" />
         ) : (
           <UploadAvatar
             contentImage={avatar ? avatar : previewAvatar}
@@ -77,7 +77,7 @@ export const ProfilePage = () => {
             onChange={handleOnChange}
           />
         )}
-        <div className="w-full max-w-xs space-y-4">
+        <div className="w-full max-w-lg space-y-8">
           <Input
             {...register('username')}
             disabled={loading}
@@ -99,22 +99,24 @@ export const ProfilePage = () => {
             valueInput={password}
           />
         </div>
-        <Button
-          type="submit"
-          text="save changes"
-          disabled={loading}
-          isLoading={loading}
-          className="w-full max-w-xs px-2 py-1.5 text-2xl"
-        />
-        <Button
-          type="button"
-          text="logout"
-          danger={true}
-          disabled={loading}
-          onClick={handleLogout}
-          icon={<FiLogOut />}
-          className="w-full max-w-xs px-2 py-1.5 text-2xl"
-        />
+        <div className="w-full max-w-lg space-y-6">
+          <Button
+            type="submit"
+            text="save changes"
+            disabled={loading}
+            isLoading={loading}
+            className="w-full px-2 py-1.5 text-2xl"
+          />
+          <Button
+            type="button"
+            text="logout"
+            danger={true}
+            disabled={loading}
+            onClick={handleLogout}
+            icon={<FiLogOut />}
+            className="w-full px-2 py-1.5 text-2xl"
+          />
+        </div>
       </form>
     </div>
   );
