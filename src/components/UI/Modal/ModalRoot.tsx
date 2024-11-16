@@ -30,7 +30,7 @@ export const ModalRoot = ({
             <div
               onClick={(e) => e.stopPropagation()}
               data-overflow={overflow}
-              className='max-h-[95%] w-full max-w-lg rounded-lg bg-skin-modal-background data-[overflow="true"]:overflow-auto'
+              className='max-h-[95%] w-full max-w-3xl rounded-lg bg-skin-modal-background data-[overflow="true"]:overflow-auto'
             >
               {children}
             </div>

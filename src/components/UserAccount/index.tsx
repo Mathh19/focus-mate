@@ -30,7 +30,7 @@ export const UserAccount = () => {
           />
         </Modal.Header>
         <Modal.Content>
-          <div className="flex w-full max-w-xs flex-col items-center">
+          <div className="flex w-full flex-col items-center">
             {authState === 'login' ? <LoginForm /> : <RegisterForm />}
             <p className="mt-3 w-full text-lg font-medium">
               {authState === 'login' ? 'First time using?' : 'Already part?'}{' '}
