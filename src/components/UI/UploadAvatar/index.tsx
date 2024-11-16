@@ -1,5 +1,4 @@
 import { FiUpload } from 'react-icons/fi';
-import { IoIosAddCircleOutline } from 'react-icons/io';
 import { useEffect, useState } from 'react';
 import { UploadInputProps } from './types';
 import { Button } from '../Button';
@@ -38,9 +37,6 @@ export const UploadAvatar = ({
           name="avatar"
           className="hidden"
         />
-        <div className="absolute bottom-0 right-0 z-20 -translate-x-1 rounded-full bg-white text-skin-base">
-          <IoIosAddCircleOutline size={26} />
-        </div>
         <img
           src={avatar ? URL.createObjectURL(avatar) : undefined}
           className="asbolute z-10 aspect-square w-full rounded-full object-cover"
