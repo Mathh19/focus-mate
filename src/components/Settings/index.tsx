@@ -94,7 +94,10 @@ export const Settings = () => {
           <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
         </Modal.Header>
         <Modal.Content>
-          <form onSubmit={handleSubmit} className="divide-bluishGray divide-y">
+          <form
+            onSubmit={handleSubmit}
+            className="divide-bluishGray w-full divide-y"
+          >
             <SettingsBox title="Timer" icon={<RiTimerLine />}>
               <div>
                 <span className="font-semibold">time in minutes</span>
