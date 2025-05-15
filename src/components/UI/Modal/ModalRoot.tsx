@@ -1,10 +1,12 @@
 import { createPortal } from 'react-dom';
+import { twMerge } from 'tailwind-merge';
 
 type ModalRootProps = {
   isOpen: boolean;
   setOpen: () => void;
   children: React.ReactNode;
   overflow?: boolean;
+  className?: string;
 };
 
 export const ModalRoot = ({
@@ -12,6 +14,7 @@ export const ModalRoot = ({
   setOpen,
   overflow = true,
   children,
+  className,
 }: ModalRootProps) => {
   if (isOpen) {
     document.body.style.overflow = 'hidden';
@@ -30,7 +33,10 @@ export const ModalRoot = ({
             <div
               onClick={(e) => e.stopPropagation()}
               data-overflow={overflow}
-              className='max-h-[95%] w-full max-w-3xl rounded-lg bg-skin-modal-background data-[overflow="true"]:overflow-auto'
+              className={twMerge(
+                'max-h-[95%] w-full max-w-3xl rounded-lg bg-skin-modal-background data-[overflow="true"]:overflow-auto',
+                className,
+              )}
             >
               {children}
             </div>

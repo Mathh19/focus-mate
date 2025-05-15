@@ -89,7 +89,11 @@ export const Settings = () => {
         }
         className="group rounded-full bg-transparent p-1.5"
       />
-      <Modal.Root isOpen={open} setOpen={() => setOpen(false)}>
+      <Modal.Root
+        isOpen={open}
+        setOpen={() => setOpen(false)}
+        className="max-w-2xl"
+      >
         <Modal.Header>
           <h2 className="mb-2 text-2xl font-bold uppercase">Settings</h2>
         </Modal.Header>
@@ -217,7 +221,7 @@ export const Settings = () => {
                 <SelectTheme themeSelected={theme} setTheme={setTheme} />
               </div>
             </SettingsBox>
-            <div className="flex justify-between pt-4 text-xl font-semibold">
+            <div className="flex justify-between pt-10 text-xl font-semibold">
               <Button
                 type="button"
                 onClick={() => setOpen(false)}
